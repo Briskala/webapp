@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { HeaderSearch } from './HeaderSearch';
 
 import { HeaderAuthButton } from './HeaderAuthButton';
+import { MobileNav } from './MobileNav';
 
 export function Header() {
   return (
@@ -23,9 +24,15 @@ export function Header() {
           <Link href="/contact">Contact</Link>
         </nav>
         <div className="header-actions">
-          <HeaderSearch />
+          <div className="desktop-search">
+            <HeaderSearch />
+          </div>
           <HeaderAuthButton />
+          <MobileNav />
         </div>
+      </div>
+      <div className="mobile-search-bar">
+        <HeaderSearch />
       </div>
     </header>
   );
