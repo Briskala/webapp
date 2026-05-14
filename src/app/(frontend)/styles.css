@@ -1,0 +1,28 @@
+/* 
+  Global styles overrides 
+  Note: Core styles are loaded from /public/assets/css/web.css
+*/
+
+:root {
+  --font-mono: 'Roboto Mono', monospace;
+  --user-font-size: 14px; /* Used by Accessibility widget */
+}
+
+/* Allow font scaling from accessibility widget and force white bg */
+html, body {
+  background-color: #ffffff !important;
+  color: #333333;
+}
+
+body {
+  font-size: var(--user-font-size, 14px) !important;
+}
+
+h1, h2, h3, h4, h5, p, a, span, div, strong, button {
+  font-size: inherit;
+}
+
+h1, h2, h3, h4, h5, p, a, span, div, strong, button {
+  font-size: inherit;
+}
+
