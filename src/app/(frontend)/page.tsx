@@ -1,5 +1,5 @@
 import React from 'react'
-import { Hero } from '@/components/Hero'
+import { CustomHero } from '@/components/CustomHero'
 import { Breadcrumb } from '@/components/Breadcrumb'
 import { Accordion } from '@/components/Accordion'
 import { Sidebar } from '@/components/Sidebar'
@@ -7,7 +7,7 @@ import { Sidebar } from '@/components/Sidebar'
 export default async function HomePage() {
   return (
     <>
-      <Hero />
+      <CustomHero />
       <Breadcrumb />
       <div className="main">
         <div className="content-col">

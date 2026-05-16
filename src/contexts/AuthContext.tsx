@@ -20,11 +20,37 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
-      setUser(firebaseUser);
+    let timeoutId: NodeJS.Timeout;
+
+    try {
+      const unsubscribe = onAuthStateChanged(
+        auth,
+        (firebaseUser) => {
+          setUser(firebaseUser);
+          setLoading(false);
+          clearTimeout(timeoutId);
+        },
+        (error) => {
+          console.error("Firebase auth error:", error);
+          setLoading(false);
+          clearTimeout(timeoutId);
+        }
+      );
+
+      // Fallback timeout in case Firebase is blocked or unresponsive
+      timeoutId = setTimeout(() => {
+        console.warn("Firebase auth timed out");
+        setLoading(false);
+      }, 3000);
+
+      return () => {
+        unsubscribe();
+        clearTimeout(timeoutId);
+      };
+    } catch (e) {
+      console.error("Failed to initialize auth:", e);
       setLoading(false);
-    });
-    return () => unsubscribe();
+    }
   }, []);
 
   const signOut = async () => {

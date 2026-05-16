@@ -29,3 +29,10 @@ game28.dta
 
 # Log files
 warnings.log
+node_modules
+node_modules
+.next
+.env
+.env.*
+.DS_Store
+media/

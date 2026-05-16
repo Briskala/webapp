@@ -26,3 +26,101 @@ h1, h2, h3, h4, h5, p, a, span, div, strong, button {
   font-size: inherit;
 }
 
+
+/* Custom Hero Styles */
+.custom-hero {
+  display: flex;
+  flex-direction: column;
+  min-height: 85vh;
+  width: 100%;
+}
+
+@media (min-width: 992px) {
+  .custom-hero {
+    flex-direction: row;
+    height: 85vh;
+  }
+}
+
+.ch-left {
+  flex: 1;
+  background-color: #ffffff;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media (min-width: 992px) {
+  .ch-left {
+    flex: 0 0 50%;
+    padding: 60px 80px;
+  }
+}
+
+.ch-top-text {
+  font-size: 14px !important;
+  color: #666666;
+  font-family: 'Inter', 'Open Sans', sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.ch-bottom-text {
+  margin-top: 60px;
+}
+
+.ch-heading {
+  font-size: 48px !important;
+  line-height: 1.1 !important;
+  color: #111111;
+  font-family: 'Playfair Display', 'Times New Roman', serif;
+  font-weight: 500;
+  margin: 0;
+}
+
+@media (min-width: 992px) {
+  .ch-heading {
+    font-size: 72px !important;
+  }
+}
+
+.ch-right {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+}
+
+@media (min-width: 992px) {
+  .ch-right {
+    flex: 0 0 50%;
+  }
+}
+
+.ch-col {
+  flex: 1;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  min-height: 400px;
+}
+
+.ch-col-1 {
+  background-image: url('/assets/img/photo_combined.jpg');
+}
+
+.ch-col-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 30px;
+  background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+}
+
+.ch-col-text {
+  color: #ffffff;
+  font-size: 16px !important;
+  line-height: 1.4 !important;
+  margin: 0;
+  font-family: 'Inter', 'Open Sans', sans-serif;
+}
