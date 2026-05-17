@@ -1,0 +1,65 @@
+/* ── Briskala Admin Login Styling ── */
+
+/* Login page full-screen background */
+body:has(.template-minimal) {
+  background-image: url('/assets/img/start_company.jpg') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  min-height: 100vh;
+}
+
+/* Remove white card — make it fully transparent */
+.template-minimal__wrap {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Make all form fields and labels readable against the background */
+.template-minimal__wrap .field-type input,
+.template-minimal__wrap input[type="email"],
+.template-minimal__wrap input[type="password"],
+.template-minimal__wrap input[type="text"] {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  color: #ffffff !important;
+  backdrop-filter: blur(8px) !important;
+  border-radius: 8px !important;
+}
+
+.template-minimal__wrap input::placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.template-minimal__wrap label,
+.template-minimal__wrap .label,
+.template-minimal__wrap p,
+.template-minimal__wrap h1,
+.template-minimal__wrap h2,
+.template-minimal__wrap .login__intro-text {
+  color: #ffffff !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Primary button — Briskala brand blue */
+.btn--style-primary {
+  background-color: #1a5276 !important;
+  border-color: #1a5276 !important;
+  color: #ffffff !important;
+}
+
+.btn--style-primary:hover {
+  background-color: #154360 !important;
+  border-color: #154360 !important;
+}
+
+/* Logo sizing */
+.graphic-logo img,
+.graphic-icon img {
+  max-height: 52px;
+  width: auto;
+  filter: brightness(0) invert(1); /* Make logo white on dark bg */
+}

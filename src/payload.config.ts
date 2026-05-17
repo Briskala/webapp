@@ -42,6 +42,17 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    components: {
+      graphics: {
+        Logo: '@/components/admin/BriskalaLogo#BriskalaLogo',
+        Icon: '@/components/admin/BriskalaLogo#BriskalaLogo',
+      },
+    },
+    meta: {
+      titleSuffix: '— Briskala Admin',
+      favicon: '/favicon.ico',
+      ogImage: '/assets/img/start_company.jpg',
+    },
   },
   collections: [
     Users, Media, Pages, News, Services, Properties, Vehicles, HolidayParks, 
