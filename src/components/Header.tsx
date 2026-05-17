@@ -16,11 +16,10 @@ export function Header() {
           </span>
         </div>
         <nav className="main-nav">
-          <Link href="/woningbouw">Woningbouw</Link>
+          <Link href="/woningbouw">Woningbouw Advies</Link>
           <Link href="/autofinanciering">Autofinanciering</Link>
-          <Link href="/vastgoed">Vastgoed</Link>
-          <Link href="/olietanken">Olietanken</Link>
-          <Link href="/diensten">Diensten</Link>
+          <Link href="/vastgoed">Vastgoed Advies</Link>
+          <Link href="/olietanken">Olietanken Advies</Link>
           <Link href="/contact">Contact</Link>
         </nav>
         <div className="header-actions">

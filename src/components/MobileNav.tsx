@@ -13,7 +13,7 @@ const navLinks = [
   },
   {
     href: '/woningbouw',
-    label: 'Woningbouw',
+    label: 'Woningbouw Advies',
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 12l-10-8-10 8"/><path d="M6 10v12"/><path d="M18 10v12"/><path d="M14 15h-4v7"/><path d="M22 22H2"/></svg>
     ),
@@ -27,28 +27,22 @@ const navLinks = [
   },
   {
     href: '/vastgoed',
-    label: 'Vastgoed',
+    label: 'Vastgoed Advies',
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/></svg>
     ),
   },
   {
     href: '/olietanken',
-    label: 'Olietanken',
+    label: 'Olietanken Advies',
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg>
     ),
   },
-  {
-    href: '/diensten',
-    label: 'Diensten',
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-    ),
-  },
+
   {
     href: '/nieuws',
-    label: 'Nieuws',
+    label: 'Nieuws & Netwerk',
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/></svg>
     ),

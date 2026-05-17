@@ -11,7 +11,7 @@ export async function Footer() {
   });
 
   const columns = footerGlobal?.columns || [];
-  const copyrightText = footerGlobal?.copyrightText || '© 2026 Belgian Property & Asset Group · Uw Partner in Wonen, Rijden & Investeren';
+  const copyrightText = footerGlobal?.copyrightText || '© 2026 Briskala Property & Asset Group · Uw Partner in Wonen, Rijden & Investeren';
   const siteRegister = footerGlobal?.siteRegister || '';
 
   return (
@@ -33,7 +33,7 @@ export async function Footer() {
             ))
           ) : (
             <div className="footer-col">
-              <h4>Belgian Property & Asset Group</h4>
+              <h4>Briskala Property & Asset Group</h4>
               <ul>
                 <li><Link href="/over-ons">Over Ons</Link></li>
                 <li><Link href="/diensten">Onze Diensten</Link></li>
@@ -49,8 +49,16 @@ export async function Footer() {
             {siteRegister && <span> · {siteRegister}</span>}
           </p>
           <div className="footer-links">
-            <Link href="/privacy-policy">Privacy</Link>
-            <Link href="/terms-and-conditions">Voorwaarden</Link>
+            <a href="/privacy-policy">Privacy</a>
+            <a href="/terms-and-conditions">Voorwaarden</a>
+            <div className="erickson-badge">
+              <span className="erickson-badge-label">Supported by</span>
+              <img
+                src="/assets/img/erickson-holding-logo.png"
+                alt="Erickson Holding"
+                className="erickson-badge-logo"
+              />
+            </div>
           </div>
           <div className="logo-sp"></div>
         </div>

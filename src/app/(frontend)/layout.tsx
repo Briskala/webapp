@@ -10,10 +10,10 @@ import { AuthProvider } from '@/contexts/AuthContext'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  description: 'Belgian Property & Asset Group - Uw Partner in Wonen, Rijden & Investeren',
+  description: 'Briskala Property & Asset Group - Uw Partner in Wonen, Rijden & Investeren',
   title: {
-    template: 'Belgian Property & Asset Group | %s',
-    default: 'Belgian Property & Asset Group',
+    template: 'Briskala Property & Asset Group | %s',
+    default: 'Briskala Property & Asset Group',
   },
   icons: {
     icon: '/favicon.ico',
@@ -43,6 +43,8 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="nl" data-bs-theme="light">
       <head>
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" />

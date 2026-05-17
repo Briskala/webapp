@@ -5,26 +5,36 @@ export function CustomHero() {
   return (
     <section className="custom-hero">
       <div className="ch-left">
-        <div className="ch-top-text">
-          We're helped 95+ business
-        </div>
-        <div className="ch-bottom-text">
-          <h1 className="ch-heading">
-            Building the<br />
-            future with<br />
-            founders who<br />
-            move the world
-          </h1>
+        <div className="ch-header-container">
+          <div className="ch-top-text">
+            Onafhankelijk Advies & Bemiddeling
+          </div>
+          <div className="ch-bottom-text">
+            <h1 className="ch-heading">
+              De juiste<br />
+              connectie<br />
+              voor elke<br />
+              ambitie
+            </h1>
+            <div className="ch-cta-wrapper" style={{ marginTop: '40px' }}>
+              <Link href="/contact" className="ch-cta-btn">
+                Plan een adviesgesprek ↗
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
       <div className="ch-right">
         <div className="ch-col ch-col-1">
           <div className="ch-col-content">
-            <p className="ch-col-text">
-              Progress, not waiters. We fund teams daring to imagine differently.
-            </p>
+            <div className="ch-photo-container">
+              <p className="ch-col-text">
+                Wij bieden persoonlijk advies en brengen u direct in contact met de juiste partners voor vastgoed, financiering en woningbouw.
+              </p>
+            </div>
           </div>
         </div>
+        <div className="ch-col ch-col-2"></div>
       </div>
     </section>
   );

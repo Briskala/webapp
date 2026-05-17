@@ -37,7 +37,7 @@ export const Footer: GlobalConfig = {
       name: 'copyrightText',
       type: 'text',
       required: true,
-      defaultValue: '© 2026 Belgian Property & Asset Group · Uw Partner in Wonen, Rijden & Investeren',
+      defaultValue: '© 2026 Briskala Property & Asset Group · Uw Partner in Wonen, Rijden & Investeren',
     },
     {
       name: 'siteRegister',

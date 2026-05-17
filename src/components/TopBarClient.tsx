@@ -83,7 +83,7 @@ export function TopBarClient({ branches, languages, accessibility }: Props) {
       <div className="inner">
         {/* Left side */}
         <div className="left">
-          <span>Belgian Property &amp; Asset Group</span>
+          <span>Briskala Property & Asset Group</span>
           <span className="sep">|</span>
 
           {/* Vestiging dropdown */}

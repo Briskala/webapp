@@ -12,34 +12,25 @@ async function seedGlobals() {
     await payload.updateGlobal({
       slug: 'footer',
       data: {
-        siteRegister: 'SP · 01017-911 · PBX (11) 3243 a 3400',
-        copyrightText: '© 2026 Belgian Property & Asset Group · Uw Partner in Wonen, Rijden & Investeren',
+        siteRegister: 'Briskala Property & Asset Group · Onafhankelijk Advies',
+        copyrightText: '© 2026 Briskala Property & Asset Group · Uw Partner in Wonen, Rijden & Investeren',
         columns: [
           {
-            title: 'Belgian Property & Asset Group',
+            title: 'Briskala Advies',
             links: [
-              { label: 'Over Ons', url: '/about-us' },
-              { label: 'Onze Diensten', url: '/our-services' },
-              { label: 'Woningbouw', url: '/housing-development' },
-              { label: 'Vastgoed', url: '/real-estate' },
-              { label: 'Autofinanciering', url: '/car-financing' },
-            ],
-          },
-          {
-            title: 'Diensten',
-            links: [
-              { label: 'Olietanken', url: '/oil-refueling' },
-              { label: 'Holiday & Resort Services', url: '/holiday-resort-services' },
-              { label: 'Customer Support', url: '/customer-support' },
+              { label: 'Vastgoed Advies', url: '/vastgoed' },
+              { label: 'Woningbouw Advies', url: '/woningbouw' },
+              { label: 'Autofinanciering', url: '/autofinanciering' },
+              { label: 'Olietanken Advies', url: '/olietanken' },
             ],
           },
           {
             title: 'Informatie',
             links: [
-              { label: 'Nieuws', url: '/news' },
+              { label: 'Over Ons', url: '/over-ons' },
+              { label: 'Nieuws & Netwerk', url: '/nieuws' },
               { label: 'FAQ', url: '/faq' },
               { label: 'Contact', url: '/contact' },
-              { label: 'Sitemap', url: '/sitemap' },
             ],
           },
           {
@@ -66,29 +57,32 @@ async function seedGlobals() {
         sectionTitle: 'Diensten & Informatie',
         items: [
           {
-            title: 'Nota Fiscal Paulista (NFP)',
+            title: 'Vastgoed Advies',
             enabled: true,
             defaultOpen: true,
             links: [
-              { label: 'Sobre a Nota Fiscal Paulista', url: '#' },
-              { label: 'Acesso a consultas on-line', url: '#' },
-              { label: 'A quem ele se destina', url: '#' },
+              { label: 'Aankoopbegeleiding', url: '/vastgoed#aankoop' },
+              { label: 'Verkoopadvies', url: '/vastgoed#verkoop' },
+              { label: 'Investeringsanalyse', url: '/vastgoed#investeren' },
             ],
           },
           {
-            title: 'Nota Fiscal Electrónica (NFE)',
+            title: 'Autofinanciering',
             enabled: true,
             defaultOpen: false,
             links: [
-              { label: 'Sobre a Nota Fiscal Eletrônica', url: '#' },
-              { label: 'Acesso ao sistema', url: '#' },
+              { label: 'Lening berekenen', url: '/autofinanciering#berekenen' },
+              { label: 'Lease opties vergelijken', url: '/autofinanciering#lease' },
             ],
           },
           {
-            title: 'Vehiculos (IPVA)',
+            title: 'Woningbouw',
             enabled: true,
             defaultOpen: false,
-            links: [{ label: 'Consulta IPVA', url: '#' }],
+            links: [
+              { label: 'Projectontwikkeling', url: '/woningbouw#projecten' },
+              { label: 'Aannemer selectie', url: '/woningbouw#aannemer' },
+            ],
           },
         ],
       },

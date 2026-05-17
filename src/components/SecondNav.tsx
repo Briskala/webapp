@@ -24,7 +24,7 @@ export function SecondNav() {
               <path d="M22 22H2"></path>
             </svg>
           </span> 
-          WONINGBOUW
+          WONINGBOUW ADVIES
         </Link>
         <Link href="/autofinanciering">
           <span className="icon">
@@ -52,7 +52,7 @@ export function SecondNav() {
               <path d="M8 14h.01"></path>
             </svg>
           </span> 
-          VASTGOED
+          VASTGOED ADVIES
         </Link>
         <Link href="/olietanken">
           <span className="icon">
@@ -60,7 +60,7 @@ export function SecondNav() {
               <path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"></path>
             </svg>
           </span> 
-          OLIETANKEN
+          OLIETANKEN ADVIES
         </Link>
         <Link href="/nieuws">
           <span className="icon">
@@ -71,7 +71,7 @@ export function SecondNav() {
               <path d="M10 6h8v4h-8V6Z"></path>
             </svg>
           </span> 
-          NIEUWS
+          NIEUWS & NETWERK
         </Link>
         <Link href="/contact">
           <span className="icon">
