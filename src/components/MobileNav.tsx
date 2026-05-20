@@ -26,12 +26,13 @@ interface MobileNavProps {
 }
 
 export function MobileNav({ mainNav }: MobileNavProps) {
-  // If CMS has nav items, use them. Otherwise use the full default with icons.
-  const links = mainNav && mainNav.length > 0
-    ? mainNav.map(item => ({ href: item.url, label: item.label, icon: null }))
-    : DEFAULT_NAV_LINKS;
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+
+  // If CMS has nav items, use them. Otherwise use the full default with icons.
+  const links = mainNav && mainNav.length > 0
+    ? mainNav.map(item => ({ href: item.url, label: item.label, icon: null as React.ReactNode }))
+    : DEFAULT_NAV_LINKS;
 
   // Close on route change
   useEffect(() => {
