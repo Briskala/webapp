@@ -1144,19 +1144,13 @@ export interface SidebarCard {
  */
 export interface HeroSection {
   id: number;
-  title?: string | null;
-  subtitle?: string | null;
-  primaryButtonText?: string | null;
-  primaryButtonUrl?: string | null;
-  secondaryButtonText?: string | null;
-  secondaryButtonUrl?: string | null;
-  tagline?: string | null;
-  stripServices?:
+  heading: string;
+  backgroundImage?: (number | null) | Media;
+  actionCards?:
     | {
-        icon: string;
         title: string;
-        linkText?: string | null;
-        url: string;
+        linkText: string;
+        linkUrl: string;
         id?: string | null;
       }[]
     | null;
@@ -1292,20 +1286,14 @@ export interface SidebarCardsSelect<T extends boolean = true> {
  * via the `definition` "hero-section_select".
  */
 export interface HeroSectionSelect<T extends boolean = true> {
-  title?: T;
-  subtitle?: T;
-  primaryButtonText?: T;
-  primaryButtonUrl?: T;
-  secondaryButtonText?: T;
-  secondaryButtonUrl?: T;
-  tagline?: T;
-  stripServices?:
+  heading?: T;
+  backgroundImage?: T;
+  actionCards?:
     | T
     | {
-        icon?: T;
         title?: T;
         linkText?: T;
-        url?: T;
+        linkUrl?: T;
         id?: T;
       };
   updatedAt?: T;
