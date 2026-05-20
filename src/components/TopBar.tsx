@@ -3,7 +3,18 @@ import { getPayload } from 'payload';
 import config from '@/payload.config';
 import { TopBarClient } from './TopBarClient';
 
-export async function TopBar() {
+interface TopBarLink {
+  id?: string;
+  label: string;
+  url: string;
+  icon?: string;
+}
+
+interface TopBarProps {
+  topBarLinks?: TopBarLink[];
+}
+
+export async function TopBar({ topBarLinks }: TopBarProps) {
   const payloadConfig = await config;
   const payload = await getPayload({ config: payloadConfig });
 
@@ -28,6 +39,7 @@ export async function TopBar() {
       branches={branches as any}
       languages={defaultLangs as any}
       accessibility={a11yGlobal as any}
+      topBarLinks={topBarLinks || []}
     />
   );
 }

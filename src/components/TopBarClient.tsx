@@ -28,10 +28,18 @@ type AccessibilityConfig = {
   resetLabel?: string | null;
 };
 
+type TopBarLink = {
+  id?: string;
+  label: string;
+  url: string;
+  icon?: string;
+};
+
 type Props = {
   branches: Branch[];
   languages: Language[];
   accessibility: AccessibilityConfig;
+  topBarLinks?: TopBarLink[];
 };
 
 const countryLabels: Record<string, string> = {
@@ -45,8 +53,9 @@ const FONT_STEP = 2;
 const MIN_FONT = 10;
 const MAX_FONT = 24;
 
-export function TopBarClient({ branches, languages, accessibility }: Props) {
+export function TopBarClient({ branches, languages, accessibility, topBarLinks = [] }: Props) {
   const [fontSize, setFontSize] = useState(BASE_FONT_SIZE);
+  const [selectedBranch, setSelectedBranch] = useState<Branch | null>(null);
 
   // Load saved font size
   useEffect(() => {
@@ -57,6 +66,54 @@ export function TopBarClient({ branches, languages, accessibility }: Props) {
       document.documentElement.style.setProperty('--user-font-size', `${size}px`);
     }
   }, []);
+
+  // IP-based branch auto-detection + cookie
+  useEffect(() => {
+    const COOKIE_KEY = 'bpag-branch';
+    const getCookie = (name: string) => {
+      const m = document.cookie.match(`(^|;)\\s*${name}=([^;]+)`);
+      return m ? decodeURIComponent(m[2]) : null;
+    };
+    const setCookie = (name: string, value: string, days = 365) => {
+      const exp = new Date(Date.now() + days * 864e5).toUTCString();
+      document.cookie = `${name}=${encodeURIComponent(value)};expires=${exp};path=/;SameSite=Lax`;
+    };
+
+    // Check cookie first
+    const saved = getCookie(COOKIE_KEY);
+    if (saved && branches.length > 0) {
+      const found = branches.find(b => b.id === saved);
+      if (found) { setSelectedBranch(found); return; }
+    }
+
+    // No cookie — detect via IP
+    if (branches.length > 0) {
+      fetch('https://ipapi.co/json/', { cache: 'no-store' })
+        .then(r => r.json())
+        .then(data => {
+          const countryCode = (data?.country_code || '').toUpperCase();
+          // Map country code to our branch country field
+          const countryMap: Record<string, 'BE' | 'NL' | 'FR'> = { BE: 'BE', NL: 'NL', FR: 'FR' };
+          const mapped = countryMap[countryCode];
+          const match = mapped ? branches.find(b => b.country === mapped && b.status === 'active') : null;
+          const branch = match || branches[0]; // fallback to first
+          if (branch) {
+            setSelectedBranch(branch);
+            setCookie(COOKIE_KEY, branch.id);
+          }
+        })
+        .catch(() => {
+          // Fallback silently to first branch
+          if (branches[0]) setSelectedBranch(branches[0]);
+        });
+    }
+  }, [branches]);
+
+  const handleSelectBranch = (branch: Branch) => {
+    setSelectedBranch(branch);
+    const exp = new Date(Date.now() + 365 * 864e5).toUTCString();
+    document.cookie = `bpag-branch=${encodeURIComponent(branch.id)};expires=${exp};path=/;SameSite=Lax`;
+  };
 
   const changeFontSize = (newSize: number) => {
     const clamped = Math.max(MIN_FONT, Math.min(MAX_FONT, newSize));
@@ -89,7 +146,7 @@ export function TopBarClient({ branches, languages, accessibility }: Props) {
           {/* Vestiging dropdown */}
           <Menu as="div" style={{ position: 'relative', display: 'inline-block' }}>
             <MenuButton style={{ background: 'none', border: 'none', color: '#cce', cursor: 'pointer', fontSize: '11px', padding: '0', fontFamily: 'inherit' }}>
-              Vestiging ▾
+              {selectedBranch ? `📍 ${selectedBranch.name}` : 'Vestiging ▾'}
             </MenuButton>
             <MenuItems
               transition
@@ -111,13 +168,17 @@ export function TopBarClient({ branches, languages, accessibility }: Props) {
                     </div>
                     {(grouped[country] || []).map((branch) => (
                       <MenuItem key={branch.id} as="div">
-                        {({ focus }) => (
-                          <div style={{ padding: '7px 14px 7px 20px', borderBottom: '1px solid #f0f0f0', fontSize: '12px', cursor: 'pointer', background: focus ? '#f7f9fb' : '', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        {({ focus }: { focus: boolean }) => (
+                          <div
+                            onClick={() => handleSelectBranch(branch)}
+                            style={{ padding: '7px 14px 7px 20px', borderBottom: '1px solid #f0f0f0', fontSize: '12px', cursor: 'pointer', background: focus ? '#f7f9fb' : selectedBranch?.id === branch.id ? '#eaf4fb' : '', display: 'flex', alignItems: 'center', gap: '6px', fontWeight: selectedBranch?.id === branch.id ? 700 : 400 }}
+                          >
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                               <circle cx="12" cy="10" r="3"></circle>
                             </svg>
                             {branch.name}
+                            {selectedBranch?.id === branch.id && <span style={{ marginLeft: 'auto', color: '#1a5276' }}>✓</span>}
                           </div>
                         )}
                       </MenuItem>
@@ -168,8 +229,23 @@ export function TopBarClient({ branches, languages, accessibility }: Props) {
 
           <span className="sep">|</span>
 
-          {/* Probleem melden */}
-          <Link href="/probleem-melden" style={{ color: '#cce', fontSize: '11px' }}>Probleem melden</Link>
+          {/* Dynamic top bar links (from CMS) or defaults */}
+          {topBarLinks.length > 0 ? (
+            topBarLinks.map((link, i) => (
+              <React.Fragment key={link.id || i}>
+                <span className="sep">|</span>
+                <Link href={link.url} style={{ color: '#cce', fontSize: '11px' }}>
+                  {link.icon && <span style={{ marginRight: '4px' }}>{link.icon}</span>}
+                  {link.label}
+                </Link>
+              </React.Fragment>
+            ))
+          ) : (
+            <>
+              <span className="sep">|</span>
+              <Link href="/probleem-melden" style={{ color: '#cce', fontSize: '11px' }}>Probleem melden</Link>
+            </>
+          )}
 
           <span className="sep">|</span>
 

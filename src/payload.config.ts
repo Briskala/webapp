@@ -32,6 +32,7 @@ import { Hero } from './globals/Hero'
 import { Accessibility } from './globals/Accessibility'
 import { AccountSettings } from './globals/AccountSettings'
 import { SiteDesign } from './globals/SiteDesign'
+import { SiteNavigation } from './globals/SiteNavigation'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -59,7 +60,7 @@ export default buildConfig({
     Customers, ContactRequests, Downloads, Branches, Languages, AuthLogs,
     Aanvragen, UserServices, Messages, Transactions, ProblemReports
   ],
-  globals: [Footer, DienstenSection, SidebarCards, Hero, Accessibility, AccountSettings, SiteDesign],
+  globals: [Footer, DienstenSection, SidebarCards, Hero, Accessibility, AccountSettings, SiteDesign, SiteNavigation],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

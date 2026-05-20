@@ -27,9 +27,13 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props
   
   const payload = await getPayload({ config: await configPromise })
-  const siteDesign: any = await payload.findGlobal({
-    slug: 'site-design' as any,
-  })
+  const [siteDesign, siteNav]: [any, any] = await Promise.all([
+    payload.findGlobal({ slug: 'site-design' as any }),
+    payload.findGlobal({ slug: 'site-navigation' as any }),
+  ])
+
+  const mainNav = siteNav?.mainNav || []
+  const topBarLinks = siteNav?.topBarLinks || []
 
   const customStyles = {
     '--site-bg-color': siteDesign?.backgroundColor || '#ffffff',
@@ -52,8 +56,8 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
       </head>
       <body style={customStyles}>
         <AuthProvider>
-          <TopBar />
-          <Header />
+          <TopBar topBarLinks={topBarLinks} />
+          <Header mainNav={mainNav} />
           <UserBar />
           <SecondNav />
           <main>{children}</main>

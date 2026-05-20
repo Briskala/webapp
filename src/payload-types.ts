@@ -129,6 +129,7 @@ export interface Config {
     accessibility: Accessibility;
     'account-settings': AccountSetting;
     'site-design': SiteDesign;
+    'site-navigation': SiteNavigation;
   };
   globalsSelect: {
     footer: FooterSelect<false> | FooterSelect<true>;
@@ -138,6 +139,7 @@ export interface Config {
     accessibility: AccessibilitySelect<false> | AccessibilitySelect<true>;
     'account-settings': AccountSettingsSelect<false> | AccountSettingsSelect<true>;
     'site-design': SiteDesignSelect<false> | SiteDesignSelect<true>;
+    'site-navigation': SiteNavigationSelect<false> | SiteNavigationSelect<true>;
   };
   locale: null;
   widgets: {
@@ -1207,6 +1209,34 @@ export interface SiteDesign {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-navigation".
+ */
+export interface SiteNavigation {
+  id: number;
+  mainNav?:
+    | {
+        label: string;
+        url: string;
+        /**
+         * Plak hier de raw <svg> code voor het icoontje in het mobiele menu.
+         */
+        icon?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  topBarLinks?:
+    | {
+        label: string;
+        url: string;
+        icon?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
@@ -1342,6 +1372,31 @@ export interface SiteDesignSelect<T extends boolean = true> {
   primaryColor?: T;
   secondaryColor?: T;
   textColor?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-navigation_select".
+ */
+export interface SiteNavigationSelect<T extends boolean = true> {
+  mainNav?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        icon?: T;
+        id?: T;
+      };
+  topBarLinks?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        icon?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
