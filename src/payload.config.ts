@@ -51,9 +51,9 @@ export default buildConfig({
     },
     meta: {
       titleSuffix: '— Briskala Admin',
-      favicon: '/favicon.ico',
-      ogImage: '/assets/img/start_company.jpg',
     },
+
+
   },
   collections: [
     Users, Media, Pages, News, Services, Properties, Vehicles, HolidayParks, 
