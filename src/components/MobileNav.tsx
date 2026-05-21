@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useAuth } from '@/contexts/AuthContext';
 
 interface NavItem {
   id?: string;
@@ -28,6 +29,7 @@ interface MobileNavProps {
 export function MobileNav({ mainNav }: MobileNavProps) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const { user, loading, signOut } = useAuth();
 
   // If CMS has nav items, use them. Otherwise use the full default with icons.
   const links = mainNav && mainNav.length > 0
@@ -95,10 +97,24 @@ export function MobileNav({ mainNav }: MobileNavProps) {
         </div>
 
         <div className="mobile-nav-footer">
-          <Link href="/login">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            Inloggen / Registreren
-          </Link>
+          {loading ? (
+            <span style={{ color: '#666', fontSize: '14px', textAlign: 'center', width: '100%', display: 'block' }}>Laden...</span>
+          ) : user ? (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', width: '100%' }}>
+              <Link href={`/account/${user.uid}`} className="mobile-nav-user-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                {user.displayName || user.email?.split('@')[0] || 'Mijn Account'}
+              </Link>
+              <button onClick={() => { signOut(); setOpen(false); }} className="mobile-nav-logout-btn">
+                Uitloggen
+              </button>
+            </div>
+          ) : (
+            <Link href="/login">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Inloggen / Registreren
+            </Link>
+          )}
         </div>
       </nav>
     </>

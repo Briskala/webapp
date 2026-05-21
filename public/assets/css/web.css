@@ -877,7 +877,7 @@ body { overflow-x: hidden; width: 100%; min-width: 0; }
   height: 100%;
   background: #fff;
   z-index: 910;
-  overflow-y: auto;
+  overflow: hidden;
   transition: left 0.28s ease;
   box-shadow: 4px 0 20px rgba(0,0,0,0.18);
   display: flex;
@@ -909,11 +909,20 @@ body { overflow-x: hidden; width: 100%; min-width: 0; }
 .mobile-nav-links a:active { background: #f0f4f8; color: #1a5276; }
 .mobile-nav-links a svg { flex-shrink: 0; color: #2471a3; }
 
-.mobile-nav-footer { padding: 16px; border-top: 1px solid #e0e0e0; flex-shrink: 0; }
-.mobile-nav-footer a {
+.mobile-nav-footer { padding: 16px; border-top: 1px solid #e0e0e0; flex-shrink: 0; background: #fff; }
+.mobile-nav-footer a, .mobile-nav-user-link {
   display: flex; align-items: center; justify-content: center; gap: 8px;
   background: #1a5276; color: #fff; padding: 12px; border-radius: 4px;
   font-size: 14px; font-weight: 600; text-decoration: none; min-height: 48px;
+}
+.mobile-nav-logout-btn {
+  display: flex; align-items: center; justify-content: center;
+  background: transparent; color: #e74c3c; border: 1px solid #e74c3c; padding: 10px; border-radius: 4px;
+  font-size: 14px; font-weight: 600; cursor: pointer; min-height: 40px; transition: all 0.2s;
+  width: 100%;
+}
+.mobile-nav-logout-btn:hover, .mobile-nav-logout-btn:active {
+  background: #e74c3c; color: #fff;
 }
 
 /* ══ TABLET 768px ══ */
