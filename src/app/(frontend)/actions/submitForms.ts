@@ -86,3 +86,36 @@ export async function submitLeaseRequest(data: {
   }
 }
 
+export async function submitOilRequest(data: {
+  name: string;
+  email: string;
+  phone: string;
+  serviceType: string;
+  tankCapacity?: number;
+  message?: string;
+}) {
+  try {
+    const payload = await getPayload({ config: await configPromise });
+    
+    await payload.create({
+      collection: 'contact-requests',
+      data: {
+        name: data.name,
+        email: data.email,
+        message: `[Olietanken Advies Aanvraag]
+Dienst: ${data.serviceType}
+Telefoon: ${data.phone}
+Tank Capaciteit: ${data.tankCapacity ? `${data.tankCapacity} liter` : 'Onbekend'}
+Aanvullend bericht: ${data.message || 'Geen'}`,
+        status: 'new',
+      },
+    });
+
+    return { success: true };
+  } catch (error) {
+    console.error('Failed to submit oil request:', error);
+    return { success: false, error: 'Er is een fout opgetreden. Probeer het later opnieuw.' };
+  }
+}
+
+
