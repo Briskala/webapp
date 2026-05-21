@@ -86,6 +86,7 @@ export interface Config {
     messages: Message;
     transactions: Transaction;
     'problem-reports': ProblemReport;
+    'lease-requests': LeaseRequest;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -112,6 +113,7 @@ export interface Config {
     messages: MessagesSelect<false> | MessagesSelect<true>;
     transactions: TransactionsSelect<false> | TransactionsSelect<true>;
     'problem-reports': ProblemReportsSelect<false> | ProblemReportsSelect<true>;
+    'lease-requests': LeaseRequestsSelect<false> | LeaseRequestsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -351,6 +353,13 @@ export interface Vehicle {
   model: string;
   year?: number | null;
   price?: number | null;
+  condition?: ('Nieuw' | 'Occasion') | null;
+  fuelType?: ('Benzine' | 'Diesel' | 'Hybride' | 'Elektrisch') | null;
+  transmission?: ('Handgeschakeld' | 'Automaat') | null;
+  character?: ('Familie' | 'Comfort' | 'Avontuur' | 'Discreet') | null;
+  dealer?: (number | null) | Branch;
+  distance?: number | null;
+  tags?: ('Beste deals' | 'Nieuw' | 'Petits prix' | 'Prijsdalingen')[] | null;
   description?: {
     root: {
       type: string;
@@ -366,12 +375,53 @@ export interface Vehicle {
     };
     [k: string]: unknown;
   } | null;
+  colors?:
+    | {
+        name: string;
+        hex: string;
+        id?: string | null;
+      }[]
+    | null;
+  trims?:
+    | {
+        name: string;
+        price: number;
+        monthlyFinance: number;
+        engine: string;
+        horsepower: number;
+        id?: string | null;
+      }[]
+    | null;
+  specs?: {
+    seats?: number | null;
+    rims?: string | null;
+    climate?: string | null;
+    airbags?: string | null;
+    radar?: string | null;
+  };
   images?:
     | {
         image?: (number | null) | Media;
         id?: string | null;
       }[]
     | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "branches".
+ */
+export interface Branch {
+  id: number;
+  name: string;
+  city: string;
+  country: 'BE' | 'FR' | 'NL';
+  address?: string | null;
+  phone?: string | null;
+  email?: string | null;
+  status?: ('active' | 'inactive') | null;
+  sortOrder?: number | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -450,23 +500,6 @@ export interface Download {
   file: number | Media;
   fileType: 'doc' | 'pdf' | 'excel';
   isPublic?: boolean | null;
-  sortOrder?: number | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "branches".
- */
-export interface Branch {
-  id: number;
-  name: string;
-  city: string;
-  country: 'BE' | 'FR' | 'NL';
-  address?: string | null;
-  phone?: string | null;
-  email?: string | null;
-  status?: ('active' | 'inactive') | null;
   sortOrder?: number | null;
   updatedAt: string;
   createdAt: string;
@@ -584,6 +617,27 @@ export interface ProblemReport {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "lease-requests".
+ */
+export interface LeaseRequest {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  vehicleName: string;
+  downPayment: number;
+  termMonths: number;
+  residualValue: number;
+  interestRate: number;
+  monthlyPayment: number;
+  totalPayment: number;
+  status?: ('nieuw' | 'in_behandeling' | 'goedgekeurd' | 'geweigerd' | 'afgerond') | null;
+  notes?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -681,6 +735,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'problem-reports';
         value: number | ProblemReport;
+      } | null)
+    | ({
+        relationTo: 'lease-requests';
+        value: number | LeaseRequest;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -838,7 +896,40 @@ export interface VehiclesSelect<T extends boolean = true> {
   model?: T;
   year?: T;
   price?: T;
+  condition?: T;
+  fuelType?: T;
+  transmission?: T;
+  character?: T;
+  dealer?: T;
+  distance?: T;
+  tags?: T;
   description?: T;
+  colors?:
+    | T
+    | {
+        name?: T;
+        hex?: T;
+        id?: T;
+      };
+  trims?:
+    | T
+    | {
+        name?: T;
+        price?: T;
+        monthlyFinance?: T;
+        engine?: T;
+        horsepower?: T;
+        id?: T;
+      };
+  specs?:
+    | T
+    | {
+        seats?: T;
+        rims?: T;
+        climate?: T;
+        airbags?: T;
+        radar?: T;
+      };
   images?:
     | T
     | {
@@ -1012,6 +1103,26 @@ export interface ProblemReportsSelect<T extends boolean = true> {
   email?: T;
   problem?: T;
   status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "lease-requests_select".
+ */
+export interface LeaseRequestsSelect<T extends boolean = true> {
+  name?: T;
+  email?: T;
+  phone?: T;
+  vehicleName?: T;
+  downPayment?: T;
+  termMonths?: T;
+  residualValue?: T;
+  interestRate?: T;
+  monthlyPayment?: T;
+  totalPayment?: T;
+  status?: T;
+  notes?: T;
   updatedAt?: T;
   createdAt?: T;
 }

@@ -7,6 +7,7 @@ import {
   Info, CheckCircle, Calculator, Calendar, Landmark, MapPin, 
   Car, RefreshCw, Star
 } from 'lucide-react';
+import { submitLeaseRequest } from '../actions/submitForms';
 
 // ==========================================
 // 1. DYNAMIC SVG VEHICLE ILLUSTRATIONS
@@ -559,6 +560,8 @@ export default function ShowroomClient({ initialVehicles = [] }: ShowroomClientP
   const [interestRate, setInterestRate] = useState<number>(4.9);
   const [showSuccessToast, setShowSuccessToast] = useState(false);
   const [formInputs, setFormInputs] = useState({ name: '', email: '', phone: '', note: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   // Toggle dynamic fuel selection
   const handleFuelToggle = (fuel: string) => {
@@ -735,14 +738,50 @@ export default function ShowroomClient({ initialVehicles = [] }: ShowroomClientP
     };
   }, [selectedCalculatorCar, downPayment, termMonths, residualValue, interestRate, carTrims]);
 
-  const handleApplyFinance = (e: React.FormEvent) => {
+  const handleApplyFinance = async (e: React.FormEvent) => {
     e.preventDefault();
-    setShowSuccessToast(true);
-    setTimeout(() => {
-      setShowSuccessToast(false);
-      setSelectedCalculatorCar(null);
-      setFormInputs({ name: '', email: '', phone: '', note: '' });
-    }, 3000);
+    if (!selectedCalculatorCar) return;
+
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    const activeTrimIdx = carTrims[selectedCalculatorCar.id] || 0;
+    const activeTrim = selectedCalculatorCar.trims[activeTrimIdx];
+    const selectedHex = carColors[selectedCalculatorCar.id] || selectedCalculatorCar.colors[0]?.hex;
+    const activeColorObj = selectedCalculatorCar.colors.find(c => c.hex === selectedHex) || selectedCalculatorCar.colors[0];
+    const colorStr = activeColorObj ? `${activeColorObj.name} (${selectedHex})` : selectedHex || 'Standaard';
+
+    try {
+      const res = await submitLeaseRequest({
+        name: formInputs.name,
+        email: formInputs.email,
+        phone: formInputs.phone,
+        vehicleName: `${selectedCalculatorCar.make} ${selectedCalculatorCar.model} - ${activeTrim.name}`,
+        downPayment: downPayment,
+        termMonths: termMonths,
+        residualValue: residualValue,
+        interestRate: interestRate,
+        monthlyPayment: calculatedFinance.monthlyPayment,
+        totalPayment: calculatedFinance.totalPayment,
+        notes: `Geselecteerde kleur: ${colorStr}`
+      });
+
+      if (res.success) {
+        setShowSuccessToast(true);
+        setTimeout(() => {
+          setShowSuccessToast(false);
+          setSelectedCalculatorCar(null);
+          setFormInputs({ name: '', email: '', phone: '', note: '' });
+        }, 3000);
+      } else {
+        setSubmitError(res.error || 'Er is iets misgegaan.');
+      }
+    } catch (err) {
+      console.error(err);
+      setSubmitError('Er is een onverwachte fout opgetreden.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // Brand Options from the reference
@@ -1738,11 +1777,17 @@ export default function ShowroomClient({ initialVehicles = [] }: ShowroomClientP
                         }}
                       />
                     </div>
+                    {submitError && (
+                      <div className="alert alert-danger" style={{ fontSize: '13px', padding: '10px 12px', borderRadius: '8px', margin: 0, backgroundColor: '#fef2f2', border: '1px solid #fee2e2', color: '#991b1b' }}>
+                        ❌ {submitError}
+                      </div>
+                    )}
                     <button
                       type="submit"
+                      disabled={isSubmitting}
                       className="btn w-100 d-flex align-items-center justify-content-center gap-2"
                       style={{
-                        backgroundColor: '#22c55e',
+                        backgroundColor: isSubmitting ? '#94a3b8' : '#22c55e',
                         color: '#ffffff',
                         fontWeight: 700,
                         fontSize: '14px',
@@ -1750,13 +1795,27 @@ export default function ShowroomClient({ initialVehicles = [] }: ShowroomClientP
                         borderRadius: '8px',
                         border: 'none',
                         boxShadow: '0 4px 6px -1px rgba(34, 197, 94, 0.2)',
-                        transition: 'background-color 0.2s'
+                        transition: 'background-color 0.2s',
+                        cursor: isSubmitting ? 'not-allowed' : 'pointer'
                       }}
-                      onMouseEnter={e => e.currentTarget.style.backgroundColor = '#16a34a'}
-                      onMouseLeave={e => e.currentTarget.style.backgroundColor = '#22c55e'}
+                      onMouseEnter={e => {
+                        if (!isSubmitting) e.currentTarget.style.backgroundColor = '#16a34a';
+                      }}
+                      onMouseLeave={e => {
+                        if (!isSubmitting) e.currentTarget.style.backgroundColor = '#22c55e';
+                      }}
                     >
-                      <span>Vrijblijvend aanvragen</span>
-                      <ArrowRight size={16} />
+                      {isSubmitting ? (
+                        <>
+                          <RefreshCw className="animate-spin" size={16} />
+                          <span>Versturen...</span>
+                        </>
+                      ) : (
+                        <>
+                          <span>Vrijblijvend aanvragen</span>
+                          <ArrowRight size={16} />
+                        </>
+                      )}
                     </button>
                   </form>
 
@@ -1803,6 +1862,13 @@ export default function ShowroomClient({ initialVehicles = [] }: ShowroomClientP
         @keyframes slideInRight {
           from { transform: translateX(100%); opacity: 0; }
           to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        .animate-spin {
+          animation: spin 1s linear infinite;
         }
       ` }} />
 

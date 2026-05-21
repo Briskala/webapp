@@ -44,3 +44,45 @@ export async function submitProblemReport(formData: FormData) {
     return { success: false, error: 'Er is een fout opgetreden. Probeer het later opnieuw.' };
   }
 }
+
+export async function submitLeaseRequest(data: {
+  name: string;
+  email: string;
+  phone: string;
+  vehicleName: string;
+  downPayment: number;
+  termMonths: number;
+  residualValue: number;
+  monthlyPayment: number;
+  totalPayment: number;
+  interestRate: number;
+  notes?: string;
+}) {
+  try {
+    const payload = await getPayload({ config: await configPromise });
+    
+    await payload.create({
+      collection: 'lease-requests',
+      data: {
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        vehicleName: data.vehicleName,
+        downPayment: data.downPayment,
+        termMonths: data.termMonths,
+        residualValue: data.residualValue,
+        interestRate: data.interestRate,
+        monthlyPayment: data.monthlyPayment,
+        totalPayment: data.totalPayment,
+        status: 'nieuw',
+        notes: data.notes,
+      },
+    });
+
+    return { success: true };
+  } catch (error) {
+    console.error('Failed to submit lease request:', error);
+    return { success: false, error: 'Er is een fout opgetreden bij het opslaan van uw aanvraag. Probeer het later opnieuw.' };
+  }
+}
+
