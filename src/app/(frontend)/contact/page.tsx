@@ -71,6 +71,11 @@ export default function ContactPage() {
           display: flex;
           flex-direction: column;
           justify-content: center;
+          align-items: center;
+        }
+        .contact-form-inner {
+          width: 100%;
+          max-width: 480px;
         }
 
         .contact-brand {
@@ -326,6 +331,7 @@ export default function ContactPage() {
           }
           .contact-info-cards { display: none; }
           .contact-form-panel { padding: 40px 24px; }
+          .contact-form-inner { max-width: 100%; }
           .contact-row { grid-template-columns: 1fr; gap: 18px; }
           .contact-heading { font-size: 28px !important; }
         }
@@ -340,16 +346,7 @@ export default function ContactPage() {
 
         {/* ── LEFT: Form Panel ── */}
         <div className="contact-form-panel">
-          {/* Brand */}
-          <div className="contact-brand">
-            <div className="contact-brand-icon">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
-              </svg>
-            </div>
-            <span className="contact-brand-name">Briskala Property &amp; Asset Group</span>
-          </div>
-
+          <div className="contact-form-inner">
           <h1 className="contact-heading">Neem contact op</h1>
           <p className="contact-sub">
             Wij staan voor u klaar. Vul het formulier in en wij reageren binnen 24 uur op uw bericht.
@@ -497,6 +494,7 @@ export default function ContactPage() {
               )}
             </button>
           </form>
+          </div>
         </div>
 
         {/* ── RIGHT: Visual Panel ── */}
