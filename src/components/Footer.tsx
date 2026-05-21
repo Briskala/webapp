@@ -49,8 +49,9 @@ export async function Footer() {
             {siteRegister && <span> · {siteRegister}</span>}
           </p>
           <div className="footer-links">
-            <a href="/privacy-policy">Privacy</a>
-            <a href="/terms-and-conditions">Voorwaarden</a>
+            <Link href="/privacy-policy">Privacy Policy</Link>
+            <Link href="/terms-and-conditions">Algemene Voorwaarden</Link>
+            <Link href="/cookiebeleid">Cookiebeleid</Link>
             <div className="erickson-badge">
               <span className="erickson-badge-label">Supported by</span>
               <img

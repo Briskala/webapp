@@ -32,6 +32,7 @@ export default async function OlietankenPage() {
           <h1 style={{ fontSize: '32px', fontWeight: 800, color: '#1e3a8a', marginBottom: '24px', letterSpacing: '-0.5px' }}>
             {page?.title || 'Olietanken Advies'}
           </h1>
+          <hr style={{ border: 'none', borderBottom: '1px solid #e2e8f0', margin: '0 0 24px 0' }} />
 
           {/* CMS Rich Content Block (if populated) */}
           {page?.content && (

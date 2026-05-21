@@ -797,19 +797,16 @@ export default function ShowroomClient({ initialVehicles = [] }: ShowroomClientP
   ];
 
   return (
-    <div style={{ backgroundColor: '#f3f6f9', minHeight: '100vh', padding: '40px 0 100px 0', fontFamily: "'Open Sans', sans-serif" }}>
-      <div className="container-fluid" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 24px' }}>
+    <div style={{ backgroundColor: '#f8fafc', borderRadius: '16px', border: '1px solid #e2e8f0', padding: '24px', fontFamily: "'Open Sans', sans-serif" }}>
+      <div className="container-fluid" style={{ padding: 0 }}>
         
         {/* ==========================================
             A. TOP SHOWROOM NAVIGATION BAR & HEADER
             ========================================== */}
         <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4 pb-3 border-bottom border-secondary-subtle">
           <div>
-            <h1 style={{ fontSize: '34px', fontWeight: 800, color: '#1a5276', margin: 0, letterSpacing: '-0.5px' }}>
-              Digitale Showroom <span style={{ fontSize: '15px', fontWeight: 500, color: '#006b99', verticalAlign: 'middle', marginLeft: '10px', background: '#d0edf9', padding: '4px 10px', borderRadius: '20px' }}>Premium Finance v1.1</span>
-            </h1>
-            <p style={{ margin: '4px 0 0 0', color: '#64748b', fontSize: '14px' }}>
-              Vind uw droomvoertuig en bereken direct uw gepersonaliseerde autofinanciering en lease.
+            <p style={{ margin: 0, color: '#64748b', fontSize: '14px' }}>
+              Vind uw droomvoertuig en bereken direct uw lease. <span style={{ fontSize: '12px', fontWeight: 600, color: '#006b99', verticalAlign: 'middle', marginLeft: '10px', background: '#d0edf9', padding: '3px 8px', borderRadius: '20px' }}>Premium Finance v1.1</span>
             </p>
           </div>
           

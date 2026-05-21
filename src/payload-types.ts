@@ -132,6 +132,8 @@ export interface Config {
     'account-settings': AccountSetting;
     'site-design': SiteDesign;
     'site-navigation': SiteNavigation;
+    'legal-texts': LegalText;
+    'news-settings': NewsSetting;
   };
   globalsSelect: {
     footer: FooterSelect<false> | FooterSelect<true>;
@@ -142,6 +144,8 @@ export interface Config {
     'account-settings': AccountSettingsSelect<false> | AccountSettingsSelect<true>;
     'site-design': SiteDesignSelect<false> | SiteDesignSelect<true>;
     'site-navigation': SiteNavigationSelect<false> | SiteNavigationSelect<true>;
+    'legal-texts': LegalTextsSelect<false> | LegalTextsSelect<true>;
+    'news-settings': NewsSettingsSelect<false> | NewsSettingsSelect<true>;
   };
   locale: null;
   widgets: {
@@ -1348,6 +1352,75 @@ export interface SiteNavigation {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "legal-texts".
+ */
+export interface LegalText {
+  id: number;
+  privacyPolicy?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  termsAndConditions?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  cookiePolicy?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-settings".
+ */
+export interface NewsSetting {
+  id: number;
+  /**
+   * Voer de URL in van een RSS-feed (bijv. https://nu.nl/rss/Algemeen of een andere nieuwsbron) om automatisch nieuws te synchroniseren.
+   */
+  rssFeedUrl?: string | null;
+  rssFeedSource?: string | null;
+  autoSync?: boolean | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
@@ -1508,6 +1581,30 @@ export interface SiteNavigationSelect<T extends boolean = true> {
         icon?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "legal-texts_select".
+ */
+export interface LegalTextsSelect<T extends boolean = true> {
+  privacyPolicy?: T;
+  termsAndConditions?: T;
+  cookiePolicy?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-settings_select".
+ */
+export interface NewsSettingsSelect<T extends boolean = true> {
+  rssFeedUrl?: T;
+  rssFeedSource?: T;
+  autoSync?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
