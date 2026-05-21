@@ -10,7 +10,7 @@ export default async function DienstenPage(props: { params: Promise<{ uid: strin
   const payloadConfig = await config;
   const payload = await getPayload({ config: payloadConfig });
 
-  let diensten = [];
+  let diensten: any[] = [];
   try {
     const userResult = await payload.find({
       collection: 'users',

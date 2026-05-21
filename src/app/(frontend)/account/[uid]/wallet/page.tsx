@@ -10,7 +10,7 @@ export default async function WalletPage(props: { params: Promise<{ uid: string 
   const payloadConfig = await config;
   const payload = await getPayload({ config: payloadConfig });
 
-  let transactions = [];
+  let transactions: any[] = [];
   let balance = 0;
   
   try {

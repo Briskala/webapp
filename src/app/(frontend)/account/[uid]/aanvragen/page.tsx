@@ -10,7 +10,7 @@ export default async function AanvragenPage(props: { params: Promise<{ uid: stri
   const payloadConfig = await config;
   const payload = await getPayload({ config: payloadConfig });
 
-  let aanvragen = [];
+  let aanvragen: any[] = [];
   try {
     // We need the user's Payload ID first
     const userResult = await payload.find({

@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 
 interface HeroCard {
-  id?: string;
+  id?: string | null;
   title: string;
   linkText: string;
   linkUrl: string;

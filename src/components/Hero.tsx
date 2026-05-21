@@ -7,7 +7,7 @@ export async function Hero() {
   const payloadConfig = await config;
   const payload = await getPayload({ config: payloadConfig });
 
-  const hero = await payload.findGlobal({ slug: 'hero-section' });
+  const hero = (await payload.findGlobal({ slug: 'hero-section' })) as any;
 
   const title = hero?.title || 'Discover, Live, and Enjoy.';
   const subtitle = hero?.subtitle || 'From essential local services and community news to must-see attractions, vibrant events, and unforgettable experiences';
@@ -39,7 +39,7 @@ export async function Hero() {
         <div className="inner">
           <p className="tagline">{tagline}</p>
           <div className="strip-services">
-            {stripServices.map((svc, idx) => (
+            {stripServices.map((svc: any, idx: number) => (
               <div className="strip-service" key={svc.id ?? idx}>
                 <div className="svc-icon"><span>{svc.icon}</span></div>
                 <div className="svc-text">
