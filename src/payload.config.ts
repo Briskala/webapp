@@ -53,6 +53,12 @@ export default buildConfig({
         Logo: '@/components/admin/BriskalaLogo#BriskalaLogo',
         Icon: '@/components/admin/BriskalaLogo#BriskalaLogo',
       },
+      header: [
+        '@/components/admin/AdminHeader#AdminHeader',
+      ],
+      afterNavLinks: [
+        '@/components/admin/AdminFooter#AdminFooter',
+      ],
     },
     meta: {
       titleSuffix: '— Briskala Admin',
