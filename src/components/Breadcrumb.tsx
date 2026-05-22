@@ -10,12 +10,10 @@ export function Breadcrumb({ pageTitle = 'Home' }: BreadcrumbProps) {
     <div className="breadcrumb">
       <div className="inner">
         <span>You are here: </span>
-        <Link href="/">Home</Link>
-        {pageTitle && pageTitle !== 'Home' && (
-          <>
-            <span> › </span>
-            <span>{pageTitle}</span>
-          </>
+        {pageTitle === 'Home' ? (
+          <Link href="/">Home</Link>
+        ) : (
+          <span>{pageTitle}</span>
         )}
       </div>
     </div>
