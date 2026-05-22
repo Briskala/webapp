@@ -932,6 +932,35 @@ body { overflow-x: hidden; width: 100%; min-width: 0; }
   background: #e74c3c; color: #fff;
 }
 
+/* ── TOP BAR DROPDOWN MENUS ── */
+.topbar-dropdown-menu {
+  position: absolute;
+  top: 20px;
+  background: #fff;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  z-index: 9999;
+}
+
+.vestiging-dropdown {
+  left: 0;
+  min-width: 280px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.language-dropdown {
+  right: 0;
+  min-width: 150px;
+}
+
+.a11y-dropdown {
+  right: 0;
+  min-width: 200px;
+}
+
 /* ══ TABLET 768px ══ */
 @media (max-width: 768px) {
   .site-header .inner { justify-content: space-between; gap: 0; }
@@ -946,6 +975,34 @@ body { overflow-x: hidden; width: 100%; min-width: 0; }
     display: inline !important;
     visibility: visible !important;
     opacity: 1 !important;
+  }
+
+  /* Fix top-bar dropdown clipping on mobile by using position: fixed */
+  .topbar-dropdown-menu {
+    position: fixed !important;
+    top: 36px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    right: auto !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2) !important;
+    max-width: 90vw !important;
+    max-height: 80vh !important;
+    overflow-y: auto !important;
+  }
+
+  .vestiging-dropdown {
+    width: 290px !important;
+    min-width: 0 !important;
+  }
+
+  .language-dropdown {
+    width: 200px !important;
+    min-width: 0 !important;
+  }
+
+  .a11y-dropdown {
+    width: 220px !important;
+    min-width: 0 !important;
   }
   
   .mobile-menu-toggle { display: flex; align-items: center; justify-content: center; }

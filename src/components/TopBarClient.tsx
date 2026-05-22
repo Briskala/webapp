@@ -150,7 +150,8 @@ export function TopBarClient({ branches, languages, accessibility, topBarLinks =
             </MenuButton>
             <MenuItems
               transition
-              style={{ position: 'absolute', top: '20px', left: '0', background: '#fff', color: '#333', border: '1px solid #ddd', borderRadius: '4px', boxShadow: '0 4px 16px rgba(0,0,0,0.15)', zIndex: 9999, minWidth: '280px', maxHeight: '400px', overflowY: 'auto' }}
+              anchor="bottom start"
+              className="topbar-dropdown-menu vestiging-dropdown"
             >
               <div style={{ padding: '10px 14px', background: '#1a5276', color: '#fff', fontWeight: 700, fontSize: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -206,7 +207,8 @@ export function TopBarClient({ branches, languages, accessibility, topBarLinks =
             </MenuButton>
             <MenuItems
               transition
-              style={{ position: 'absolute', top: '20px', right: '0', background: '#fff', color: '#333', border: '1px solid #ddd', borderRadius: '4px', boxShadow: '0 4px 16px rgba(0,0,0,0.15)', zIndex: 9999, minWidth: '150px' }}
+              anchor="bottom end"
+              className="topbar-dropdown-menu language-dropdown"
             >
               <div style={{ padding: '8px 12px', background: '#1a5276', color: '#fff', fontWeight: 700, fontSize: '11px', display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -227,8 +229,6 @@ export function TopBarClient({ branches, languages, accessibility, topBarLinks =
               ))}
             </MenuItems>
           </Menu>
-
-          <span className="sep">|</span>
 
           {/* Dynamic top bar links (from CMS) or defaults */}
           {topBarLinks.length > 0 ? (
@@ -264,7 +264,8 @@ export function TopBarClient({ branches, languages, accessibility, topBarLinks =
               </MenuButton>
               <MenuItems
                 transition
-                style={{ position: 'absolute', top: '20px', right: '0', background: '#fff', color: '#333', border: '1px solid #ddd', borderRadius: '4px', boxShadow: '0 4px 16px rgba(0,0,0,0.15)', zIndex: 9999, minWidth: '200px' }}
+                anchor="bottom end"
+                className="topbar-dropdown-menu a11y-dropdown"
               >
                 <div style={{ padding: '8px 12px', background: '#1a5276', color: '#fff', fontWeight: 700, fontSize: '11px', display: 'flex', alignItems: 'center', gap: '6px' }}>
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
