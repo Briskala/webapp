@@ -34,7 +34,7 @@ export default async function AccountOverviewPage(props: { params: Promise<{ uid
       <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#1a5276', marginBottom: '20px' }}>
         Overzicht
       </h2>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px' }}>
+      <div className="account-overview-grid">
         {[
           { label: 'E-mail', value: dbUser?.email || '—' },
           { label: accountSettings?.customerNumberLabel || 'Klantnr', value: dbUser?.customerNumber || '—' },

@@ -25,6 +25,8 @@ import { Messages } from './collections/Messages'
 import { Transactions } from './collections/Transactions'
 import { ProblemReports } from './collections/ProblemReports'
 import { LeaseRequests } from './collections/LeaseRequests'
+import { Documents } from './collections/Documents'
+import { AdminNotes } from './collections/AdminNotes'
 
 import { Footer } from './globals/Footer'
 import { DienstenSection } from './globals/DienstenSection'
@@ -60,7 +62,8 @@ export default buildConfig({
   collections: [
     Users, Media, Pages, News, Services, Properties, Vehicles, HolidayParks, 
     Customers, ContactRequests, Downloads, Branches, Languages, AuthLogs,
-    Aanvragen, UserServices, Messages, Transactions, ProblemReports, LeaseRequests
+    Aanvragen, UserServices, Messages, Transactions, ProblemReports, LeaseRequests,
+    Documents, AdminNotes
   ],
 
   globals: [Footer, DienstenSection, SidebarCards, Hero, Accessibility, AccountSettings, SiteDesign, SiteNavigation, LegalTexts, NewsSettings],

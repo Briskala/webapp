@@ -87,6 +87,8 @@ export interface Config {
     transactions: Transaction;
     'problem-reports': ProblemReport;
     'lease-requests': LeaseRequest;
+    documents: Document;
+    'admin-notes': AdminNote;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -114,6 +116,8 @@ export interface Config {
     transactions: TransactionsSelect<false> | TransactionsSelect<true>;
     'problem-reports': ProblemReportsSelect<false> | ProblemReportsSelect<true>;
     'lease-requests': LeaseRequestsSelect<false> | LeaseRequestsSelect<true>;
+    documents: DocumentsSelect<false> | DocumentsSelect<true>;
+    'admin-notes': AdminNotesSelect<false> | AdminNotesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -473,11 +477,16 @@ export interface HolidayPark {
  */
 export interface Customer {
   id: number;
+  /**
+   * Wordt automatisch gegenereerd indien leeg (formaat: BPAG-XXXXXX).
+   */
+  customerNumber: string;
   name: string;
   email: string;
   phone?: string | null;
-  type?: ('company' | 'individual') | null;
-  accountBalance?: number | null;
+  accountStatus?: ('actief' | 'inactief' | 'geschorst') | null;
+  user?: (number | null) | User;
+  adminNotes?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -543,9 +552,13 @@ export interface AuthLog {
 export interface Aanvragen {
   id: number;
   user: number | User;
+  /**
+   * Wordt automatisch ingevuld op basis van de gebruiker.
+   */
+  customerNumber?: string | null;
   title: string;
   description?: string | null;
-  status?: ('in_behandeling' | 'goedgekeurd' | 'afgerond' | 'geannuleerd') | null;
+  status?: ('in_behandeling' | 'goedgekeurd' | 'afgekeurd' | 'meer_info_vereist' | 'on_hold') | null;
   requestDate?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -557,6 +570,10 @@ export interface Aanvragen {
 export interface UserService {
   id: number;
   user: number | User;
+  /**
+   * Wordt automatisch ingevuld op basis van de gebruiker.
+   */
+  customerNumber?: string | null;
   service: number | Service;
   status?: ('actief' | 'inactief' | 'verlopen') | null;
   startDate?: string | null;
@@ -571,6 +588,10 @@ export interface UserService {
 export interface Message {
   id: number;
   user: number | User;
+  /**
+   * Wordt automatisch ingevuld op basis van de gebruiker.
+   */
+  customerNumber?: string | null;
   subject: string;
   content: {
     root: {
@@ -587,6 +608,7 @@ export interface Message {
     };
     [k: string]: unknown;
   };
+  messageType?: ('normal' | 'automatic' | 'document_request' | 'warning' | 'update') | null;
   isRead?: boolean | null;
   sentDate?: string | null;
   updatedAt: string;
@@ -639,6 +661,36 @@ export interface LeaseRequest {
   notes?: string | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "documents".
+ */
+export interface Document {
+  id: number;
+  title: string;
+  customerNumber?: string | null;
+  user?: (number | null) | User;
+  file?: (number | null) | Media;
+  status?: ('requested' | 'in_behandeling' | 'goedgekeurd' | 'afgekeurd' | 'verlopen') | null;
+  internalNotes?: string | null;
+  feedback?: string | null;
+  uploadedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "admin-notes".
+ */
+export interface AdminNote {
+  id: number;
+  customerNumber: string;
+  user?: (number | null) | User;
+  note: string;
+  author?: string | null;
+  createdAt: string;
+  updatedAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -743,6 +795,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'lease-requests';
         value: number | LeaseRequest;
+      } | null)
+    | ({
+        relationTo: 'documents';
+        value: number | Document;
+      } | null)
+    | ({
+        relationTo: 'admin-notes';
+        value: number | AdminNote;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -971,11 +1031,13 @@ export interface HolidayParksSelect<T extends boolean = true> {
  * via the `definition` "customers_select".
  */
 export interface CustomersSelect<T extends boolean = true> {
+  customerNumber?: T;
   name?: T;
   email?: T;
   phone?: T;
-  type?: T;
-  accountBalance?: T;
+  accountStatus?: T;
+  user?: T;
+  adminNotes?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1052,6 +1114,7 @@ export interface AuthLogsSelect<T extends boolean = true> {
  */
 export interface AanvragenSelect<T extends boolean = true> {
   user?: T;
+  customerNumber?: T;
   title?: T;
   description?: T;
   status?: T;
@@ -1065,6 +1128,7 @@ export interface AanvragenSelect<T extends boolean = true> {
  */
 export interface UserServicesSelect<T extends boolean = true> {
   user?: T;
+  customerNumber?: T;
   service?: T;
   status?: T;
   startDate?: T;
@@ -1078,8 +1142,10 @@ export interface UserServicesSelect<T extends boolean = true> {
  */
 export interface MessagesSelect<T extends boolean = true> {
   user?: T;
+  customerNumber?: T;
   subject?: T;
   content?: T;
+  messageType?: T;
   isRead?: T;
   sentDate?: T;
   updatedAt?: T;
@@ -1129,6 +1195,34 @@ export interface LeaseRequestsSelect<T extends boolean = true> {
   notes?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "documents_select".
+ */
+export interface DocumentsSelect<T extends boolean = true> {
+  title?: T;
+  customerNumber?: T;
+  user?: T;
+  file?: T;
+  status?: T;
+  internalNotes?: T;
+  feedback?: T;
+  uploadedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "admin-notes_select".
+ */
+export interface AdminNotesSelect<T extends boolean = true> {
+  customerNumber?: T;
+  user?: T;
+  note?: T;
+  author?: T;
+  createdAt?: T;
+  updatedAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -1,13 +1,22 @@
 import type { CollectionConfig } from 'payload'
+import { resolveCustomerUser, autoCreateServiceOnApproval } from '../lib/customerUtils'
 
 export const Aanvragen: CollectionConfig = {
   slug: 'aanvragen',
   admin: {
     useAsTitle: 'title',
     group: 'Account',
+    defaultColumns: ['title', 'customerNumber', 'status', 'requestDate'],
   },
   access: {
     read: () => true,
+    create: () => true,
+    update: () => true,
+    delete: () => true,
+  },
+  hooks: {
+    beforeChange: [resolveCustomerUser],
+    afterChange: [autoCreateServiceOnApproval],
   },
   fields: [
     {
@@ -16,6 +25,15 @@ export const Aanvragen: CollectionConfig = {
       relationTo: 'users',
       required: true,
       label: 'Gebruiker',
+    },
+    {
+      name: 'customerNumber',
+      type: 'text',
+      index: true,
+      label: 'Klantnummer',
+      admin: {
+        description: 'Wordt automatisch ingevuld op basis van de gebruiker.',
+      },
     },
     {
       name: 'title',
@@ -35,8 +53,9 @@ export const Aanvragen: CollectionConfig = {
       options: [
         { label: 'In behandeling', value: 'in_behandeling' },
         { label: 'Goedgekeurd', value: 'goedgekeurd' },
-        { label: 'Afgerond', value: 'afgerond' },
-        { label: 'Geannuleerd', value: 'geannuleerd' },
+        { label: 'Afgekeurd', value: 'afgekeurd' },
+        { label: 'Meer informatie vereist', value: 'meer_info_vereist' },
+        { label: 'On hold', value: 'on_hold' },
       ],
       label: 'Status',
     },

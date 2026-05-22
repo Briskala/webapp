@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
-import { LogOut, User, FileText, Settings, MessageSquare, Briefcase, CreditCard } from 'lucide-react';
+import { LogOut, User, FileText, Settings, MessageSquare, Briefcase, CreditCard, FolderOpen } from 'lucide-react';
 
 type Props = {
   uid: string;
@@ -58,16 +58,160 @@ export function AccountLayoutClient({ uid, labels, dbUser, children }: Props) {
     { icon: <FileText size={18} />, label: labels.menuAanvragen, href: `/account/${user.uid}/aanvragen` },
     { icon: <Briefcase size={18} />, label: labels.menuDiensten, href: `/account/${user.uid}/diensten` },
     { icon: <MessageSquare size={18} />, label: labels.menuBerichten, href: `/account/${user.uid}/berichten`, badge: dbUser?.messageCount },
+    { icon: <FolderOpen size={18} />, label: 'Mijn documenten', href: `/account/${user.uid}/documenten` },
     { icon: <CreditCard size={18} />, label: 'Portemonnee', href: `/account/${user.uid}/wallet` }, // Changed Wallet to Portemonnee
   ];
 
   return (
-    <div style={{ minHeight: '100vh', background: '#f7f9fb' }}>
+    <div className="account-container">
+      <style dangerouslySetInnerHTML={{ __html: `
+        .account-container {
+          min-height: 100vh;
+          background: #f7f9fb;
+        }
+
+        .account-breadcrumb-bar {
+          padding: 10px 0;
+          border-bottom: 1px solid rgba(255,255,255,0.1);
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .account-user-info {
+          padding: 28px 0;
+          display: flex;
+          align-items: center;
+          gap: 20px;
+        }
+
+        .account-stats-inner {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 16px;
+          display: flex;
+          gap: 32px;
+        }
+
+        .account-main-grid {
+          max-width: 1200px;
+          margin: 32px auto;
+          padding: 0 16px;
+          display: grid;
+          grid-template-columns: 260px 1fr;
+          gap: 32px;
+        }
+
+        .account-panel {
+          background: #fff;
+          border-radius: 6px;
+          border: 1px solid #e0e0e0;
+          padding: 28px;
+          min-height: 500px;
+        }
+
+        .account-table-container {
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          border: 1px solid #e0e0e0;
+          border-radius: 6px;
+        }
+
+        .account-overview-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 16px;
+        }
+
+        .wallet-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          margin-bottom: 24px;
+        }
+
+        .bericht-header {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 12px;
+        }
+
+        @media (max-width: 768px) {
+          .account-breadcrumb-bar {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 6px;
+            padding: 12px 0;
+          }
+          
+          .account-user-info {
+            flex-direction: column;
+            text-align: center;
+            padding: 20px 0;
+            gap: 12px;
+          }
+          
+          .account-user-info > div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+          
+          .account-stats-inner {
+            flex-direction: column;
+            gap: 0;
+            padding: 8px 16px;
+          }
+          
+          .account-stats-inner > div {
+            padding: 10px 0 !important;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+          }
+          
+          .account-stats-inner > div:last-child {
+            border-bottom: none;
+          }
+          
+          .account-main-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin: 16px auto;
+          }
+          
+          .account-panel {
+            padding: 16px;
+            min-height: auto;
+          }
+        }
+
+        @media (max-width: 576px) {
+          .account-overview-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .wallet-header {
+            flex-direction: column;
+            gap: 16px;
+            align-items: stretch;
+          }
+          
+          .wallet-header > div {
+            text-align: left !important;
+          }
+
+          .bericht-header {
+            flex-direction: column;
+            gap: 4px;
+            align-items: flex-start;
+          }
+        }
+      ` }} />
+
       {/* Account Header */}
       <div style={{ background: '#1a5276', padding: '0' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 16px' }}>
           {/* Breadcrumb bar */}
-          <div style={{ padding: '10px 0', borderBottom: '1px solid rgba(255,255,255,0.1)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div className="account-breadcrumb-bar">
             <Link href="/" style={{ color: '#aad4ef', fontSize: '12px', textDecoration: 'none' }}>
               ← Terug naar home
             </Link>
@@ -77,7 +221,7 @@ export function AccountLayoutClient({ uid, labels, dbUser, children }: Props) {
           </div>
 
           {/* User info */}
-          <div style={{ padding: '28px 0', display: 'flex', alignItems: 'center', gap: '20px' }}>
+          <div className="account-user-info">
             {user.photoURL ? (
               <img src={user.photoURL} alt="Profiel" style={{ width: '64px', height: '64px', borderRadius: '50%', border: '3px solid rgba(255,255,255,0.3)' }} />
             ) : (
@@ -99,7 +243,7 @@ export function AccountLayoutClient({ uid, labels, dbUser, children }: Props) {
 
       {/* Stats bar */}
       <div style={{ background: '#2471a3', padding: '0' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 16px', display: 'flex', gap: '32px' }}>
+        <div className="account-stats-inner">
           <div style={{ padding: '14px 0', color: '#fff', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '8px' }}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
             Saldo: <strong>€ {(dbUser?.balance ?? 0).toFixed(2)}</strong>
@@ -112,7 +256,7 @@ export function AccountLayoutClient({ uid, labels, dbUser, children }: Props) {
       </div>
 
       {/* Main content */}
-      <div style={{ maxWidth: '1200px', margin: '32px auto', padding: '0 16px', display: 'grid', gridTemplateColumns: '260px 1fr', gap: '32px' }}>
+      <div className="account-main-grid">
         {/* Sidebar menu */}
         <div style={{ background: '#fff', borderRadius: '6px', border: '1px solid #e0e0e0', overflow: 'hidden', height: 'fit-content' }}>
           <div style={{ padding: '12px 16px', background: '#f0f4f8', borderBottom: '1px solid #e0e0e0', fontWeight: 700, color: '#1a5276', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
@@ -148,7 +292,7 @@ export function AccountLayoutClient({ uid, labels, dbUser, children }: Props) {
         </div>
 
         {/* Main panel from pages */}
-        <div style={{ background: '#fff', borderRadius: '6px', border: '1px solid #e0e0e0', padding: '28px', minHeight: '500px' }}>
+        <div className="account-panel">
           {children}
         </div>
       </div>

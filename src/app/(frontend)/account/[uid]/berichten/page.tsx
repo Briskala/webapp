@@ -1,6 +1,7 @@
 import React from 'react';
 import { getPayload } from 'payload';
 import config from '@/payload.config';
+import { RichText } from '@/components/RichText';
 
 export const dynamic = 'force-dynamic';
 
@@ -42,7 +43,7 @@ export default async function BerichtenPage(props: { params: Promise<{ uid: stri
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           {berichten.map((item: any) => (
             <div key={item.id} style={{ border: '1px solid #e0e0e0', borderRadius: '6px', padding: '20px', background: item.isRead ? '#fff' : '#f0f8ff' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px' }}>
+              <div className="bericht-header">
                 <h3 style={{ fontSize: '16px', fontWeight: item.isRead ? 600 : 700, margin: 0, color: '#1a5276' }}>
                   {!item.isRead && <span style={{ display: 'inline-block', width: '8px', height: '8px', borderRadius: '50%', background: '#c0392b', marginRight: '8px', transform: 'translateY(-1px)' }}></span>}
                   {item.subject}
@@ -51,8 +52,8 @@ export default async function BerichtenPage(props: { params: Promise<{ uid: stri
                   {new Date(item.sentDate).toLocaleString('nl-NL', { dateStyle: 'medium', timeStyle: 'short' })}
                 </span>
               </div>
-              <div style={{ fontSize: '14px', color: '#444', lineHeight: 1.6, whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
-                {item.content ? JSON.stringify(item.content, null, 2) : 'Geen inhoud'}
+              <div style={{ fontSize: '14px', color: '#444', lineHeight: 1.6, wordBreak: 'break-word' }}>
+                <RichText content={item.content} />
               </div>
             </div>
           ))}

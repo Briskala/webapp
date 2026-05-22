@@ -1,13 +1,21 @@
 import type { CollectionConfig } from 'payload'
+import { resolveCustomerUser } from '../lib/customerUtils'
 
 export const UserServices: CollectionConfig = {
   slug: 'user-services',
   admin: {
     useAsTitle: 'id',
     group: 'Account',
+    defaultColumns: ['user', 'customerNumber', 'service', 'status', 'startDate'],
   },
   access: {
     read: () => true,
+    create: () => true,
+    update: () => true,
+    delete: () => true,
+  },
+  hooks: {
+    beforeChange: [resolveCustomerUser],
   },
   fields: [
     {
@@ -18,9 +26,18 @@ export const UserServices: CollectionConfig = {
       label: 'Gebruiker',
     },
     {
+      name: 'customerNumber',
+      type: 'text',
+      index: true,
+      label: 'Klantnummer',
+      admin: {
+        description: 'Wordt automatisch ingevuld op basis van de gebruiker.',
+      },
+    },
+    {
       name: 'service',
       type: 'relationship',
-      relationTo: 'services', // Links to the existing services collection
+      relationTo: 'services',
       required: true,
       label: 'Dienst',
     },

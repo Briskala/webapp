@@ -34,7 +34,7 @@ export default async function WalletPage(props: { params: Promise<{ uid: string 
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '24px' }}>
+      <div className="wallet-header">
         <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#1a5276', margin: 0 }}>
           Portemonnee
         </h2>
@@ -51,7 +51,7 @@ export default async function WalletPage(props: { params: Promise<{ uid: string 
           <p style={{ color: '#666', margin: 0 }}>Er zijn nog geen transacties gevonden in uw portemonnee.</p>
         </div>
       ) : (
-        <div style={{ border: '1px solid #e0e0e0', borderRadius: '6px', overflow: 'hidden' }}>
+        <div className="account-table-container">
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '14px' }}>
             <thead style={{ background: '#f0f4f8' }}>
               <tr>

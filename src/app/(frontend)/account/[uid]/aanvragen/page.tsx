@@ -52,7 +52,7 @@ export default async function AanvragenPage(props: { params: Promise<{ uid: stri
           <p style={{ color: '#666', margin: 0 }}>U heeft nog geen aanvragen ingediend.</p>
         </div>
       ) : (
-        <div style={{ border: '1px solid #e0e0e0', borderRadius: '6px', overflow: 'hidden' }}>
+        <div className="account-table-container">
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '14px' }}>
             <thead style={{ background: '#f0f4f8' }}>
               <tr>
