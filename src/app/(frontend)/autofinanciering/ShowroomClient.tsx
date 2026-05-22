@@ -797,16 +797,29 @@ export default function ShowroomClient({ initialVehicles = [] }: ShowroomClientP
   ];
 
   return (
-    <div style={{ backgroundColor: '#f8fafc', borderRadius: '16px', border: '1px solid #e2e8f0', padding: '24px', fontFamily: "'Open Sans', sans-serif" }}>
+    <div style={{ backgroundColor: '#ffffff', borderRadius: '24px', border: '1px solid #e2e8f0', padding: '32px', fontFamily: "'Open Sans', sans-serif", boxShadow: '0 10px 40px -10px rgba(0, 0, 0, 0.02)' }}>
       <div className="container-fluid" style={{ padding: 0 }}>
         
         {/* ==========================================
             A. TOP SHOWROOM NAVIGATION BAR & HEADER
             ========================================== */}
-        <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4 pb-3 border-bottom border-secondary-subtle">
+        <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4 pb-3 border-bottom border-light-subtle">
           <div>
-            <p style={{ margin: 0, color: '#64748b', fontSize: '14px' }}>
-              Vind uw droomvoertuig en bereken direct uw lease. <span style={{ fontSize: '12px', fontWeight: 600, color: '#006b99', verticalAlign: 'middle', marginLeft: '10px', background: '#d0edf9', padding: '3px 8px', borderRadius: '20px' }}>Premium Finance v1.1</span>
+            <p style={{ margin: 0, color: '#64748b', fontSize: '15px', fontWeight: 600, display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+              Vind uw droomvoertuig en bereken direct uw lease. 
+              <span style={{ 
+                fontSize: '11px', 
+                fontWeight: 800, 
+                color: '#0d9488', 
+                marginLeft: '12px', 
+                background: '#ccfbf1', 
+                padding: '4px 12px', 
+                borderRadius: '20px',
+                textTransform: 'uppercase',
+                letterSpacing: '0.5px'
+              }}>
+                Premium Finance v1.1
+              </span>
             </p>
           </div>
           
@@ -817,23 +830,40 @@ export default function ShowroomClient({ initialVehicles = [] }: ShowroomClientP
                 key={brand}
                 onClick={() => setSelectedBrand(brand)}
                 style={{
-                  padding: '10px 20px',
+                  padding: '8px 18px',
                   borderRadius: '30px',
                   fontWeight: 700,
-                  fontSize: '13px',
-                  border: 'none',
-                  backgroundColor: selectedBrand === brand ? '#1a5276' : '#ffffff',
-                  color: selectedBrand === brand ? '#ffffff' : '#64748b',
-                  boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)',
+                  fontSize: '12px',
+                  border: '1px solid',
+                  borderColor: selectedBrand === brand ? 'transparent' : '#cbd5e1',
+                  backgroundColor: selectedBrand === brand ? '#1e3a8a' : '#ffffff',
+                  color: selectedBrand === brand ? '#ffffff' : '#475569',
+                  boxShadow: selectedBrand === brand ? '0 4px 12px rgba(30, 58, 138, 0.15)' : 'none',
                   transition: 'all 0.2s ease',
                   textTransform: 'uppercase',
                   letterSpacing: '0.5px',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '8px'
+                  gap: '8px',
+                  cursor: 'pointer'
+                }}
+                onMouseEnter={e => {
+                  if (selectedBrand !== brand) {
+                    e.currentTarget.style.borderColor = '#94a3b8';
+                    e.currentTarget.style.backgroundColor = '#f8fafc';
+                  }
+                }}
+                onMouseLeave={e => {
+                  if (selectedBrand !== brand) {
+                    e.currentTarget.style.borderColor = '#cbd5e1';
+                    e.currentTarget.style.backgroundColor = '#ffffff';
+                  }
                 }}
               >
-                {brand === 'FORD' && <Car size={14} />}
+                {brand === 'FORD' && <Car size={13} />}
+                {brand === 'NISSAN' && <Car size={13} />}
+                {brand === 'MITSUBISHI' && <Car size={13} />}
+                {brand === 'OPEL' && <Car size={13} />}
                 {brand}
               </button>
             ))}
@@ -854,21 +884,29 @@ export default function ShowroomClient({ initialVehicles = [] }: ShowroomClientP
                 onChange={e => setSearchTerm(e.target.value)}
                 style={{
                   width: '100%',
-                  padding: '12px 16px 12px 48px',
+                  padding: '14px 16px 14px 48px',
                   borderRadius: '12px',
                   border: '1px solid #cbd5e1',
                   backgroundColor: '#ffffff',
                   fontSize: '14px',
                   color: '#1e293b',
-                  boxShadow: '0 1px 2px 0 rgba(0,0,0,0.05)',
+                  boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.02)',
                   outline: 'none',
-                  transition: 'border-color 0.2s'
+                  transition: 'all 0.2s ease'
+                }}
+                onFocus={e => {
+                  e.currentTarget.style.borderColor = '#1e3a8a';
+                  e.currentTarget.style.boxShadow = '0 0 0 3px rgba(30, 58, 138, 0.1)';
+                }}
+                onBlur={e => {
+                  e.currentTarget.style.borderColor = '#cbd5e1';
+                  e.currentTarget.style.boxShadow = 'inset 0 1px 2px rgba(0,0,0,0.02)';
                 }}
               />
               {searchTerm && (
                 <button 
                   onClick={() => setSearchTerm('')} 
-                  style={{ position: 'absolute', right: '16px', top: '50%', transform: 'translateY(-50%)', border: 'none', background: 'transparent', color: '#64748b' }}
+                  style={{ position: 'absolute', right: '16px', top: '50%', transform: 'translateY(-50%)', border: 'none', background: 'transparent', color: '#64748b', cursor: 'pointer' }}
                 >
                   <X size={16} />
                 </button>
@@ -882,26 +920,29 @@ export default function ShowroomClient({ initialVehicles = [] }: ShowroomClientP
                 onChange={e => setSortBy(e.target.value)}
                 style={{
                   width: '100%',
-                  padding: '12px 16px',
+                  padding: '14px 16px',
                   borderRadius: '12px',
                   border: '1px solid #cbd5e1',
                   backgroundColor: '#ffffff',
                   fontSize: '14px',
                   color: '#1e293b',
-                  fontWeight: 600,
+                  fontWeight: 700,
                   appearance: 'none',
                   cursor: 'pointer',
                   outline: 'none',
-                  boxShadow: '0 1px 2px 0 rgba(0,0,0,0.05)'
+                  boxShadow: '0 1px 2px rgba(0,0,0,0.05)',
+                  transition: 'all 0.2s ease'
                 }}
+                onFocus={e => e.currentTarget.style.borderColor = '#1e3a8a'}
+                onBlur={e => e.currentTarget.style.borderColor = '#cbd5e1'}
               >
                 <option value="price-asc">Prijs: minder duur naar duurder ▾</option>
                 <option value="price-desc">Prijs: duurder naar minder duur ▴</option>
                 <option value="hp-desc">Vermogen: hoogste PK's ⚡</option>
                 <option value="year-desc">Bouwjaar: nieuwste eerst 📅</option>
               </select>
-              <span style={{ position: 'absolute', right: '16px', top: '50%', transform: 'translateY(-50%)', color: '#64748b', pointerEvents: 'none' }}>
-                <ChevronDown size={16} />
+              <span style={{ position: 'absolute', right: '16px', top: '50%', transform: 'translateY(-50%)', color: '#475569', pointerEvents: 'none', display: 'flex', alignItems: 'center' }}>
+                <ChevronDown size={16} strokeWidth={2.5} />
               </span>
             </div>
           </div>
@@ -1229,6 +1270,16 @@ export default function ShowroomClient({ initialVehicles = [] }: ShowroomClientP
               </div>
             ) : (
               <div className="row g-4">
+                <style>{`
+                  @keyframes pulse-ring {
+                    0% { transform: scale(0.33); opacity: 0.6; }
+                    80%, 100% { opacity: 0; }
+                  }
+                  @keyframes pulse-dot {
+                    0%, 100% { transform: scale(0.8); }
+                    50% { transform: scale(1.2); }
+                  }
+                `}</style>
                 {filteredVehicles.map(vehicle => {
                   // Active state for this specific card
                   const activeTrimIndex = carTrims[vehicle.id] || 0;
@@ -1247,21 +1298,21 @@ export default function ShowroomClient({ initialVehicles = [] }: ShowroomClientP
                         className="h-100 d-flex flex-column"
                         style={{
                           backgroundColor: '#ffffff',
-                          borderRadius: '16px',
+                          borderRadius: '24px',
                           border: '1px solid rgba(226, 232, 240, 0.8)',
-                          boxShadow: '0 4px 6px -1px rgba(0,0,0,0.02), 0 2px 4px -2px rgba(0,0,0,0.02)',
-                          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                          boxShadow: '0 10px 30px -10px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.02)',
+                          transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
                           position: 'relative',
                           overflow: 'hidden'
                         }}
                         onMouseEnter={(e) => {
-                          e.currentTarget.style.transform = 'translateY(-4px)';
-                          e.currentTarget.style.boxShadow = '0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05)';
+                          e.currentTarget.style.transform = 'translateY(-6px)';
+                          e.currentTarget.style.boxShadow = '0 25px 50px -12px rgba(15, 23, 42, 0.12), 0 12px 24px -10px rgba(15, 23, 42, 0.08)';
                           e.currentTarget.style.borderColor = '#cbd5e1';
                         }}
                         onMouseLeave={(e) => {
                           e.currentTarget.style.transform = 'none';
-                          e.currentTarget.style.boxShadow = '0 4px 6px -1px rgba(0,0,0,0.02), 0 2px 4px -2px rgba(0,0,0,0.02)';
+                          e.currentTarget.style.boxShadow = '0 10px 30px -10px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.02)';
                           e.currentTarget.style.borderColor = 'rgba(226, 232, 240, 0.8)';
                         }}
                       >
@@ -1269,33 +1320,88 @@ export default function ShowroomClient({ initialVehicles = [] }: ShowroomClientP
                         {/* ==========================================
                             CARD HEADER: Title, Badge, Price, Lease
                             ========================================== */}
-                        <div style={{ padding: '20px 20px 0 20px' }}>
+                        <div style={{ padding: '24px 24px 16px 24px' }}>
                           <div className="d-flex justify-content-between align-items-start">
                             <div>
-                              <h2 style={{ fontSize: '20px', fontWeight: 800, color: '#1e293b', margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}>
+                              <span style={{ 
+                                fontSize: '11px', 
+                                fontWeight: 800, 
+                                color: '#1e3a8a', 
+                                letterSpacing: '1px', 
+                                textTransform: 'uppercase', 
+                                display: 'block', 
+                                marginBottom: '4px',
+                                opacity: 0.8
+                              }}>
+                                {vehicle.make}
+                              </span>
+                              <h2 style={{ 
+                                fontSize: '22px', 
+                                fontWeight: 800, 
+                                color: '#0f172a', 
+                                margin: 0, 
+                                display: 'flex', 
+                                alignItems: 'center', 
+                                flexWrap: 'wrap',
+                                gap: '8px',
+                                lineHeight: '1.2'
+                              }}>
                                 {vehicle.model}
                                 {isNew && (
-                                  <span style={{ fontSize: '10px', fontWeight: 700, backgroundColor: '#006b99', color: '#ffffff', padding: '2px 8px', borderRadius: '4px', textTransform: 'uppercase' }}>
+                                  <span style={{ 
+                                    fontSize: '9px', 
+                                    fontWeight: 800, 
+                                    background: 'linear-gradient(135deg, #1e3a8a, #3b82f6)', 
+                                    color: '#ffffff', 
+                                    padding: '3px 10px', 
+                                    borderRadius: '30px', 
+                                    textTransform: 'uppercase',
+                                    boxShadow: '0 2px 4px rgba(30, 58, 138, 0.15)'
+                                  }}>
                                     Nieuw
                                   </span>
                                 )}
                                 {isPromo && (
-                                  <span style={{ fontSize: '10px', fontWeight: 700, backgroundColor: '#ea580c', color: '#ffffff', padding: '2px 8px', borderRadius: '4px', textTransform: 'uppercase' }}>
+                                  <span style={{ 
+                                    fontSize: '9px', 
+                                    fontWeight: 800, 
+                                    background: 'linear-gradient(135deg, #ea580c, #f97316)', 
+                                    color: '#ffffff', 
+                                    padding: '3px 10px', 
+                                    borderRadius: '30px', 
+                                    textTransform: 'uppercase',
+                                    boxShadow: '0 2px 4px rgba(234, 88, 12, 0.15)'
+                                  }}>
                                     Prijsdaling
                                   </span>
                                 )}
                               </h2>
                               
                               {/* Availability dot and message */}
-                              <div className="d-flex align-items-center gap-1.5 mt-1" style={{ fontSize: '11px' }}>
-                                <span style={{ 
-                                  width: '8px', 
-                                  height: '8px', 
-                                  borderRadius: '50%', 
-                                  display: 'inline-block',
-                                  backgroundColor: vehicle.tags.includes('Nieuw') ? '#94a3b8' : '#22c55e'
-                                }} />
-                                <span style={{ color: '#64748b', fontWeight: 500 }}>
+                              <div className="d-flex align-items-center gap-2 mt-2" style={{ fontSize: '12px' }}>
+                                <span style={{ position: 'relative', display: 'flex', height: '8px', width: '8px' }}>
+                                  <span style={{
+                                    position: 'absolute',
+                                    display: 'inline-flex',
+                                    height: '100%',
+                                    width: '100%',
+                                    borderRadius: '50%',
+                                    backgroundColor: vehicle.tags.includes('Nieuw') ? '#94a3b8' : '#22c55e',
+                                    opacity: 0.6,
+                                    transform: 'scale(1.8)',
+                                    animation: 'pulse-ring 1.5s cubic-bezier(0.215, 0.610, 0.355, 1) infinite'
+                                  }} />
+                                  <span style={{ 
+                                    position: 'relative',
+                                    display: 'inline-flex',
+                                    width: '8px', 
+                                    height: '8px', 
+                                    borderRadius: '50%', 
+                                    backgroundColor: vehicle.tags.includes('Nieuw') ? '#94a3b8' : '#22c55e',
+                                    animation: 'pulse-dot 1.5s cubic-bezier(0.215, 0.610, 0.355, 1) infinite'
+                                  }} />
+                                </span>
+                                <span style={{ color: '#475569', fontWeight: 600 }}>
                                   {vehicle.tags.includes('Nieuw') ? 'Binnenkort beschikbaar' : 'Model direct beschikbaar'}
                                 </span>
                               </div>
@@ -1303,10 +1409,10 @@ export default function ShowroomClient({ initialVehicles = [] }: ShowroomClientP
 
                             {/* Price details right aligned */}
                             <div className="text-end">
-                              <div style={{ fontSize: '18px', fontWeight: 800, color: '#1e293b' }}>
+                              <div style={{ fontSize: '20px', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.5px' }}>
                                 € {activeTrim.price.toLocaleString('nl-NL')}
                               </div>
-                              <div style={{ fontSize: '11px', color: '#006b99', fontWeight: 700 }}>
+                              <div style={{ fontSize: '12px', color: '#0d9488', fontWeight: 700, marginTop: '2px' }}>
                                 Lease vanaf € {activeTrim.monthlyFinance}/mnd
                               </div>
                             </div>
@@ -1317,66 +1423,100 @@ export default function ShowroomClient({ initialVehicles = [] }: ShowroomClientP
                             CARD IMAGE SECTION: Dynamic Color Selector
                             ========================================== */}
                         <div style={{ 
-                          padding: '10px 20px',
+                          padding: '0 24px',
                           display: 'flex',
                           flexDirection: 'column',
                           alignItems: 'center',
                           position: 'relative'
                         }}>
-                          {/* Color swatch rings absolutely placed on top left of image */}
+                          {/* Inner Studio Container */}
                           <div style={{
-                            position: 'absolute',
-                            left: '20px',
-                            top: '10px',
+                            width: '100%',
+                            background: 'radial-gradient(circle at center, rgba(241, 245, 249, 0.8) 0%, rgba(226, 232, 240, 0.3) 100%)',
+                            borderRadius: '16px',
+                            border: '1px solid rgba(226, 232, 240, 0.5)',
+                            padding: '20px',
                             display: 'flex',
-                            gap: '6px',
-                            zIndex: 10
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            position: 'relative',
+                            overflow: 'hidden'
                           }}>
-                            {vehicle.colors.map(color => {
-                              const isSelected = selectedHex === color.hex;
-                              return (
-                                <button
-                                  key={color.hex}
-                                  onClick={() => setCarColors(prev => ({ ...prev, [vehicle.id]: color.hex }))}
-                                  title={color.name}
-                                  style={{
-                                    width: '18px',
-                                    height: '18px',
-                                    borderRadius: '50%',
-                                    backgroundColor: color.hex,
-                                    border: isSelected ? '2px stroke #0f172a' : '1px solid #cbd5e1',
-                                    boxShadow: isSelected ? '0 0 0 2px #38bdf8, 0 1px 2px rgba(0,0,0,0.1)' : '0 1px 2px rgba(0,0,0,0.05)',
-                                    cursor: 'pointer',
-                                    transform: isSelected ? 'scale(1.15)' : 'scale(1)',
-                                    transition: 'transform 0.15s ease'
-                                  }}
-                                />
-                              );
-                            })}
-                          </div>
+                            {/* Color swatch rings absolutely placed in a glassy floating pill */}
+                            <div style={{
+                              position: 'absolute',
+                              left: '12px',
+                              top: '12px',
+                              backgroundColor: 'rgba(255, 255, 255, 0.75)',
+                              backdropFilter: 'blur(8px)',
+                              padding: '5px 8px',
+                              borderRadius: '30px',
+                              border: '1px solid rgba(255, 255, 255, 0.6)',
+                              boxShadow: '0 4px 12px rgba(15, 23, 42, 0.05)',
+                              display: 'flex',
+                              gap: '6px',
+                              zIndex: 10
+                            }}>
+                              {vehicle.colors.map(color => {
+                                const isSelected = selectedHex === color.hex;
+                                return (
+                                  <button
+                                    key={color.hex}
+                                    onClick={() => setCarColors(prev => ({ ...prev, [vehicle.id]: color.hex }))}
+                                    title={color.name}
+                                    style={{
+                                      width: '16px',
+                                      height: '16px',
+                                      borderRadius: '50%',
+                                      backgroundColor: color.hex,
+                                      border: isSelected ? '2px solid #ffffff' : '1px solid rgba(15, 23, 42, 0.1)',
+                                      boxShadow: isSelected ? '0 0 0 2px #0f172a, 0 4px 6px rgba(0,0,0,0.1)' : '0 1px 2px rgba(0,0,0,0.05)',
+                                      cursor: 'pointer',
+                                      transform: isSelected ? 'scale(1.1)' : 'scale(1)',
+                                      transition: 'all 0.2s ease'
+                                    }}
+                                  />
+                                );
+                              })}
+                            </div>
 
-                          {/* Dynamic SVG vehicle image */}
-                          <div style={{ width: '100%', height: '140px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <VehicleSvgRenderer 
-                              type={vehicle.bodyType} 
-                              color={selectedHex} 
-                              className="w-100 h-100" 
-                            />
-                          </div>
+                            {/* Dynamic SVG vehicle image */}
+                            <div style={{ width: '100%', height: '140px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                              <VehicleSvgRenderer 
+                                type={vehicle.bodyType} 
+                                color={selectedHex} 
+                                className="w-100 h-100" 
+                              />
+                            </div>
 
-                          <div style={{ fontSize: '10px', color: '#94a3b8', marginTop: '-5px', fontWeight: 600 }}>
-                            Kleur: {activeColorObj.name}
+                            {/* Refined Color Name Badge */}
+                            <div style={{
+                              fontSize: '11px',
+                              color: '#475569',
+                              fontWeight: 600,
+                              backgroundColor: '#ffffff',
+                              padding: '4px 12px',
+                              borderRadius: '20px',
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: '6px',
+                              border: '1px solid #e2e8f0',
+                              boxShadow: '0 1px 2px rgba(0,0,0,0.02)'
+                            }}>
+                              <span style={{ display: 'inline-block', width: '8px', height: '8px', borderRadius: '50%', backgroundColor: selectedHex, border: '1px solid rgba(15, 23, 42, 0.1)' }} />
+                              <span>Kleur: <strong>{activeColorObj.name}</strong></span>
+                            </div>
                           </div>
                         </div>
 
                         {/* ==========================================
                             CARD INFO & DETAILS: Specs and Trims
                             ========================================== */}
-                        <div style={{ padding: '0 20px 20px 20px', flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+                        <div style={{ padding: '24px', flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
                           
                           {/* 1. Trim Dropdown Selector */}
                           <div className="mb-3">
-                            <label style={{ fontSize: '10px', fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', display: 'block', marginBottom: '4px' }}>
+                            <label style={{ fontSize: '11px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.5px', display: 'block', marginBottom: '6px' }}>
                               Uitvoering & Motorisering:
                             </label>
                             <div style={{ position: 'relative' }}>
@@ -1385,16 +1525,26 @@ export default function ShowroomClient({ initialVehicles = [] }: ShowroomClientP
                                 onChange={e => setCarTrims(prev => ({ ...prev, [vehicle.id]: Number(e.target.value) }))}
                                 style={{
                                   width: '100%',
-                                  padding: '6px 12px',
-                                  fontSize: '12px',
+                                  padding: '10px 16px',
+                                  fontSize: '13px',
                                   fontWeight: 600,
-                                  color: '#475569',
+                                  color: '#0f172a',
                                   backgroundColor: '#f8fafc',
                                   border: '1px solid #cbd5e1',
-                                  borderRadius: '6px',
+                                  borderRadius: '12px',
                                   cursor: 'pointer',
                                   outline: 'none',
-                                  appearance: 'none'
+                                  appearance: 'none',
+                                  transition: 'all 0.2s ease',
+                                  boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.02)'
+                                }}
+                                onFocus={e => {
+                                  e.currentTarget.style.borderColor = '#1e3a8a';
+                                  e.currentTarget.style.boxShadow = '0 0 0 3px rgba(30, 58, 138, 0.08)';
+                                }}
+                                onBlur={e => {
+                                  e.currentTarget.style.borderColor = '#cbd5e1';
+                                  e.currentTarget.style.boxShadow = 'none';
                                 }}
                               >
                                 {vehicle.trims.map((trim, idx) => (
@@ -1403,83 +1553,175 @@ export default function ShowroomClient({ initialVehicles = [] }: ShowroomClientP
                                   </option>
                                 ))}
                               </select>
-                              <span style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', color: '#64748b', pointerEvents: 'none' }}>
-                                <ChevronDown size={12} />
+                              <span style={{ position: 'absolute', right: '14px', top: '50%', transform: 'translateY(-50%)', color: '#64748b', pointerEvents: 'none', display: 'flex', alignItems: 'center' }}>
+                                <ChevronDown size={14} strokeWidth={2.5} />
                               </span>
                             </div>
                           </div>
 
-                          {/* 2. Specs Strip with vertical bars */}
-                          <div className="d-flex justify-content-between text-center mb-3 py-2 border-top border-bottom border-light-subtle" style={{ fontSize: '12px' }}>
-                            <div style={{ flex: 1, borderRight: '1px solid #f1f5f9' }}>
-                              <span className="d-block" style={{ color: '#475569', fontWeight: 700 }}>
+                          {/* 2. Specs Strip with premium capsules */}
+                          <div className="d-flex justify-content-between gap-2 mb-4 mt-1" style={{ fontSize: '12px' }}>
+                            <div style={{
+                              flex: 1,
+                              backgroundColor: '#f8fafc',
+                              border: '1px solid #e2e8f0',
+                              borderRadius: '12px',
+                              padding: '8px',
+                              textAlign: 'center'
+                            }}>
+                              <span style={{ color: '#0f172a', fontWeight: 800, fontSize: '13px', display: 'block' }}>
                                 {vehicle.fuelType}
                               </span>
-                              <span className="d-block" style={{ color: '#94a3b8', fontSize: '10px' }}>
+                              <span style={{ color: '#64748b', fontSize: '10px', fontWeight: 600, display: 'block', marginTop: '2px' }}>
                                 {activeTrim.engine.split(' ')[1] || '1.2L'}
                               </span>
                             </div>
-                            <div style={{ flex: 1, borderRight: '1px solid #f1f5f9' }}>
-                              <span className="d-block" style={{ color: '#475569', fontWeight: 700 }}>
+                            <div style={{
+                              flex: 1,
+                              backgroundColor: '#f8fafc',
+                              border: '1px solid #e2e8f0',
+                              borderRadius: '12px',
+                              padding: '8px',
+                              textAlign: 'center'
+                            }}>
+                              <span style={{ color: '#0f172a', fontWeight: 800, fontSize: '13px', display: 'block' }}>
                                 {activeTrim.horsepower} PK
                               </span>
-                              <span className="d-block" style={{ color: '#94a3b8', fontSize: '10px' }}>
+                              <span style={{ color: '#64748b', fontSize: '10px', fontWeight: 600, display: 'block', marginTop: '2px' }}>
                                 Vermogen
                               </span>
                             </div>
-                            <div style={{ flex: 1 }}>
-                              <span className="d-block" style={{ color: '#475569', fontWeight: 700 }}>
+                            <div style={{
+                              flex: 1,
+                              backgroundColor: '#f8fafc',
+                              border: '1px solid #e2e8f0',
+                              borderRadius: '12px',
+                              padding: '8px',
+                              textAlign: 'center'
+                            }}>
+                              <span style={{ color: '#0f172a', fontWeight: 800, fontSize: '13px', display: 'block' }}>
                                 {vehicle.specs.seats}
                               </span>
-                              <span className="d-block" style={{ color: '#94a3b8', fontSize: '10px' }}>
+                              <span style={{ color: '#64748b', fontSize: '10px', fontWeight: 600, display: 'block', marginTop: '2px' }}>
                                 Zitplaatsen
                               </span>
                             </div>
                           </div>
 
-                          {/* 3. Bullet points specs (Reference checklist) */}
-                          <div className="d-flex flex-column gap-2 mb-4" style={{ fontSize: '11px', color: '#475569' }}>
-                            <div className="d-flex align-items-center gap-2">
-                              <Settings size={14} className="text-secondary" />
-                              <span>{vehicle.transmission === 'Automaat' ? 'Automatische transmissie' : 'Handgeschakelde 6-bak'}</span>
+                          {/* 3. Advanced Checklist Spec Bullets (Premium styled with circular blue-tinted wrappers) */}
+                          <div className="d-flex flex-column gap-2.5 mb-4" style={{ fontSize: '13px', color: '#334155' }}>
+                            <div className="d-flex align-items-center gap-3">
+                              <div style={{
+                                width: '28px',
+                                height: '28px',
+                                borderRadius: '50%',
+                                backgroundColor: '#eff6ff',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                color: '#3b82f6',
+                                flexShrink: 0
+                              }}>
+                                <Settings size={14} strokeWidth={2.5} />
+                              </div>
+                              <span style={{ fontWeight: 500 }}>{vehicle.transmission === 'Automaat' ? 'Automatische transmissie' : 'Handgeschakelde 6-bak'}</span>
                             </div>
-                            <div className="d-flex align-items-center gap-2">
-                              <Wind size={14} className="text-secondary" />
-                              <span>{vehicle.specs.climate}</span>
+
+                            <div className="d-flex align-items-center gap-3">
+                              <div style={{
+                                width: '28px',
+                                height: '28px',
+                                borderRadius: '50%',
+                                backgroundColor: '#eff6ff',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                color: '#3b82f6',
+                                flexShrink: 0
+                              }}>
+                                <Wind size={14} strokeWidth={2.5} />
+                              </div>
+                              <span style={{ fontWeight: 500 }}>{vehicle.specs.climate}</span>
                             </div>
-                            <div className="d-flex align-items-center gap-2">
-                              <Disc size={14} className="text-secondary" />
-                              <span>{vehicle.specs.rims}</span>
+
+                            <div className="d-flex align-items-center gap-3">
+                              <div style={{
+                                width: '28px',
+                                height: '28px',
+                                borderRadius: '50%',
+                                backgroundColor: '#eff6ff',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                color: '#3b82f6',
+                                flexShrink: 0
+                              }}>
+                                <Disc size={14} strokeWidth={2.5} />
+                              </div>
+                              <span style={{ fontWeight: 500 }}>{vehicle.specs.rims}</span>
                             </div>
-                            <div className="d-flex align-items-center gap-2">
-                              <ShieldAlert size={14} className="text-secondary" />
-                              <span>{vehicle.specs.airbags}</span>
+
+                            <div className="d-flex align-items-center gap-3">
+                              <div style={{
+                                width: '28px',
+                                height: '28px',
+                                borderRadius: '50%',
+                                backgroundColor: '#eff6ff',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                color: '#3b82f6',
+                                flexShrink: 0
+                              }}>
+                                <ShieldAlert size={14} strokeWidth={2.5} />
+                              </div>
+                              <span style={{ fontWeight: 500 }}>{vehicle.specs.airbags}</span>
                             </div>
-                            <div className="d-flex align-items-center gap-2">
-                              <Eye size={14} className="text-secondary" />
-                              <span>{vehicle.specs.radar}</span>
+
+                            <div className="d-flex align-items-center gap-3">
+                              <div style={{
+                                width: '28px',
+                                height: '28px',
+                                borderRadius: '50%',
+                                backgroundColor: '#eff6ff',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                color: '#3b82f6',
+                                flexShrink: 0
+                              }}>
+                                <Eye size={14} strokeWidth={2.5} />
+                              </div>
+                              <span style={{ fontWeight: 500 }}>{vehicle.specs.radar}</span>
                             </div>
                           </div>
 
-                          {/* 4. Action button "Financiering Berekenen" */}
+                          {/* 4. Action button "Financiering Berekenen" with luxurious linear gradient */}
                           <button
                             onClick={() => handleOpenCalculator(vehicle)}
                             className="btn w-100 mt-auto d-flex align-items-center justify-content-center gap-2"
                             style={{
-                              backgroundColor: '#1a5276',
+                              background: 'linear-gradient(135deg, #1e3a8a 0%, #0d9488 100%)',
                               color: '#ffffff',
                               fontWeight: 700,
-                              fontSize: '13px',
-                              borderRadius: '8px',
-                              padding: '10px 16px',
+                              fontSize: '14px',
+                              borderRadius: '12px',
+                              padding: '12px 20px',
                               border: 'none',
-                              boxShadow: '0 2px 4px rgba(26, 82, 118, 0.2)',
-                              transition: 'background-color 0.2s'
+                              boxShadow: '0 4px 14px rgba(13, 148, 136, 0.3)',
+                              transition: 'all 0.3s ease',
+                              cursor: 'pointer'
                             }}
-                            onMouseEnter={e => e.currentTarget.style.backgroundColor = '#006b99'}
-                            onMouseLeave={e => e.currentTarget.style.backgroundColor = '#1a5276'}
+                            onMouseEnter={e => {
+                              e.currentTarget.style.transform = 'translateY(-1px)';
+                              e.currentTarget.style.boxShadow = '0 6px 20px rgba(13, 148, 136, 0.4)';
+                            }}
+                            onMouseLeave={e => {
+                              e.currentTarget.style.transform = 'none';
+                              e.currentTarget.style.boxShadow = '0 4px 14px rgba(13, 148, 136, 0.3)';
+                            }}
                           >
-                            <Calculator size={16} />
+                            <Calculator size={18} />
                             Financiering Berekenen
                           </button>
 
