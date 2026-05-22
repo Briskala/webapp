@@ -938,7 +938,7 @@ body { overflow-x: hidden; width: 100%; min-width: 0; }
   .mobile-search-bar .search-box { width: 100%; display: flex; border: 1px solid #ccc; background: #fff; border-radius: 4px; }
   .mobile-search-bar .search-box input { width: 100%; padding: 10px 12px; border: none; background: transparent; }
   
-  .auth-btn-text { display: none; }
+  .auth-btn-text { display: inline !important; }
   
   .mobile-menu-toggle { display: flex; align-items: center; justify-content: center; }
 
