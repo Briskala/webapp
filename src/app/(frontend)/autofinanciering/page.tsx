@@ -1,27 +1,16 @@
 import React from 'react'
-import { getPayload } from 'payload'
-import configPromise from '@/payload.config'
 import { Breadcrumb } from '@/components/Breadcrumb'
-import ShowroomClient from './ShowroomClient'
 import { Sidebar } from '@/components/Sidebar'
+import Link from 'next/link'
 
 export const metadata = {
-  title: 'Digitale Showroom & Autofinanciering | Briskala Property & Asset Group',
-  description: 'Ontdek ons ruime aanbod van voertuigen en bereken direct uw gepersonaliseerde autofinanciering en financial lease.',
+  title: 'Autofinanciering | Briskala Property & Asset Group',
+  description: 'Bereken direct uw gepersonaliseerde autofinanciering, financial lease en operational lease. Flexibele, op maat gemaakte financieringsoplossingen.',
 }
 
 export const dynamic = 'force-dynamic'
 
 export default async function AutofinancieringPage() {
-  const payload = await getPayload({ config: await configPromise })
-  const { docs } = await payload.find({
-    collection: 'vehicles',
-    limit: 50,
-  })
-
-  // Convert payload docs to serializable array
-  const initialVehicles = docs ? JSON.parse(JSON.stringify(docs)) : []
-
   return (
     <>
       <Breadcrumb pageTitle="Autofinanciering" />
@@ -29,7 +18,7 @@ export default async function AutofinancieringPage() {
         <div className="content-col">
           {/* Main Title */}
           <h1 style={{ fontSize: '32px', fontWeight: 800, color: '#1e3a8a', marginBottom: '24px', letterSpacing: '-0.5px' }}>
-            Autofinanciering &amp; Digitale Showroom
+            Autofinanciering
           </h1>
           <hr style={{ border: 'none', borderBottom: '1px solid #e2e8f0', margin: '0 0 24px 0' }} />
 
@@ -52,7 +41,7 @@ export default async function AutofinancieringPage() {
                 lineHeight: '1.7',
               }}
             >
-              Onze financieringsexperts begeleiden u bij het maken van de juiste keuze tussen financial lease en consumptieve kredieten. Bekijk hieronder onze belangrijkste financieringsvormen en ontdek aansluitend onze actuele digitale showroom.
+              Onze financieringsexperts begeleiden u bij het maken van de juiste keuze tussen financial lease en consumptieve kredieten. Bekijk hieronder onze belangrijkste financieringsvormen en ontdek onze flexibele opties.
             </p>
           </div>
 
@@ -174,22 +163,243 @@ export default async function AutofinancieringPage() {
             </div>
           </div>
 
-          {/* Showroom Header */}
-          <h2
+          {/* Special Finance Benefit block */}
+          <div
             style={{
-              fontSize: '22px',
-              fontWeight: 700,
-              color: '#1e3a8a',
-              marginBottom: '20px',
-              fontFamily: "'Open Sans', sans-serif",
-              borderBottom: '2px solid #eff6ff',
-              paddingBottom: '8px',
+              background: 'linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)',
+              border: '1px solid #bfdbfe',
+              borderRadius: '16px',
+              padding: '28px',
+              marginBottom: '44px',
+              boxShadow: '0 4px 12px rgba(30, 58, 138, 0.03)',
             }}
           >
-            Onze Actuele Digitale Showroom
-          </h2>
+            <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
+              <div
+                style={{
+                  background: '#1e3a8a',
+                  width: '36px',
+                  height: '36px',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#ffffff',
+                  flexShrink: 0,
+                }}
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+              </div>
+              <div>
+                <h4 style={{ fontSize: '16px', fontWeight: 700, color: '#1e3a8a', marginBottom: '8px' }}>
+                  Onafhankelijk advies en snelle afhandeling
+                </h4>
+                <p style={{ fontSize: '13.5px', color: '#1e40af', lineHeight: '1.6', margin: 0 }}>
+                  Als onafhankelijke tussenpersoon vergelijken wij de tarieven en voorwaarden van alle toonaangevende financieringsmaatschappijen in Nederland. Hierdoor bent u altijd verzekerd van de laagste rente en gunstigste voorwaarden die perfect aansluiten op uw onderneming of persoonlijke gezinssituatie.
+                </p>
+              </div>
+            </div>
+          </div>
 
-          <ShowroomClient initialVehicles={initialVehicles} />
+          {/* Interactive timeline roadmap */}
+          <div style={{ marginBottom: '44px' }}>
+            <h2
+              style={{
+                fontSize: '22px',
+                fontWeight: 700,
+                color: '#1e3a8a',
+                marginBottom: '28px',
+                fontFamily: "'Open Sans', sans-serif",
+                borderBottom: '2px solid #eff6ff',
+                paddingBottom: '8px',
+              }}
+            >
+              Uw autofinanciering in 4 stappen
+            </h2>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', position: 'relative', paddingLeft: '24px' }}>
+              {/* Vertical line helper */}
+              <div
+                style={{
+                  position: 'absolute',
+                  left: '7px',
+                  top: '12px',
+                  bottom: '12px',
+                  width: '2px',
+                  background: '#e2e8f0',
+                  zIndex: 1,
+                }}
+              />
+
+              {/* Step 1 */}
+              <div style={{ position: 'relative', zIndex: 2 }} className="timeline-item">
+                <div
+                  style={{
+                    position: 'absolute',
+                    left: '-24px',
+                    top: '2px',
+                    width: '16px',
+                    height: '16px',
+                    borderRadius: '50%',
+                    backgroundColor: '#1e3a8a',
+                    border: '3px solid #ffffff',
+                    boxShadow: '0 0 0 1px #e2e8f0',
+                  }}
+                  className="timeline-dot"
+                />
+                <h4 style={{ fontSize: '15px', fontWeight: 700, color: '#1e3a8a', marginBottom: '4px' }}>
+                  Stap 1: Voertuig &amp; Budget bepalen
+                </h4>
+                <p style={{ fontSize: '13px', color: '#64748b', lineHeight: '1.6', margin: 0 }}>
+                  U selecteert uw gewenste personenauto of bedrijfswagen bij een dealer of online. Bepaal uw gewenste looptijd, eventuele aanbetaling of slottermijn om het maandbedrag af te stemmen.
+                </p>
+              </div>
+
+              {/* Step 2 */}
+              <div style={{ position: 'relative', zIndex: 2 }} className="timeline-item">
+                <div
+                  style={{
+                    position: 'absolute',
+                    left: '-24px',
+                    top: '2px',
+                    width: '16px',
+                    height: '16px',
+                    borderRadius: '50%',
+                    backgroundColor: '#1e3a8a',
+                    border: '3px solid #ffffff',
+                    boxShadow: '0 0 0 1px #e2e8f0',
+                  }}
+                  className="timeline-dot"
+                />
+                <h4 style={{ fontSize: '15px', fontWeight: 700, color: '#1e3a8a', marginBottom: '4px' }}>
+                  Stap 2: Vrijblijvende Aanvraag
+                </h4>
+                <p style={{ fontSize: '13px', color: '#64748b', lineHeight: '1.6', margin: 0 }}>
+                  U levert uw gegevens eenvoudig bij ons aan. Voor zakelijke aanvragen ontvangen wij graag uw KvK-nummer en recente jaarcijfers indien beschikbaar.
+                </p>
+              </div>
+
+              {/* Step 3 */}
+              <div style={{ position: 'relative', zIndex: 2 }} className="timeline-item">
+                <div
+                  style={{
+                    position: 'absolute',
+                    left: '-24px',
+                    top: '2px',
+                    width: '16px',
+                    height: '16px',
+                    borderRadius: '50%',
+                    backgroundColor: '#1e3a8a',
+                    border: '3px solid #ffffff',
+                    boxShadow: '0 0 0 1px #e2e8f0',
+                  }}
+                  className="timeline-dot"
+                />
+                <h4 style={{ fontSize: '15px', fontWeight: 700, color: '#1e3a8a', marginBottom: '4px' }}>
+                  Stap 3: Tarievenvergelijking &amp; Akkoord
+                </h4>
+                <p style={{ fontSize: '13px', color: '#64748b', lineHeight: '1.6', margin: 0 }}>
+                  Onze adviseurs vergelijken direct meerdere kredietaanbieders. Binnen 24 uur ontvangt u een passend voorstel en bij akkoord leggen we dit direct vast.
+                </p>
+              </div>
+
+              {/* Step 4 */}
+              <div style={{ position: 'relative', zIndex: 2 }} className="timeline-item">
+                <div
+                  style={{
+                    position: 'absolute',
+                    left: '-24px',
+                    top: '2px',
+                    width: '16px',
+                    height: '16px',
+                    borderRadius: '50%',
+                    backgroundColor: '#22c55e',
+                    border: '3px solid #ffffff',
+                    boxShadow: '0 0 0 1px #e2e8f0',
+                  }}
+                  className="timeline-dot-active"
+                />
+                <h4 style={{ fontSize: '15px', fontWeight: 700, color: '#22c55e', marginBottom: '4px' }}>
+                  Stap 4: Direct Wegrijden
+                </h4>
+                <p style={{ fontSize: '13px', color: '#64748b', lineHeight: '1.6', margin: 0 }}>
+                  Na ondertekening en overboeking van de gelden aan de leverancier is de financiering afgerond. U kunt de sleutels in ontvangst nemen en direct op weg!
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Premium Call to Action */}
+          <div
+            style={{
+              background: 'linear-gradient(135deg, #1e3a8a 0%, #1e1b4b 100%)',
+              borderRadius: '16px',
+              padding: '36px',
+              textAlign: 'center',
+              color: '#ffffff',
+              boxShadow: '0 8px 24px rgba(30, 58, 138, 0.15)',
+            }}
+          >
+            <h3
+              style={{
+                fontSize: '22px',
+                fontWeight: 700,
+                marginBottom: '12px',
+                fontFamily: "'Open Sans', sans-serif",
+              }}
+            >
+              Direct een financieringsvoorstel aanvragen?
+            </h3>
+            <p
+              style={{
+                fontSize: '14px',
+                color: '#cbd5e1',
+                lineHeight: '1.6',
+                maxWidth: '540px',
+                margin: '0 auto 24px',
+              }}
+            >
+              Heeft u al een specifiek voertuig op het oog of wilt u vooraf weten wat uw maximale leasewaarde is? Neem vandaag nog contact met ons op voor een onafhankelijk advies.
+            </p>
+            <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <Link
+                href="/contact"
+                style={{
+                  backgroundColor: '#ffffff',
+                  color: '#1e3a8a',
+                  padding: '12px 24px',
+                  borderRadius: '8px',
+                  textDecoration: 'none',
+                  fontSize: '14px',
+                  fontWeight: 700,
+                  transition: 'all 0.2s ease',
+                  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                }}
+                className="woningbouw-btn-primary"
+              >
+                Plan adviesgesprek &rarr;
+              </Link>
+              <a
+                href="tel:+310000000"
+                style={{
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  color: '#ffffff',
+                  padding: '12px 24px',
+                  borderRadius: '8px',
+                  textDecoration: 'none',
+                  fontSize: '14px',
+                  fontWeight: 600,
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  transition: 'all 0.2s ease',
+                }}
+                className="woningbouw-btn-secondary"
+              >
+                Bellen met expert
+              </a>
+            </div>
+          </div>
         </div>
         <Sidebar />
       </div>
@@ -200,6 +410,17 @@ export default async function AutofinancieringPage() {
           box-shadow: 0 8px 16px rgba(0,0,0,0.04);
           background-color: #ffffff !important;
           border-color: #cbd5e1 !important;
+        }
+        .woningbouw-btn-primary:hover {
+          background-color: #f8fafc !important;
+          transform: translateY(-1px);
+        }
+        .woningbouw-btn-secondary:hover {
+          background-color: rgba(255, 255, 255, 0.15) !important;
+        }
+        .timeline-item:hover .timeline-dot {
+          background-color: #3b82f6 !important;
+          transform: scale(1.1);
         }
       `}} />
     </>
