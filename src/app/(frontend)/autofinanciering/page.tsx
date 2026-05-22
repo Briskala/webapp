@@ -56,11 +56,11 @@ export default async function AutofinancieringPage() {
             </p>
           </div>
 
-          {/* 2-Column Card Grid (Expertises) styled like woningbouw */}
+          {/* 3-Column Card Grid (Financieringsvormen) matching Woningbouw layout */}
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
               gap: '20px',
               marginBottom: '40px',
             }}
@@ -97,11 +97,47 @@ export default async function AutofinancieringPage() {
                 Financial Lease (Zakelijk)
               </h3>
               <p style={{ fontSize: '13px', color: '#64748b', lineHeight: '1.6', margin: 0 }}>
-                De perfecte oplossing voor ZZP'ers en MKB-ondernemers. U bent direct economisch eigenaar van het voertuig, behoudt uw liquiditeit en profiteert van aantrekkelijke fiscale voordelen zoals rente- en investeringsaftrek.
+                De perfecte oplossing voor ZZP'ers en MKB-ondernemers. U bent direct economisch eigenaar, behoudt uw wendbaarheid en profiteert van fiscale voordelen zoals rente- en investeringsaftrek.
               </p>
             </div>
 
-            {/* Card 2: Particuliere Financiering */}
+            {/* Card 2: Operational Lease */}
+            <div
+              style={{
+                background: '#f8fafc',
+                border: '1px solid #e2e8f0',
+                borderRadius: '12px',
+                padding: '24px',
+                transition: 'all 0.2s ease',
+              }}
+              className="autofinanciering-premium-card"
+            >
+              <div
+                style={{
+                  background: '#eff6ff',
+                  width: '44px',
+                  height: '44px',
+                  borderRadius: '8px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#1e3a8a',
+                  marginBottom: '16px',
+                }}
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-.999.43-1.563A6 6 0 1 1 21.75 8.25Z" />
+                </svg>
+              </div>
+              <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#1e3a8a', marginBottom: '8px' }}>
+                Operational Lease (Zorgeloos)
+              </h3>
+              <p style={{ fontSize: '13px', color: '#64748b', lineHeight: '1.6', margin: 0 }}>
+                Volledig ontzorgd zakelijk of privé rijden. Geen omkijken naar onderhoud, reparaties, verzekeringen en wegenbelasting. U betaalt een all-in maandbedrag.
+              </p>
+            </div>
+
+            {/* Card 3: Particuliere Financiering */}
             <div
               style={{
                 background: '#f8fafc',
@@ -133,7 +169,7 @@ export default async function AutofinancieringPage() {
                 Particuliere Financiering
               </h3>
               <p style={{ fontSize: '13px', color: '#64748b', lineHeight: '1.6', margin: 0 }}>
-                Financier uw nieuwe of gebruikte auto als particulier met volledige transparantie. Met een vaste looptijd, een vast maandbedrag en een helder rentepercentage weet u exact waar u aan toe bent gedurende de gehele rit.
+                Financier uw auto met absolute rust. Met een vaste looptijd, een vast maandbedrag en een helder rentepercentage weet u exact waar u aan toe bent.
               </p>
             </div>
           </div>
