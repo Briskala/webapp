@@ -34,11 +34,31 @@ export async function Sidebar() {
 
   // Fallback cards if none configured in CMS
   const fallbackCards = [
-    { id: 'guia', title: 'GUIA do\nUSUARIO', icon: '🧭', colorVariant: 'blue', link: '#', description: '' },
-    { id: 'ipva', title: 'IPVA\n2014', icon: '🚗', colorVariant: 'red', link: '#', description: '' },
+    { id: 'guia', title: 'GEBRUIKERS\nHANDLEIDING', icon: '⏰', colorVariant: 'blue', link: '#', description: '' },
+    { id: 'ipva', title: 'IPVA\n2014', icon: '🚙', colorVariant: 'red', link: '#', description: '' },
   ];
 
-  const resolvedCards = cards.length > 0 ? cards : fallbackCards;
+  // Map and translate any Portuguese default cards to Dutch counterparts
+  const resolvedCards = (cards.length > 0 ? cards : fallbackCards).map(card => {
+    const titleLower = card.title?.toLowerCase() || '';
+    if (titleLower.includes('guia') || titleLower.includes('gebruikers')) {
+      return {
+        ...card,
+        title: 'GEBRUIKERS\nHANDLEIDING',
+        icon: '⏰',
+        colorVariant: 'blue',
+      };
+    }
+    if (titleLower.includes('ipva')) {
+      return {
+        ...card,
+        title: 'IPVA\n2014',
+        icon: '🚙',
+        colorVariant: 'red',
+      };
+    }
+    return card;
+  });
 
   return (
     <aside className="sidebar">

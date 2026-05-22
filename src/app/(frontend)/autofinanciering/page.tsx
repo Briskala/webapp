@@ -3,6 +3,7 @@ import { getPayload } from 'payload'
 import configPromise from '@/payload.config'
 import { Breadcrumb } from '@/components/Breadcrumb'
 import ShowroomClient from './ShowroomClient'
+import { Sidebar } from '@/components/Sidebar'
 
 export const metadata = {
   title: 'Digitale Showroom & Autofinanciering | Briskala Property & Asset Group',
@@ -24,13 +25,8 @@ export default async function AutofinancieringPage() {
   return (
     <>
       <Breadcrumb pageTitle="Autofinanciering" />
-      {/* 
-        Override .main grid-template to be full-width (1fr) rather than 1fr 300px,
-        allowing the digital showroom's advanced filter dashboard and vehicle grids
-        to scale beautifully to 1440px with ample padding.
-      */}
-      <div className="main" style={{ gridTemplateColumns: '1fr', maxWidth: '1440px', padding: '28px 24px 48px' }}>
-        <div className="content-col" style={{ width: '100%' }}>
+      <div className="main">
+        <div className="content-col">
           {/* Main Title */}
           <h1 style={{ fontSize: '32px', fontWeight: 800, color: '#1e3a8a', marginBottom: '24px', letterSpacing: '-0.5px' }}>
             Autofinanciering &amp; Digitale Showroom
@@ -159,6 +155,7 @@ export default async function AutofinancieringPage() {
 
           <ShowroomClient initialVehicles={initialVehicles} />
         </div>
+        <Sidebar />
       </div>
 
       <style dangerouslySetInnerHTML={{ __html: `
