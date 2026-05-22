@@ -192,6 +192,7 @@ export function TopBarClient({ branches, languages, accessibility, topBarLinks =
 
         {/* Right side */}
         <div className="right">
+          <span className="sep mobile-only-sep">|</span>
 
           {/* Language selector */}
           <Menu as="div" style={{ position: 'relative', display: 'inline-block' }}>
