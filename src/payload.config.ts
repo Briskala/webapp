@@ -59,6 +59,12 @@ export default buildConfig({
       afterNavLinks: [
         '@/components/admin/AdminFooter#AdminFooter',
       ],
+      beforeLogin: [
+        '@/components/admin/AdminLoginLayout#AdminLoginHeader',
+      ],
+      afterLogin: [
+        '@/components/admin/AdminLoginLayout#AdminLoginFooter',
+      ],
     },
     meta: {
       titleSuffix: '— Briskala Admin',

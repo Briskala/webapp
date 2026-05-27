@@ -1,6 +1,7 @@
 import React from 'react';
 import { getPayload } from 'payload';
 import config from '@/payload.config';
+import { CustomerDocuments } from '@/components/auth/CustomerDocuments';
 
 export const dynamic = 'force-dynamic';
 
@@ -11,6 +12,7 @@ export default async function DienstenPage(props: { params: Promise<{ uid: strin
   const payload = await getPayload({ config: payloadConfig });
 
   let diensten: any[] = [];
+  let documents: any[] = [];
   try {
     const userResult = await payload.find({
       collection: 'users',
@@ -25,6 +27,14 @@ export default async function DienstenPage(props: { params: Promise<{ uid: strin
         sort: '-startDate',
       });
       diensten = result.docs;
+
+      const docsResult = await payload.find({
+        collection: 'documents',
+        where: { user: { equals: payloadUserId } },
+        sort: '-uploadedAt',
+        depth: 1, // to get the media URL
+      });
+      documents = docsResult.docs;
     }
   } catch (e) {}
 
@@ -71,6 +81,8 @@ export default async function DienstenPage(props: { params: Promise<{ uid: strin
           </table>
         </div>
       )}
+
+      <CustomerDocuments initialDocuments={documents} />
     </div>
   );
 }

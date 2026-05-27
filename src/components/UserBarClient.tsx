@@ -7,6 +7,18 @@ import { useRouter } from 'next/navigation';
 export function UserBarClient() {
   const { user, loading, signOut } = useAuth();
   const router = useRouter();
+  const [status, setStatus] = React.useState({ messageCount: 0, customerNumber: 'Niet ingelogd' });
+
+  React.useEffect(() => {
+    if (user?.uid) {
+      fetch(`/api/user/status?uid=${user.uid}`)
+        .then(res => res.json())
+        .then(data => {
+          if (!data.error) setStatus(data);
+        })
+        .catch(console.error);
+    }
+  }, [user]);
 
   const handleSignOut = async () => {
     await signOut();
@@ -45,39 +57,40 @@ export function UserBarClient() {
   return (
     <div className="user-bar">
       <div className="inner">
-        <div className="user-info" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <div className="user-info" style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap', minWidth: 0 }}>
           {user.photoURL && (
-            <img src={user.photoURL} alt="Avatar" style={{ width: '22px', height: '22px', borderRadius: '50%', border: '1px solid #ccc' }} />
+            <img src={user.photoURL} alt="Avatar" style={{ width: '20px', height: '20px', borderRadius: '50%', border: '1px solid #ccc', flexShrink: 0 }} />
           )}
-          <span>Welkom, <strong>{displayName}</strong> &nbsp;|&nbsp; </span>
-          <Link href={`/account/${user.uid}`}>Mijn account</Link>
-          &nbsp;|&nbsp;
-          <button onClick={handleSignOut} style={{ background: 'none', border: 'none', color: '#c0392b', cursor: 'pointer', fontSize: '12px', padding: 0 }}>
+          <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '160px' }}>
+            Welkom, <strong>{displayName}</strong>
+          </span>
+          <span style={{ color: '#aaa', flexShrink: 0 }}>|</span>
+          <Link href={`/account/${user.uid}`} style={{ whiteSpace: 'nowrap' }}>Mijn account</Link>
+          <span style={{ color: '#aaa', flexShrink: 0 }}>|</span>
+          <button onClick={handleSignOut} style={{ background: 'none', border: 'none', color: '#c0392b', cursor: 'pointer', fontSize: '12px', padding: 0, whiteSpace: 'nowrap' }}>
             Uitloggen
           </button>
         </div>
         <div className="balance">
           <span style={{ display: 'flex', alignItems: 'center' }}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '6px' }}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '6px', flexShrink: 0 }}>
               <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline>
             </svg>
             Saldo: <strong style={{ marginLeft: '4px' }}>€ 0,00</strong>
           </span>
         </div>
         <div className="mail">
-          <span style={{ display: 'flex', alignItems: 'center' }}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '6px' }}>
+          <span style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '4px' }}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline>
             </svg>
-            Berichten: <strong style={{ marginLeft: '4px' }}>0</strong>
+            Berichten: <strong>{status.messageCount > 0 ? status.messageCount : '0'}</strong>
+            {status.messageCount > 0 && (
+              <Link href={`/account/${user.uid}/berichten`} style={{ fontSize: '11px', background: '#e74c3c', color: '#fff', padding: '2px 6px', borderRadius: '4px', textDecoration: 'none', whiteSpace: 'nowrap' }}>
+                Lees alles
+              </Link>
+            )}
           </span>
-        </div>
-        <div className="profile-select">
-          <label>Profiel:</label>
-          <select defaultValue="particulier">
-            <option value="particulier">Particulier</option>
-            <option value="zakelijk">Zakelijk</option>
-          </select>
         </div>
       </div>
     </div>

@@ -7,56 +7,35 @@ export function AdminHeader() {
   const navLinks = [
     { label: 'Bekijk Website', href: '/' },
     { label: 'Klantendashboard', href: '/account' },
-    { label: 'Documenten Archief', href: '/admin/collections/documents' },
-    { label: 'Berichten Center', href: '/admin/collections/messages' },
+    { label: 'Documenten', href: '/admin/collections/documents' },
+    { label: 'Berichten', href: '/admin/collections/messages' },
   ]
 
   return (
     <div
       style={{
         width: '100%',
-        background: 'rgba(15, 23, 42, 0.95)',
-        backdropFilter: 'blur(12px)',
-        borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-        padding: '12px 24px',
+        background: '#ffffff',
+        borderBottom: '1px solid #eaeaea',
+        padding: '10px 24px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        color: '#f8fafc',
-        fontFamily: "'Outfit', 'Inter', sans-serif",
-        boxShadow: '0 4px 20px -2px rgba(0, 0, 0, 0.3)',
+        boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
         zIndex: 99,
         position: 'relative',
       }}
     >
-      {/* Title & Brand */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-        <div
-          style={{
-            width: '10px',
-            height: '10px',
-            borderRadius: '50%',
-            background: '#10b981',
-            boxShadow: '0 0 10px #10b981',
-          }}
+      {/* Logo */}
+      <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+        <img
+          src="/assets/img/bpark.svg"
+          alt="BPAG Logo"
+          width={72}
+          height={52}
+          style={{ display: 'block' }}
         />
-        <span style={{ fontWeight: 700, fontSize: '15px', letterSpacing: '0.5px' }}>
-          BRISKALA <span style={{ color: '#38bdf8', fontWeight: 400 }}>BEHEER</span>
-        </span>
-        <span
-          style={{
-            fontSize: '11px',
-            background: 'rgba(56, 189, 248, 0.15)',
-            color: '#38bdf8',
-            padding: '2px 8px',
-            borderRadius: '12px',
-            fontWeight: 600,
-            border: '1px solid rgba(56, 189, 248, 0.3)',
-          }}
-        >
-          v1.1
-        </span>
-      </div>
+      </a>
 
       {/* Navigation Quick Links */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
@@ -67,12 +46,13 @@ export function AdminHeader() {
             onMouseEnter={() => setHoveredLink(link.label)}
             onMouseLeave={() => setHoveredLink(null)}
             style={{
-              color: hoveredLink === link.label ? '#38bdf8' : '#94a3b8',
+              color: hoveredLink === link.label ? '#1a5276' : '#555',
               textDecoration: 'none',
               fontSize: '13px',
               fontWeight: 500,
-              transition: 'all 0.2s ease',
-              transform: hoveredLink === link.label ? 'translateY(-1px)' : 'none',
+              transition: 'color 0.2s ease',
+              borderBottom: hoveredLink === link.label ? '2px solid #1a5276' : '2px solid transparent',
+              paddingBottom: '2px',
             }}
           >
             {link.label}
@@ -80,10 +60,10 @@ export function AdminHeader() {
         ))}
       </div>
 
-      {/* Portal Status */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-        <span style={{ fontSize: '12px', color: '#94a3b8' }}>Status:</span>
-        <span style={{ fontSize: '12px', fontWeight: 600, color: '#10b981' }}>Operationeel</span>
+      {/* Status */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+        <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10b981', boxShadow: '0 0 6px #10b981' }} />
+        <span style={{ fontSize: '12px', color: '#555', fontWeight: 500 }}>Operationeel</span>
       </div>
     </div>
   )

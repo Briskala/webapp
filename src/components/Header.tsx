@@ -15,7 +15,8 @@ const DEFAULT_NAV: NavItem[] = [
   { label: 'Woningbouw Advies', url: '/woningbouw' },
   { label: 'Autofinanciering', url: '/autofinanciering' },
   { label: 'Vastgoed Advies', url: '/vastgoed' },
-  { label: 'Olietanken Advies', url: '/olietanken' },
+  { label: 'Laadpark', url: '/laadpark' },
+  { label: 'Verzekeringen', url: '/insurance' },
   { label: 'Contact', url: '/contact' },
 ]
 
@@ -30,9 +31,9 @@ export function Header({ mainNav }: HeaderProps) {
     <header className="site-header">
       <div className="inner">
         <div className="logo">
-          <span>
+          <Link href="/">
             <img className="img-fluid" width="101" height="74" src="/assets/img/bpark.svg" alt="BPAG Logo" />
-          </span>
+          </Link>
         </div>
         <nav className="main-nav">
           {navItems.map((item, index) => (
