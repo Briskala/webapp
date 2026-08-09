@@ -114,7 +114,7 @@ export default async function NieuwsPage() {
       <Breadcrumb pageTitle="Nieuws" />
       <div className="main">
         <div className="content-col">
-          {/* Header section matching olietanken */}
+          {/* Header section */}
           <h1
             style={{
               fontSize: '32px',
