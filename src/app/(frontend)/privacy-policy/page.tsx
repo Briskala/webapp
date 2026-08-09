@@ -7,7 +7,7 @@ import { RichText } from '@/components/RichText'
 
 export const metadata = {
   title: 'Privacy Policy — Briskala',
-  description: 'Privacy Policy en gegevensbescherming van Briskala Property & Asset Group.',
+  description: 'Privacy Policy en gegevensbescherming van Briskala, het platform voor boekhouding en financieel beheer.',
 }
 
 export const dynamic = 'force-dynamic'
@@ -37,16 +37,16 @@ export default async function PrivacyPolicyPage() {
               <div style={{ color: '#475569', fontSize: '14px', lineHeight: '1.75' }}>
                 <p><strong>Laatst bijgewerkt: 21 mei 2026</strong></p>
                 <p>
-                  Briskala Property &amp; Asset Group ("Briskala", "wij", "ons" of "onze") hecht grote waarde aan de bescherming van uw persoonsgegevens. In deze Privacy Policy leggen wij uit welke gegevens wij verzamelen, hoe wij deze gebruiken en wat uw rechten zijn.
+                  Briskala ("wij", "ons" of "onze"), het platform voor boekhouding en financieel beheer, hecht grote waarde aan de bescherming van uw persoonsgegevens. In deze Privacy Policy leggen wij uit welke gegevens wij verzamelen, hoe wij deze gebruiken en wat uw rechten zijn.
                 </p>
                 
                 <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#1a3a5c', margin: '24px 0 12px 0' }}>1. Welke gegevens verzamelen wij?</h3>
                 <p>
-                  Wanneer u gebruik maakt van onze website of diensten (zoals het aanvragen van een stookolietank-advies of een autofinanciering), kunnen wij de volgende persoonsgegevens verzamelen:
+                  Wanneer u gebruik maakt van onze website of het Briskala-platform (bijvoorbeeld bij registratie, facturatie of het uploaden van financiële documenten), kunnen wij de volgende persoonsgegevens verzamelen:
                 </p>
                 <ul style={{ paddingLeft: '20px', margin: '12px 0' }}>
                   <li>Naam, voornaam en contactgegevens (e-mailadres, telefoonnummer).</li>
-                  <li>Informatie met betrekking tot uw aanvraag (voertuigkeuze, financieringsvoorkeuren, tankcapaciteit).</li>
+                  <li>Bedrijfsgegevens en informatie die u in uw administratie vastlegt (zoals facturen, uitgaven en documenten).</li>
                   <li>IP-adres en browsergegevens via cookies.</li>
                 </ul>
 
@@ -55,7 +55,7 @@ export default async function PrivacyPolicyPage() {
                   Wij gebruiken de verzamelde persoonsgegevens voor de volgende doeleinden:
                 </p>
                 <ul style={{ paddingLeft: '20px', margin: '12px 0' }}>
-                  <li>Het verwerken en beantwoorden van uw advies- of financieringsaanvragen.</li>
+                  <li>Het leveren van boekhoud- en financiële beheersfuncties.</li>
                   <li>Het onderhouden van contact en het verlenen van support.</li>
                   <li>Het verbeteren van onze website en dienstverlening.</li>
                   <li>Voldoen aan wettelijke verplichtingen.</li>
@@ -63,7 +63,7 @@ export default async function PrivacyPolicyPage() {
 
                 <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#1a3a5c', margin: '24px 0 12px 0' }}>3. Gegevensdeling met derden</h3>
                 <p>
-                  Wij verkopen uw persoonsgegevens niet aan derden. Wij delen uw gegevens uitsluitend met vertrouwde partners indien dit noodzakelijk is voor de uitvoering van onze dienstverlening (bijvoorbeeld financieringspartners voor lease-aanvragen) of om te voldoen aan wettelijke verplichtingen.
+                  Wij verkopen uw persoonsgegevens niet aan derden. Wij delen uw gegevens uitsluitend met vertrouwde partners indien dit noodzakelijk is voor de uitvoering van onze dienstverlening (bijvoorbeeld hosting- of betaalproviders) of om te voldoen aan wettelijke verplichtingen.
                 </p>
 
                 <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#1a3a5c', margin: '24px 0 12px 0' }}>4. Uw rechten</h3>

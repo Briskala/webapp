@@ -478,7 +478,7 @@ export interface HolidayPark {
 export interface Customer {
   id: number;
   /**
-   * Wordt automatisch gegenereerd indien leeg (formaat: BPAG-XXXXXX).
+   * Wordt automatisch gegenereerd indien leeg (formaat: BRISK-XXXXXX).
    */
   customerNumber: string;
   name: string;

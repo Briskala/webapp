@@ -26,7 +26,6 @@ export default async function SearchPage(props: { searchParams: Promise<{ q?: st
     pages: [],
     news: [],
     services: [],
-    properties: [],
   };
 
   if (query) {
@@ -41,23 +40,21 @@ export default async function SearchPage(props: { searchParams: Promise<{ q?: st
       };
 
       // Query multiple collections in parallel
-      const [pagesRes, newsRes, servicesRes, propertiesRes] = await Promise.all([
+      const [pagesRes, newsRes, servicesRes] = await Promise.all([
         payload.find({ collection: 'pages', ...searchOptions }),
         payload.find({ collection: 'news', ...searchOptions }),
         payload.find({ collection: 'services', ...searchOptions }),
-        payload.find({ collection: 'properties', ...searchOptions }),
       ]);
 
       results.pages = pagesRes.docs;
       results.news = newsRes.docs;
       results.services = servicesRes.docs;
-      results.properties = propertiesRes.docs;
     } catch (e) {
       console.error('Search query failed', e);
     }
   }
 
-  const totalResults = results.pages.length + results.news.length + results.services.length + results.properties.length;
+  const totalResults = results.pages.length + results.news.length + results.services.length;
 
   return (
     <div style={{ minHeight: '60vh', padding: '60px 16px', background: '#f7f9fb' }}>
@@ -123,7 +120,7 @@ export default async function SearchPage(props: { searchParams: Promise<{ q?: st
                 <div style={{ padding: '0 24px' }}>
                   {results.news.map((doc: any, i: number) => (
                     <div key={doc.id} style={{ padding: '20px 0', borderBottom: i < results.news.length - 1 ? '1px solid #f0f4f8' : 'none' }}>
-                      <Link href={`/news/${doc.id}`} style={{ fontSize: '18px', fontWeight: 600, color: '#2471a3', textDecoration: 'none', marginBottom: '8px', display: 'block' }}>
+                      <Link href={`/nieuws/${doc.id}`} style={{ fontSize: '18px', fontWeight: 600, color: '#2471a3', textDecoration: 'none', marginBottom: '8px', display: 'block' }}>
                         {doc.title}
                       </Link>
                     </div>
@@ -136,33 +133,14 @@ export default async function SearchPage(props: { searchParams: Promise<{ q?: st
             {results.services.length > 0 && (
               <div style={{ background: '#fff', borderRadius: '8px', border: '1px solid #e0e0e0', overflow: 'hidden' }}>
                 <div style={{ background: '#f0f4f8', padding: '16px 24px', borderBottom: '1px solid #e0e0e0', fontWeight: 600, color: '#1a5276' }}>
-                  Diensten ({results.services.length})
+                  Functies & diensten ({results.services.length})
                 </div>
                 <div style={{ padding: '0 24px' }}>
                   {results.services.map((doc: any, i: number) => (
                     <div key={doc.id} style={{ padding: '20px 0', borderBottom: i < results.services.length - 1 ? '1px solid #f0f4f8' : 'none' }}>
-                      <Link href={`/diensten/${doc.id}`} style={{ fontSize: '18px', fontWeight: 600, color: '#2471a3', textDecoration: 'none', marginBottom: '8px', display: 'block' }}>
+                      <Link href="/functies" style={{ fontSize: '18px', fontWeight: 600, color: '#2471a3', textDecoration: 'none', marginBottom: '8px', display: 'block' }}>
                         {doc.title}
                       </Link>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Properties Results */}
-            {results.properties.length > 0 && (
-              <div style={{ background: '#fff', borderRadius: '8px', border: '1px solid #e0e0e0', overflow: 'hidden' }}>
-                <div style={{ background: '#f0f4f8', padding: '16px 24px', borderBottom: '1px solid #e0e0e0', fontWeight: 600, color: '#1a5276' }}>
-                  Vastgoed ({results.properties.length})
-                </div>
-                <div style={{ padding: '0 24px' }}>
-                  {results.properties.map((doc: any, i: number) => (
-                    <div key={doc.id} style={{ padding: '20px 0', borderBottom: i < results.properties.length - 1 ? '1px solid #f0f4f8' : 'none' }}>
-                      <Link href={`/vastgoed/${doc.id}`} style={{ fontSize: '18px', fontWeight: 600, color: '#2471a3', textDecoration: 'none', marginBottom: '8px', display: 'block' }}>
-                        {doc.title}
-                      </Link>
-                      <div style={{ fontSize: '14px', color: '#666', marginTop: '4px' }}>€ {doc.price}</div>
                     </div>
                   ))}
                 </div>

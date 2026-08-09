@@ -33,7 +33,11 @@ export default async function DynamicPage({ params }: { params: Promise<{ slug: 
         <div className="content-col">
           <h2>{page.title}</h2>
           <div className="page-content">
-            <p>Welcome to the {page.title} page!</p>
+            <p>
+              Dit is de {page.title}-pagina van Briskala. Bekijk onze{' '}
+              <a href="/functies">functies</a> voor boekhouding en financieel beheer, of ga naar{' '}
+              <a href="/contact">contact</a> voor meer informatie.
+            </p>
           </div>
         </div>
         <Sidebar />

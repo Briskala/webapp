@@ -15,7 +15,7 @@ export const SiteDesign: GlobalConfig = {
       name: 'siteName',
       type: 'text',
       label: 'Website Naam',
-      defaultValue: 'BPAG',
+      defaultValue: 'Briskala',
     },
     {
       name: 'backgroundColor',

@@ -7,7 +7,7 @@ import { RichText } from '@/components/RichText'
 
 export const metadata = {
   title: 'Algemene Voorwaarden — Briskala',
-  description: 'Algemene Voorwaarden en contractuele bepalingen van Briskala Property & Asset Group.',
+  description: 'Algemene Voorwaarden van Briskala, het platform voor boekhouding en financieel beheer.',
 }
 
 export const dynamic = 'force-dynamic'
@@ -37,7 +37,7 @@ export default async function TermsAndConditionsPage() {
               <div style={{ color: '#475569', fontSize: '14px', lineHeight: '1.75' }}>
                 <p><strong>Laatst bijgewerkt: 21 mei 2026</strong></p>
                 <p>
-                  Welkom bij Briskala Property &amp; Asset Group ("Briskala"). Deze Algemene Voorwaarden zijn van toepassing op alle diensten, offertes, overeenkomsten en leveringen door Briskala. Door onze website te gebruiken of een aanvraag in te dienen, gaat u akkoord met deze voorwaarden.
+                  Welkom bij Briskala, het platform voor boekhouding en financieel beheer. Deze Algemene Voorwaarden zijn van toepassing op alle diensten, abonnementen en functionaliteiten van Briskala. Door onze website of het platform te gebruiken, gaat u akkoord met deze voorwaarden.
                 </p>
 
                 <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#1a3a5c', margin: '24px 0 12px 0' }}>1. Definities</h3>
@@ -45,24 +45,24 @@ export default async function TermsAndConditionsPage() {
                   In deze voorwaarden wordt verstaan onder:
                 </p>
                 <ul style={{ paddingLeft: '20px', margin: '12px 0' }}>
-                  <li><strong>Dienstverlening:</strong> Alle adviezen, berekeningen, inspecties en bemiddeling aangeboden via de website.</li>
-                  <li><strong>Gebruiker:</strong> De natuurlijke of rechtspersoon die de website bezoekt of diensten afneemt.</li>
-                  <li><strong>Overeenkomst:</strong> Elke afspraak tussen Briskala en gebruiker tot het leveren van diensten.</li>
+                  <li><strong>Platform:</strong> De Briskala-software voor boekhouding, facturen, uitgaven, btw en financiële rapportages.</li>
+                  <li><strong>Gebruiker:</strong> De natuurlijke of rechtspersoon die de website bezoekt of het platform gebruikt.</li>
+                  <li><strong>Overeenkomst:</strong> Elke afspraak tussen Briskala en gebruiker tot het leveren van diensten of abonnementen.</li>
                 </ul>
 
-                <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#1a3a5c', margin: '24px 0 12px 0' }}>2. Vrijblijvendheid van Berekeningen</h3>
+                <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#1a3a5c', margin: '24px 0 12px 0' }}>2. Gebruik van het platform</h3>
                 <p>
-                  Alle berekeningen op onze website (inclusief maar niet beperkt tot de autofinanciering calculator en de stookolietank autonomy-calculator) zijn louter indicatief en vormen geen bindend aanbod. Offertes en financieringsvoorstellen worden pas definitief na individuele beoordeling en schriftelijke bevestiging.
+                  U bent zelf verantwoordelijk voor de juistheid van de financiële gegevens die u in Briskala vastlegt. Rapportages, btw-overzichten en berekeningen zijn hulpmiddelen en vormen geen bindend fiscaal advies, tenzij schriftelijk anders overeengekomen.
                 </p>
 
                 <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#1a3a5c', margin: '24px 0 12px 0' }}>3. Aansprakelijkheid</h3>
                 <p>
-                  Briskala spant zich in om de website en de informatie daarop zo actueel en accuraat mogelijk te houden. Wij zijn echter niet aansprakelijk voor eventuele directe of indirecte schade die ontstaat door het gebruik van (of het vertrouwen op) onvolledige of onjuiste informatie op de website.
+                  Briskala spant zich in om de website en het platform zo actueel, veilig en accuraat mogelijk te houden. Wij zijn echter niet aansprakelijk voor eventuele directe of indirecte schade die ontstaat door het gebruik van (of het vertrouwen op) onvolledige of onjuiste informatie, behoudens dwingendrechtelijke bepalingen.
                 </p>
 
                 <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#1a3a5c', margin: '24px 0 12px 0' }}>4. Intellectueel Eigendom</h3>
                 <p>
-                  Alle inhoud op deze website, inclusief teksten, logo's, illustraties en interactieve widgets (zoals de SVG car visualisaties en tank simulators), zijn intellectueel eigendom van Briskala of haar licentiegevers en mogen niet zonder voorafgaande toestemming worden gekopieerd of verspreid.
+                  Alle inhoud op deze website en in het platform, inclusief teksten, logo&apos;s, illustraties en software, zijn intellectueel eigendom van Briskala of haar licentiegevers en mogen niet zonder voorafgaande toestemming worden gekopieerd of verspreid.
                 </p>
               </div>
             )}

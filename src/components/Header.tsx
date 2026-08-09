@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { HeaderSearch } from './HeaderSearch';
 import { HeaderAuthButton } from './HeaderAuthButton';
 import { MobileNav } from './MobileNav';
+import { MAIN_NAV } from '@/content/briskala';
 
 interface NavItem {
   id?: string;
@@ -11,14 +12,7 @@ interface NavItem {
   url: string;
 }
 
-const DEFAULT_NAV: NavItem[] = [
-  { label: 'Woningbouw Advies', url: '/woningbouw' },
-  { label: 'Autofinanciering', url: '/autofinanciering' },
-  { label: 'Vastgoed Advies', url: '/vastgoed' },
-  { label: 'Laadpark', url: '/laadpark' },
-  { label: 'Verzekeringen', url: '/insurance' },
-  { label: 'Contact', url: '/contact' },
-]
+const DEFAULT_NAV: NavItem[] = MAIN_NAV;
 
 interface HeaderProps {
   mainNav?: NavItem[];
@@ -32,7 +26,7 @@ export function Header({ mainNav }: HeaderProps) {
       <div className="inner">
         <div className="logo">
           <Link href="/">
-            <img className="img-fluid" width="101" height="74" src="/assets/img/bpark.svg" alt="BPAG Logo" />
+            <img className="img-fluid" width="101" height="74" src="/assets/img/bpark.svg" alt="Briskala" />
           </Link>
         </div>
         <nav className="main-nav">
@@ -54,4 +48,3 @@ export function Header({ mainNav }: HeaderProps) {
     </header>
   );
 }
-

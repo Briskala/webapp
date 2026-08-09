@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
 
     if (existing.docs.length === 0) {
       // Generate a random customer number
-      const customerNumber = `BPAG-${Math.floor(100000 + Math.random() * 900000)}`;
+      const customerNumber = `BRISK-${Math.floor(100000 + Math.random() * 900000)}`;
       // Create new user in Payload (Turso)
       await payload.create({
         collection: 'users',

@@ -8,7 +8,7 @@ import { syncRssNews } from '../actions/rssSync'
 
 export const metadata = {
   title: 'Nieuws & Updates — Briskala',
-  description: 'Blijf op de hoogte van de laatste ontwikkelingen, woningbouwadviezen en marktupdates van Briskala.',
+  description: 'Blijf op de hoogte van updates over boekhouding, btw, facturatie en financieel beheer van Briskala.',
 }
 
 export const dynamic = 'force-dynamic'

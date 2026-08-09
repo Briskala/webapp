@@ -140,7 +140,7 @@ export function TopBarClient({ branches, languages, accessibility, topBarLinks =
       <div className="inner">
         {/* Left side */}
         <div className="left">
-          <span>Briskala Property & Asset Group</span>
+          <span>Briskala — Boekhouding & Financieel Beheer</span>
           <span className="sep">|</span>
 
           {/* Vestiging dropdown */}

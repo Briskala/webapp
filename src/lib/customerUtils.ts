@@ -2,7 +2,7 @@ import type { CollectionBeforeChangeHook, CollectionBeforeValidateHook, Collecti
 
 export function generateCustomerNumber(): string {
   const digits = Math.floor(100000 + Math.random() * 900000);
-  return `BPAG-${digits}`;
+  return `BRISK-${digits}`;
 }
 
 export const ensureCustomerNumber: CollectionBeforeValidateHook = async ({

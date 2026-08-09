@@ -3,7 +3,7 @@
 import React, { useState, useRef } from 'react';
 import {
   Wrench, Monitor, Lock, CreditCard, ClipboardList, FileText,
-  Mail, Home, Car, HelpCircle, Clock, BookOpen, AlertTriangle,
+  Mail, HelpCircle, Clock, BookOpen, AlertTriangle,
   CheckCircle, XCircle, Send, ChevronDown, Phone, Newspaper,
   MessageSquare, ArrowRight, MapPin
 } from 'lucide-react';
@@ -18,8 +18,8 @@ const PROBLEM_CATEGORIES = [
   { value: 'formulier', label: 'Formulier verstuurt niet', Icon: ClipboardList },
   { value: 'document', label: 'Document of bestand opent niet', Icon: FileText },
   { value: 'contact', label: 'Geen reactie ontvangen', Icon: Mail },
-  { value: 'vastgoed', label: 'Probleem met vastgoed aanvraag', Icon: Home },
-  { value: 'autofinanciering', label: 'Probleem met autofinanciering', Icon: Car },
+  { value: 'facturen', label: 'Probleem met facturen', Icon: FileText },
+  { value: 'boekhouding', label: 'Probleem met boekhouding of btw', Icon: ClipboardList },
   { value: 'overig', label: 'Anders / overig probleem', Icon: HelpCircle },
 ];
 
@@ -430,7 +430,7 @@ export default function ProbleemMeldenPage() {
               </div>
             </div>
             <p className="pm-text">
-              Welkom op de ondersteuningspagina van <strong>Briskala Property &amp; Asset Group</strong>. Wij streven ernaar onze diensten altijd vlekkeloos te laten werken, maar begrijpen dat er soms iets mis kan gaan.
+              Welkom op de ondersteuningspagina van <strong>Briskala</strong>. Wij streven ernaar ons boekhoudplatform altijd vlekkeloos te laten werken, maar begrijpen dat er soms iets mis kan gaan.
             </p>
             <p className="pm-text">
               Via dit formulier kunt u snel en eenvoudig een probleem doorgeven. Ons supportteam neemt uw melding serieus en reageert binnen <strong>1 werkdag</strong> op uw verzoek.

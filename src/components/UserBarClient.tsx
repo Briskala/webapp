@@ -43,7 +43,7 @@ export function UserBarClient() {
       <div className="user-bar">
         <div className="inner">
           <div className="user-info">
-            <span>Welkom, Gast &nbsp;|&nbsp; Klantnr: <em>Niet ingelogd</em> &nbsp;|&nbsp; </span>
+            <span>Welkom, Gast &nbsp;|&nbsp; Accountnr: <em>Niet ingelogd</em> &nbsp;|&nbsp; </span>
             <Link href="/login">Mijn account</Link>
           </div>
         </div>

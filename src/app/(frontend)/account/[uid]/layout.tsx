@@ -6,13 +6,13 @@ import { AccountLayoutClient } from '@/components/auth/AccountLayoutClient';
 export const dynamic = 'force-dynamic';
 
 const defaultLabels = {
-  title: 'Mijn Account',
-  welcomeText: 'Welkom',
-  customerNumberLabel: 'Klantnr',
+  title: 'Mijn Briskala',
+  welcomeText: 'Welkom bij uw financiële dashboard',
+  customerNumberLabel: 'Accountnr',
   profileLabel: 'Profiel',
   menuGegevens: 'Mijn gegevens',
-  menuAanvragen: 'Mijn aanvragen',
-  menuDiensten: 'Mijn diensten',
+  menuAanvragen: 'Facturen & aanvragen',
+  menuDiensten: 'Mijn abonnement',
   menuBerichten: 'Berichten',
   menuUitloggen: 'Uitloggen',
 };

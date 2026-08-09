@@ -10,10 +10,11 @@ import { AuthProvider } from '@/contexts/AuthContext'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  description: 'Briskala Property & Asset Group - Uw Partner in Wonen, Rijden & Investeren',
+  description:
+    'Briskala is het complete platform voor boekhouding en financieel beheer. Beheer facturen, uitgaven, btw en rapporten — voor particulieren, zzp’ers, mkb, grote bedrijven en accountants.',
   title: {
-    template: 'Briskala Property & Asset Group | %s',
-    default: 'Briskala Property & Asset Group',
+    template: 'Briskala | %s',
+    default: 'Briskala — Boekhouding & Financieel Beheer',
   },
   icons: {
     icon: '/favicon.ico',

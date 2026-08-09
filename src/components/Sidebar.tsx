@@ -32,30 +32,38 @@ export async function Sidebar() {
     excel: '📗',
   };
 
-  // Fallback cards if none configured in CMS
   const fallbackCards = [
-    { id: 'guia', title: 'GEBRUIKERS\nHANDLEIDING', icon: '⏰', colorVariant: 'blue', link: '#', description: '' },
-    { id: 'ipva', title: 'IPVA\n2014', icon: '🚙', colorVariant: 'red', link: '#', description: '' },
+    {
+      id: 'start',
+      title: 'START\nGRATIS',
+      icon: '📘',
+      colorVariant: 'blue',
+      link: '/login',
+      description: 'Open uw Briskala-account',
+    },
+    {
+      id: 'prijzen',
+      title: 'BEKIJK\nPRIJZEN',
+      icon: '💶',
+      colorVariant: 'red',
+      link: '/prijzen',
+      description: 'Kies het juiste abonnement',
+    },
   ];
 
-  // Map and translate any Portuguese default cards to Dutch counterparts
-  const resolvedCards = (cards.length > 0 ? cards : fallbackCards).map(card => {
+  const resolvedCards = (cards.length > 0 ? cards : fallbackCards).map((card) => {
     const titleLower = card.title?.toLowerCase() || '';
-    if (titleLower.includes('guia') || titleLower.includes('gebruikers')) {
-      return {
-        ...card,
-        title: 'GEBRUIKERS\nHANDLEIDING',
-        icon: '⏰',
-        colorVariant: 'blue',
-      };
-    }
-    if (titleLower.includes('ipva')) {
-      return {
-        ...card,
-        title: 'IPVA\n2014',
-        icon: '🚙',
-        colorVariant: 'red',
-      };
+    if (
+      titleLower.includes('guia') ||
+      titleLower.includes('gebruikers') ||
+      titleLower.includes('ipva') ||
+      titleLower.includes('usuario')
+    ) {
+      // Replace legacy Portuguese / unrelated CMS cards with accounting CTAs
+      if (titleLower.includes('ipva')) {
+        return fallbackCards[1];
+      }
+      return fallbackCards[0];
     }
     return card;
   });
@@ -79,7 +87,7 @@ export async function Sidebar() {
       })}
 
       <div className="downloads-box">
-        <div className="downloads-title"><span>Descargas</span></div>
+        <div className="downloads-title"><span>Downloads</span></div>
         {downloads.length > 0 ? (
           downloads.map((doc) => (
             <div className="download-item" key={doc.id}>
@@ -94,16 +102,16 @@ export async function Sidebar() {
         ) : (
           <>
             <div className="download-item">
-              <Link href="#">Ouvidoria <span className="dl-ext">.doc</span></Link>
+              <Link href="/functies">Functie-overzicht <span className="dl-ext">.pdf</span></Link>
+              <span className="dl-icon dl-icon-pdf">📕</span>
+            </div>
+            <div className="download-item">
+              <Link href="/prijzen">Prijslijst Briskala <span className="dl-ext">.pdf</span></Link>
+              <span className="dl-icon dl-icon-pdf">📕</span>
+            </div>
+            <div className="download-item">
+              <Link href="/faq">Veelgestelde vragen <span className="dl-ext">.doc</span></Link>
               <span className="dl-icon dl-icon-doc">📄</span>
-            </div>
-            <div className="download-item">
-              <Link href="#">Lorem Ipsum Dolor <span className="dl-ext">.pdf</span></Link>
-              <span className="dl-icon dl-icon-pdf">📕</span>
-            </div>
-            <div className="download-item">
-              <Link href="#">Catálogo completo de serviços <span className="dl-ext">.pdf</span></Link>
-              <span className="dl-icon dl-icon-pdf">📕</span>
             </div>
           </>
         )}
@@ -111,4 +119,3 @@ export async function Sidebar() {
     </aside>
   );
 }
-

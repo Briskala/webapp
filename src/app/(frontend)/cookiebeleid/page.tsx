@@ -7,7 +7,7 @@ import { RichText } from '@/components/RichText'
 
 export const metadata = {
   title: 'Cookiebeleid — Briskala',
-  description: 'Cookiebeleid en cookie-instellingen van Briskala Property & Asset Group.',
+  description: 'Cookiebeleid en cookie-instellingen van Briskala.',
 }
 
 export const dynamic = 'force-dynamic'
@@ -37,7 +37,7 @@ export default async function CookiebeleidPage() {
               <div style={{ color: '#475569', fontSize: '14px', lineHeight: '1.75' }}>
                 <p><strong>Laatst bijgewerkt: 21 mei 2026</strong></p>
                 <p>
-                  Briskala Property &amp; Asset Group ("Briskala") maakt gebruik van cookies en vergelijkbare technologieën op haar website. In dit Cookiebeleid leggen wij uit wat cookies zijn, welke cookies wij gebruiken en hoe u uw cookie-instellingen kunt beheren.
+                  Briskala maakt gebruik van cookies en vergelijkbare technologieën op haar website en platform. In dit Cookiebeleid leggen wij uit wat cookies zijn, welke cookies wij gebruiken en hoe u uw cookie-instellingen kunt beheren.
                 </p>
 
                 <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#1a3a5c', margin: '24px 0 12px 0' }}>1. Wat zijn cookies?</h3>

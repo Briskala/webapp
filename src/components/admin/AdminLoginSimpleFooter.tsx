@@ -16,7 +16,7 @@ export function AdminLoginSimpleFooter() {
       marginTop: 'auto'
     }}>
       <div>
-        © {new Date().getFullYear()} Briskala Property & Asset Group. Alle rechten voorbehouden.
+        © {new Date().getFullYear()} Briskala. Alle rechten voorbehouden.
       </div>
       <div style={{ display: 'flex', gap: '16px' }}>
         <Link href="/privacy-policy" style={{ color: '#1a5276', textDecoration: 'none' }}>Privacy Policy</Link>

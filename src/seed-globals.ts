@@ -1,5 +1,6 @@
 import { getPayload } from 'payload'
 import config from './payload.config'
+import { HERO_DEFAULT, MAIN_NAV } from './content/briskala'
 
 async function seedGlobals() {
   const payloadConfig = await config
@@ -7,28 +8,27 @@ async function seedGlobals() {
 
   console.log('Seeding globals...')
 
-  // Seed siteRegister in Footer
   try {
     await payload.updateGlobal({
       slug: 'footer',
       data: {
-        siteRegister: 'Briskala Property & Asset Group · Onafhankelijk Advies',
-        copyrightText: '© 2026 Briskala Property & Asset Group · Uw Partner in Wonen, Rijden & Investeren',
+        siteRegister: 'Briskala · Boekhouding & financieel beheer',
+        copyrightText: '© 2026 Briskala · Boekhouding & financieel beheer',
         columns: [
           {
-            title: 'Briskala Advies',
+            title: 'Platform',
             links: [
-              { label: 'Vastgoed Advies', url: '/vastgoed' },
-              { label: 'Woningbouw Advies', url: '/woningbouw' },
-              { label: 'Autofinanciering', url: '/autofinanciering' },
-              { label: 'Olietanken Advies', url: '/olietanken' },
+              { label: 'Functies', url: '/functies' },
+              { label: 'Facturen', url: '/facturen' },
+              { label: 'Boekhouding', url: '/boekhouding' },
+              { label: 'Rapporten', url: '/rapporten' },
             ],
           },
           {
             title: 'Informatie',
             links: [
               { label: 'Over Ons', url: '/over-ons' },
-              { label: 'Nieuws & Netwerk', url: '/nieuws' },
+              { label: 'Prijzen', url: '/prijzen' },
               { label: 'FAQ', url: '/faq' },
               { label: 'Contact', url: '/contact' },
             ],
@@ -38,50 +38,51 @@ async function seedGlobals() {
             links: [
               { label: 'Privacy Policy', url: '/privacy-policy' },
               { label: 'Algemene Voorwaarden', url: '/terms-and-conditions' },
-              { label: 'Cookiebeleid', url: '/cookie-policy' },
+              { label: 'Cookiebeleid', url: '/cookiebeleid' },
             ],
           },
         ],
       },
     })
-    console.log('Footer global seeded (columns + siteRegister)')
+    console.log('Footer global seeded')
   } catch (e) {
     console.error('Footer seed error:', e)
   }
 
-  // Seed DienstenSection
   try {
     await payload.updateGlobal({
       slug: 'diensten-section',
       data: {
-        sectionTitle: 'Diensten & Informatie',
+        sectionTitle: 'Platform & Functies',
         items: [
           {
-            title: 'Vastgoed Advies',
+            title: 'Facturen & inkomsten',
             enabled: true,
             defaultOpen: true,
             links: [
-              { label: 'Aankoopbegeleiding', url: '/vastgoed#aankoop' },
-              { label: 'Verkoopadvies', url: '/vastgoed#verkoop' },
-              { label: 'Investeringsanalyse', url: '/vastgoed#investeren' },
+              { label: 'Facturen maken en versturen', url: '/facturen' },
+              { label: 'Openstaande betalingen volgen', url: '/facturen#betalingen' },
+              { label: 'Herinneringen automatiseren', url: '/facturen#herinneringen' },
             ],
           },
           {
-            title: 'Autofinanciering',
+            title: 'Uitgaven & documenten',
             enabled: true,
             defaultOpen: false,
             links: [
-              { label: 'Lening berekenen', url: '/autofinanciering#berekenen' },
-              { label: 'Lease opties vergelijken', url: '/autofinanciering#lease' },
+              { label: 'Uitgaven registreren', url: '/uitgaven' },
+              { label: 'Bonnen uploaden', url: '/uitgaven#bonnen' },
+              { label: 'Documentenarchief', url: '/functies#documenten' },
             ],
           },
           {
-            title: 'Woningbouw',
+            title: 'Boekhouding, btw & rapporten',
             enabled: true,
             defaultOpen: false,
             links: [
-              { label: 'Projectontwikkeling', url: '/woningbouw#projecten' },
-              { label: 'Aannemer selectie', url: '/woningbouw#aannemer' },
+              { label: 'Boekhouding beheren', url: '/boekhouding' },
+              { label: 'Btw-administratie', url: '/btw' },
+              { label: 'Financiële rapporten', url: '/rapporten' },
             ],
           },
         ],
@@ -92,25 +93,24 @@ async function seedGlobals() {
     console.error('DienstenSection seed error:', e)
   }
 
-  // Seed SidebarCards
   try {
     await payload.updateGlobal({
       slug: 'sidebar-cards',
       data: {
         cards: [
           {
-            title: 'GUIA do USUARIO',
-            icon: '🧭',
+            title: 'START\\nGRATIS',
+            icon: '📘',
             colorVariant: 'blue',
-            link: '#',
-            description: 'User guide',
+            link: '/login',
+            description: 'Open uw Briskala-account',
           },
           {
-            title: 'IPVA 2014',
-            icon: '🚗',
+            title: 'BEKIJK\\nPRIJZEN',
+            icon: '💶',
             colorVariant: 'red',
-            link: '#',
-            description: 'IPVA 2014',
+            link: '/prijzen',
+            description: 'Kies het juiste abonnement',
           },
         ],
       },
@@ -118,6 +118,56 @@ async function seedGlobals() {
     console.log('SidebarCards global seeded')
   } catch (e) {
     console.error('SidebarCards seed error:', e)
+  }
+
+  try {
+    await payload.updateGlobal({
+      slug: 'hero-section',
+      data: {
+        heading: HERO_DEFAULT.heading,
+        actionCards: HERO_DEFAULT.cards,
+      },
+    })
+    console.log('Hero global seeded')
+  } catch (e) {
+    console.error('Hero seed error:', e)
+  }
+
+  try {
+    await payload.updateGlobal({
+      slug: 'site-navigation',
+      data: {
+        mainNav: MAIN_NAV,
+        topBarLinks: [
+          { label: 'FAQ', url: '/faq', icon: '?' },
+          { label: 'Prijzen', url: '/prijzen', icon: '€' },
+          { label: 'Support', url: '/probleem-melden', icon: '💬' },
+        ],
+      },
+    })
+    console.log('Site navigation seeded')
+  } catch (e) {
+    console.error('Site navigation seed error:', e)
+  }
+
+  try {
+    await payload.updateGlobal({
+      slug: 'account-settings',
+      data: {
+        title: 'Mijn Briskala',
+        welcomeText: 'Welkom bij uw financiële dashboard',
+        customerNumberLabel: 'Accountnr',
+        profileLabel: 'Profiel',
+        menuGegevens: 'Mijn gegevens',
+        menuAanvragen: 'Facturen & aanvragen',
+        menuDiensten: 'Mijn abonnement',
+        menuBerichten: 'Berichten',
+        menuUitloggen: 'Uitloggen',
+      },
+    })
+    console.log('Account settings seeded')
+  } catch (e) {
+    console.error('Account settings seed error:', e)
   }
 
   console.log('All globals seeded successfully!')
