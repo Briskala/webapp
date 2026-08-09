@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
-import { LogOut, User, FileText, Settings, MessageSquare, Briefcase, CreditCard, FolderOpen } from 'lucide-react';
+import { LogOut, User, FileText, MessageSquare, Briefcase, CreditCard, FolderOpen, Calculator, Building2 } from 'lucide-react';
 
 type Props = {
   uid: string;
@@ -54,7 +54,9 @@ export function AccountLayoutClient({ uid, labels, dbUser, children }: Props) {
   };
 
   const menuItems = [
-    { icon: <User size={18} />, label: labels.menuGegevens, href: `/account/${user.uid}` }, // Made default dashboard link to basic info
+    { icon: <User size={18} />, label: labels.menuGegevens, href: `/account/${user.uid}` },
+    { icon: <Calculator size={18} />, label: 'Accounting', href: '/accounting' },
+    { icon: <Building2 size={18} />, label: 'Bedrijven', href: '/accounting' },
     { icon: <FileText size={18} />, label: labels.menuAanvragen, href: `/account/${user.uid}/aanvragen` },
     { icon: <Briefcase size={18} />, label: labels.menuDiensten, href: `/account/${user.uid}/diensten` },
     { icon: <MessageSquare size={18} />, label: labels.menuBerichten, href: `/account/${user.uid}/berichten`, badge: dbUser?.messageCount },

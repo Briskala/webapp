@@ -12,7 +12,11 @@ interface NavItem {
   url: string;
 }
 
-const DEFAULT_NAV: NavItem[] = MAIN_NAV;
+const DEFAULT_NAV: NavItem[] = [
+  ...MAIN_NAV.filter((item) => item.url !== '/contact'),
+  { label: 'Accounting', url: '/accounting' },
+  { label: 'Contact', url: '/contact' },
+];
 
 interface HeaderProps {
   mainNav?: NavItem[];

@@ -1,0 +1,331 @@
+.acc-shell {
+  --acc-bg: #f4f7fb;
+  --acc-panel: #ffffff;
+  --acc-border: #dbe3ee;
+  --acc-text: #0f172a;
+  --acc-muted: #64748b;
+  --acc-primary: #1a5276;
+  --acc-primary-soft: #e8f2f8;
+  --acc-success: #0f766e;
+  --acc-danger: #b91c1c;
+  --acc-warning: #b45309;
+  min-height: 70vh;
+  background: var(--acc-bg);
+  color: var(--acc-text);
+}
+
+.acc-topbar {
+  background: linear-gradient(135deg, #123a56 0%, #1a5276 55%, #2471a3 100%);
+  color: #fff;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.acc-topbar-inner,
+.acc-body-inner,
+.acc-picker-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.acc-topbar-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.acc-company-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.acc-company-meta {
+  margin: 4px 0 0;
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+.acc-role-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.acc-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 20px;
+  padding: 20px 0 48px;
+}
+
+.acc-sidebar {
+  background: var(--acc-panel);
+  border: 1px solid var(--acc-border);
+  border-radius: 14px;
+  padding: 12px;
+  height: fit-content;
+  position: sticky;
+  top: 16px;
+}
+
+.acc-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: var(--acc-text);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.acc-nav-link:hover {
+  background: var(--acc-primary-soft);
+  color: var(--acc-primary);
+}
+
+.acc-nav-link.active {
+  background: var(--acc-primary);
+  color: #fff;
+}
+
+.acc-main {
+  min-width: 0;
+}
+
+.acc-panel {
+  background: var(--acc-panel);
+  border: 1px solid var(--acc-border);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.acc-panel h2 {
+  margin: 0 0 6px;
+  font-size: 20px;
+  color: var(--acc-primary);
+}
+
+.acc-panel p.lead {
+  margin: 0 0 18px;
+  color: var(--acc-muted);
+  font-size: 14px;
+}
+
+.acc-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.acc-kpi {
+  background: #f8fafc;
+  border: 1px solid var(--acc-border);
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.acc-kpi .label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--acc-muted);
+  font-weight: 700;
+}
+
+.acc-kpi .value {
+  margin-top: 6px;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--acc-primary);
+}
+
+.acc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.acc-table th,
+.acc-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #eef2f7;
+  text-align: left;
+}
+
+.acc-table th {
+  color: var(--acc-primary);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: #f8fafc;
+}
+
+.acc-table td.num,
+.acc-table th.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.acc-badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  background: #eef2ff;
+  color: #3730a3;
+}
+
+.acc-badge.sent,
+.acc-badge.received,
+.acc-badge.completed,
+.acc-badge.posted { background: #ecfdf5; color: #065f46; }
+.acc-badge.draft { background: #f1f5f9; color: #475569; }
+.acc-badge.overdue,
+.acc-badge.void,
+.acc-badge.rejected { background: #fef2f2; color: #991b1b; }
+.acc-badge.partial { background: #fffbeb; color: #92400e; }
+
+.acc-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.acc-btn {
+  appearance: none;
+  border: none;
+  background: var(--acc-primary);
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.acc-btn.secondary {
+  background: #fff;
+  color: var(--acc-primary);
+  border: 1px solid var(--acc-border);
+}
+
+.acc-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.acc-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.acc-field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: #334155;
+  margin-bottom: 6px;
+}
+
+.acc-field input,
+.acc-field select,
+.acc-field textarea {
+  width: 100%;
+  border: 1.5px solid #d1d5db;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+  background: #fafafa;
+}
+
+.acc-field input:focus,
+.acc-field select:focus,
+.acc-field textarea:focus {
+  outline: none;
+  border-color: var(--acc-primary);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(26,82,118,0.12);
+}
+
+.acc-empty {
+  padding: 28px;
+  text-align: center;
+  color: var(--acc-muted);
+  background: #f8fafc;
+  border: 1px dashed var(--acc-border);
+  border-radius: 12px;
+}
+
+.acc-picker-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.acc-company-card {
+  background: var(--acc-panel);
+  border: 1px solid var(--acc-border);
+  border-radius: 14px;
+  padding: 20px;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+}
+
+.acc-company-card:hover {
+  border-color: var(--acc-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(26,82,118,0.08);
+}
+
+.acc-company-card h3 {
+  margin: 0 0 8px;
+  color: var(--acc-primary);
+  font-size: 18px;
+}
+
+.acc-company-card p {
+  margin: 0;
+  color: var(--acc-muted);
+  font-size: 13px;
+}
+
+@media (max-width: 900px) {
+  .acc-layout {
+    grid-template-columns: 1fr;
+  }
+  .acc-sidebar {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 6px;
+  }
+  .acc-nav-link {
+    margin-bottom: 0;
+    font-size: 13px;
+  }
+}

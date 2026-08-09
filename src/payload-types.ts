@@ -89,6 +89,18 @@ export interface Config {
     'lease-requests': LeaseRequest;
     documents: Document;
     'admin-notes': AdminNote;
+    'accounting-companies': AccountingCompany;
+    'accounting-memberships': AccountingMembership;
+    'accounting-accounts': AccountingAccount;
+    'accounting-contacts': AccountingContact;
+    'accounting-tax-rates': AccountingTaxRate;
+    'accounting-invoices': AccountingInvoice;
+    'accounting-bills': AccountingBill;
+    'accounting-expenses': AccountingExpense;
+    'accounting-payments': AccountingPayment;
+    'accounting-journals': AccountingJournal;
+    'accounting-ledger-entries': AccountingLedgerEntry;
+    'accounting-audit-logs': AccountingAuditLog;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -118,6 +130,18 @@ export interface Config {
     'lease-requests': LeaseRequestsSelect<false> | LeaseRequestsSelect<true>;
     documents: DocumentsSelect<false> | DocumentsSelect<true>;
     'admin-notes': AdminNotesSelect<false> | AdminNotesSelect<true>;
+    'accounting-companies': AccountingCompaniesSelect<false> | AccountingCompaniesSelect<true>;
+    'accounting-memberships': AccountingMembershipsSelect<false> | AccountingMembershipsSelect<true>;
+    'accounting-accounts': AccountingAccountsSelect<false> | AccountingAccountsSelect<true>;
+    'accounting-contacts': AccountingContactsSelect<false> | AccountingContactsSelect<true>;
+    'accounting-tax-rates': AccountingTaxRatesSelect<false> | AccountingTaxRatesSelect<true>;
+    'accounting-invoices': AccountingInvoicesSelect<false> | AccountingInvoicesSelect<true>;
+    'accounting-bills': AccountingBillsSelect<false> | AccountingBillsSelect<true>;
+    'accounting-expenses': AccountingExpensesSelect<false> | AccountingExpensesSelect<true>;
+    'accounting-payments': AccountingPaymentsSelect<false> | AccountingPaymentsSelect<true>;
+    'accounting-journals': AccountingJournalsSelect<false> | AccountingJournalsSelect<true>;
+    'accounting-ledger-entries': AccountingLedgerEntriesSelect<false> | AccountingLedgerEntriesSelect<true>;
+    'accounting-audit-logs': AccountingAuditLogsSelect<false> | AccountingAuditLogsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -694,6 +718,273 @@ export interface AdminNote {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "accounting-companies".
+ */
+export interface AccountingCompany {
+  id: number;
+  name: string;
+  /**
+   * URL segment, e.g. acme-bv
+   */
+  slug: string;
+  /**
+   * Public environment id used in /accounting/{slug}/{hash}
+   */
+  publicHash: string;
+  currency: 'EUR' | 'USD' | 'GBP';
+  country: string;
+  vatNumber?: string | null;
+  chamberOfCommerce?: string | null;
+  address?: string | null;
+  /**
+   * MM-DD
+   */
+  fiscalYearStart?: string | null;
+  status?: ('active' | 'archived') | null;
+  owner: number | User;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "accounting-memberships".
+ */
+export interface AccountingMembership {
+  id: number;
+  company: number | AccountingCompany;
+  user: number | User;
+  role: 'owner' | 'administrator' | 'accountant' | 'manager' | 'employee' | 'viewer';
+  status?: ('active' | 'invited' | 'revoked') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "accounting-accounts".
+ */
+export interface AccountingAccount {
+  id: number;
+  company: number | AccountingCompany;
+  code: string;
+  name: string;
+  type: 'asset' | 'liability' | 'equity' | 'income' | 'expense';
+  parent?: (number | null) | AccountingAccount;
+  isSystem?: boolean | null;
+  isActive?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "accounting-contacts".
+ */
+export interface AccountingContact {
+  id: number;
+  company: number | AccountingCompany;
+  name: string;
+  type: 'customer' | 'supplier' | 'both';
+  email?: string | null;
+  phone?: string | null;
+  vatNumber?: string | null;
+  address?: string | null;
+  notes?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "accounting-tax-rates".
+ */
+export interface AccountingTaxRate {
+  id: number;
+  company: number | AccountingCompany;
+  name: string;
+  rate: number;
+  type?: ('vat' | 'other') | null;
+  isDefault?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "accounting-invoices".
+ */
+export interface AccountingInvoice {
+  id: number;
+  company: number | AccountingCompany;
+  number: string;
+  contact?: (number | null) | AccountingContact;
+  customerName?: string | null;
+  issueDate: string;
+  dueDate?: string | null;
+  status?: ('draft' | 'sent' | 'partial' | 'paid' | 'overdue' | 'void') | null;
+  lines?:
+    | {
+        description: string;
+        quantity: number;
+        unitPrice: number;
+        vatRate: number;
+        lineTotal?: number | null;
+        id?: string | null;
+      }[]
+    | null;
+  subtotal?: number | null;
+  vatAmount?: number | null;
+  total?: number | null;
+  amountPaid?: number | null;
+  balanceDue?: number | null;
+  notes?: string | null;
+  posted?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "accounting-bills".
+ */
+export interface AccountingBill {
+  id: number;
+  company: number | AccountingCompany;
+  number: string;
+  contact?: (number | null) | AccountingContact;
+  supplierName?: string | null;
+  issueDate: string;
+  dueDate?: string | null;
+  status?: ('draft' | 'received' | 'partial' | 'paid' | 'overdue' | 'void') | null;
+  lines?:
+    | {
+        description: string;
+        quantity: number;
+        unitPrice: number;
+        vatRate: number;
+        lineTotal?: number | null;
+        id?: string | null;
+      }[]
+    | null;
+  subtotal?: number | null;
+  vatAmount?: number | null;
+  total?: number | null;
+  amountPaid?: number | null;
+  balanceDue?: number | null;
+  notes?: string | null;
+  posted?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "accounting-expenses".
+ */
+export interface AccountingExpense {
+  id: number;
+  company: number | AccountingCompany;
+  description: string;
+  expenseDate: string;
+  vendor?: string | null;
+  category?: string | null;
+  status?: ('draft' | 'submitted' | 'approved' | 'posted' | 'rejected') | null;
+  subtotal?: number | null;
+  vatRate?: number | null;
+  vatAmount?: number | null;
+  total?: number | null;
+  receiptRef?: string | null;
+  notes?: string | null;
+  posted?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "accounting-payments".
+ */
+export interface AccountingPayment {
+  id: number;
+  company: number | AccountingCompany;
+  reference?: string | null;
+  paymentDate: string;
+  direction: 'incoming' | 'outgoing';
+  amount: number;
+  method?: ('bank' | 'cash' | 'card' | 'other') | null;
+  status?: ('draft' | 'completed' | 'void') | null;
+  invoice?: (number | null) | AccountingInvoice;
+  bill?: (number | null) | AccountingBill;
+  notes?: string | null;
+  posted?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "accounting-journals".
+ */
+export interface AccountingJournal {
+  id: number;
+  company: number | AccountingCompany;
+  reference: string;
+  entryDate: string;
+  memo?: string | null;
+  status?: ('draft' | 'posted' | 'void') | null;
+  lines?:
+    | {
+        account: number | AccountingAccount;
+        accountCode?: string | null;
+        debit?: number | null;
+        credit?: number | null;
+        memo?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  debitTotal?: number | null;
+  creditTotal?: number | null;
+  posted?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "accounting-ledger-entries".
+ */
+export interface AccountingLedgerEntry {
+  id: number;
+  company: number | AccountingCompany;
+  entryDate: string;
+  description: string;
+  sourceType: string;
+  sourceId: string;
+  lines?:
+    | {
+        account: number | AccountingAccount;
+        accountCode: string;
+        debit?: number | null;
+        credit?: number | null;
+        memo?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  debitTotal?: number | null;
+  creditTotal?: number | null;
+  createdByUser?: (number | null) | User;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "accounting-audit-logs".
+ */
+export interface AccountingAuditLog {
+  id: number;
+  company: number | AccountingCompany;
+  action: string;
+  entityType: string;
+  entityId?: string | null;
+  details?: string | null;
+  actor?: (number | null) | User;
+  ipAddress?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -803,6 +1094,54 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'admin-notes';
         value: number | AdminNote;
+      } | null)
+    | ({
+        relationTo: 'accounting-companies';
+        value: number | AccountingCompany;
+      } | null)
+    | ({
+        relationTo: 'accounting-memberships';
+        value: number | AccountingMembership;
+      } | null)
+    | ({
+        relationTo: 'accounting-accounts';
+        value: number | AccountingAccount;
+      } | null)
+    | ({
+        relationTo: 'accounting-contacts';
+        value: number | AccountingContact;
+      } | null)
+    | ({
+        relationTo: 'accounting-tax-rates';
+        value: number | AccountingTaxRate;
+      } | null)
+    | ({
+        relationTo: 'accounting-invoices';
+        value: number | AccountingInvoice;
+      } | null)
+    | ({
+        relationTo: 'accounting-bills';
+        value: number | AccountingBill;
+      } | null)
+    | ({
+        relationTo: 'accounting-expenses';
+        value: number | AccountingExpense;
+      } | null)
+    | ({
+        relationTo: 'accounting-payments';
+        value: number | AccountingPayment;
+      } | null)
+    | ({
+        relationTo: 'accounting-journals';
+        value: number | AccountingJournal;
+      } | null)
+    | ({
+        relationTo: 'accounting-ledger-entries';
+        value: number | AccountingLedgerEntry;
+      } | null)
+    | ({
+        relationTo: 'accounting-audit-logs';
+        value: number | AccountingAuditLog;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -1223,6 +1562,252 @@ export interface AdminNotesSelect<T extends boolean = true> {
   author?: T;
   createdAt?: T;
   updatedAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "accounting-companies_select".
+ */
+export interface AccountingCompaniesSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  publicHash?: T;
+  currency?: T;
+  country?: T;
+  vatNumber?: T;
+  chamberOfCommerce?: T;
+  address?: T;
+  fiscalYearStart?: T;
+  status?: T;
+  owner?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "accounting-memberships_select".
+ */
+export interface AccountingMembershipsSelect<T extends boolean = true> {
+  company?: T;
+  user?: T;
+  role?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "accounting-accounts_select".
+ */
+export interface AccountingAccountsSelect<T extends boolean = true> {
+  company?: T;
+  code?: T;
+  name?: T;
+  type?: T;
+  parent?: T;
+  isSystem?: T;
+  isActive?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "accounting-contacts_select".
+ */
+export interface AccountingContactsSelect<T extends boolean = true> {
+  company?: T;
+  name?: T;
+  type?: T;
+  email?: T;
+  phone?: T;
+  vatNumber?: T;
+  address?: T;
+  notes?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "accounting-tax-rates_select".
+ */
+export interface AccountingTaxRatesSelect<T extends boolean = true> {
+  company?: T;
+  name?: T;
+  rate?: T;
+  type?: T;
+  isDefault?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "accounting-invoices_select".
+ */
+export interface AccountingInvoicesSelect<T extends boolean = true> {
+  company?: T;
+  number?: T;
+  contact?: T;
+  customerName?: T;
+  issueDate?: T;
+  dueDate?: T;
+  status?: T;
+  lines?:
+    | T
+    | {
+        description?: T;
+        quantity?: T;
+        unitPrice?: T;
+        vatRate?: T;
+        lineTotal?: T;
+        id?: T;
+      };
+  subtotal?: T;
+  vatAmount?: T;
+  total?: T;
+  amountPaid?: T;
+  balanceDue?: T;
+  notes?: T;
+  posted?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "accounting-bills_select".
+ */
+export interface AccountingBillsSelect<T extends boolean = true> {
+  company?: T;
+  number?: T;
+  contact?: T;
+  supplierName?: T;
+  issueDate?: T;
+  dueDate?: T;
+  status?: T;
+  lines?:
+    | T
+    | {
+        description?: T;
+        quantity?: T;
+        unitPrice?: T;
+        vatRate?: T;
+        lineTotal?: T;
+        id?: T;
+      };
+  subtotal?: T;
+  vatAmount?: T;
+  total?: T;
+  amountPaid?: T;
+  balanceDue?: T;
+  notes?: T;
+  posted?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "accounting-expenses_select".
+ */
+export interface AccountingExpensesSelect<T extends boolean = true> {
+  company?: T;
+  description?: T;
+  expenseDate?: T;
+  vendor?: T;
+  category?: T;
+  status?: T;
+  subtotal?: T;
+  vatRate?: T;
+  vatAmount?: T;
+  total?: T;
+  receiptRef?: T;
+  notes?: T;
+  posted?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "accounting-payments_select".
+ */
+export interface AccountingPaymentsSelect<T extends boolean = true> {
+  company?: T;
+  reference?: T;
+  paymentDate?: T;
+  direction?: T;
+  amount?: T;
+  method?: T;
+  status?: T;
+  invoice?: T;
+  bill?: T;
+  notes?: T;
+  posted?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "accounting-journals_select".
+ */
+export interface AccountingJournalsSelect<T extends boolean = true> {
+  company?: T;
+  reference?: T;
+  entryDate?: T;
+  memo?: T;
+  status?: T;
+  lines?:
+    | T
+    | {
+        account?: T;
+        accountCode?: T;
+        debit?: T;
+        credit?: T;
+        memo?: T;
+        id?: T;
+      };
+  debitTotal?: T;
+  creditTotal?: T;
+  posted?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "accounting-ledger-entries_select".
+ */
+export interface AccountingLedgerEntriesSelect<T extends boolean = true> {
+  company?: T;
+  entryDate?: T;
+  description?: T;
+  sourceType?: T;
+  sourceId?: T;
+  lines?:
+    | T
+    | {
+        account?: T;
+        accountCode?: T;
+        debit?: T;
+        credit?: T;
+        memo?: T;
+        id?: T;
+      };
+  debitTotal?: T;
+  creditTotal?: T;
+  createdByUser?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "accounting-audit-logs_select".
+ */
+export interface AccountingAuditLogsSelect<T extends boolean = true> {
+  company?: T;
+  action?: T;
+  entityType?: T;
+  entityId?: T;
+  details?: T;
+  actor?: T;
+  ipAddress?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

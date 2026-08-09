@@ -27,6 +27,20 @@ import { ProblemReports } from './collections/ProblemReports'
 import { LeaseRequests } from './collections/LeaseRequests'
 import { Documents } from './collections/Documents'
 import { AdminNotes } from './collections/AdminNotes'
+import {
+  AccountingCompanies,
+  AccountingMemberships,
+  AccountingAccounts,
+  AccountingContacts,
+  AccountingTaxRates,
+  AccountingInvoices,
+  AccountingBills,
+  AccountingExpenses,
+  AccountingPayments,
+  AccountingJournals,
+  AccountingLedgerEntries,
+  AccountingAuditLogs,
+} from './collections/accounting'
 
 import { Footer } from './globals/Footer'
 import { DienstenSection } from './globals/DienstenSection'
@@ -75,7 +89,10 @@ export default buildConfig({
     Users, Media, Pages, News, Services, Properties, Vehicles, HolidayParks, 
     Customers, ContactRequests, Downloads, Branches, Languages, AuthLogs,
     Aanvragen, UserServices, Messages, Transactions, ProblemReports, LeaseRequests,
-    Documents, AdminNotes
+    Documents, AdminNotes,
+    AccountingCompanies, AccountingMemberships, AccountingAccounts, AccountingContacts,
+    AccountingTaxRates, AccountingInvoices, AccountingBills, AccountingExpenses,
+    AccountingPayments, AccountingJournals, AccountingLedgerEntries, AccountingAuditLogs,
   ],
 
   globals: [Footer, DienstenSection, SidebarCards, Hero, Accessibility, AccountSettings, SiteDesign, SiteNavigation, LegalTexts, NewsSettings],

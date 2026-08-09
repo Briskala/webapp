@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getPayload } from 'payload';
 import config from '@/payload.config';
+import { attachSessionCookie } from '@/lib/accounting/session';
 
 export async function POST(req: NextRequest) {
   try {
@@ -50,7 +51,8 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    return NextResponse.json({ success: true });
+    const res = NextResponse.json({ success: true });
+    return attachSessionCookie(res, uid, email);
   } catch (err) {
     console.error('Sync user error:', err);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });

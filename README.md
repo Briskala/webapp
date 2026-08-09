@@ -35,6 +35,54 @@ Briskala helps users manage:
 - Account dashboard (documents, messages, financial overview)  
 - CMS-managed content via Payload Admin  
 
+## Integrated accounting platform
+
+Briskala includes a **native multi-company accounting module** (clean-room implementation inspired by concepts from BigCapital, ERPNext, and Akaunting — not a fork or merge of those codebases).
+
+### User flow
+
+1. Log in to Briskala (existing Firebase auth)  
+2. Open the Briskala dashboard → **Accounting**  
+3. Select or create a company  
+4. Work inside `/accounting/{company-slug}/{publicHash}`
+
+Example:
+
+```text
+/accounting/acme-bv/8f92a7c1
+```
+
+`publicHash` is an unguessable public environment id (not an internal database id). Access still requires a Briskala session **and** an active company membership.
+
+### Accounting modules
+
+| Module | Path |
+|---|---|
+| Company picker | `/accounting` |
+| Dashboard | `/accounting/{slug}/{hash}` |
+| Invoices | `.../invoices` |
+| Expenses | `.../expenses` |
+| Bills (AP) | `.../bills` |
+| Contacts | `.../contacts` |
+| Payments | `.../payments` |
+| Banking | `.../banking` |
+| Chart of accounts | `.../accounts` |
+| Journals / ledger | `.../journals` |
+| VAT | `.../vat` |
+| Reports (P&L) | `.../reports` |
+| Settings / roles | `.../settings` |
+
+### Roles
+
+`owner` · `administrator` · `accountant` · `manager` · `employee` · `viewer`
+
+### Architecture notes
+
+- Briskala UI, branding, and authentication remain the main product shell  
+- Accounting data lives in Payload collections with **company-level isolation**  
+- Double-entry postings are written to an append-only ledger  
+- Demo session for local testing: `POST /api/accounting/demo-session`
+
 ## Technology stack
 
 | Layer | Technology |
@@ -42,9 +90,9 @@ Briskala helps users manage:
 | Framework | Next.js 16 (App Router) + React 19 |
 | CMS / API | Payload CMS 3 |
 | Database | SQLite / libSQL (`@payloadcms/db-sqlite`) |
-| Auth (customers) | Firebase Auth |
+| Auth (customers) | Firebase Auth (+ signed accounting session cookie) |
 | Auth (admin) | Payload Users |
-| Styling | Bootstrap + custom brand CSS |
+| Styling | Bootstrap + custom brand CSS + accounting shell styles |
 | Package manager | pnpm |
 | Language | TypeScript |
 
@@ -85,6 +133,14 @@ Briskala helps users manage:
 ### Mobile homepage
 
 ![Mobile homepage](docs/screenshots/09-mobile-homepage.png)
+
+### Accounting — company picker
+
+![Accounting company picker](docs/screenshots/10-accounting-picker.png)
+
+### Accounting — company dashboard
+
+![Accounting dashboard](docs/screenshots/11-accounting-dashboard.png)
 
 ## Demo video
 
