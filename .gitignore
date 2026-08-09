@@ -39,3 +39,9 @@ node_modules
 .env.*
 .DS_Store
 media/
+
+# Local SQLite database
+briskala.db
+briskala.db-*
+*.db
+*.db-journal
