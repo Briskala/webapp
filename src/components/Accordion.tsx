@@ -13,35 +13,39 @@ export async function Accordion() {
 
   const items = section?.items || [];
 
-  // Fallback hardcoded data when CMS is empty
   const fallbackItems = [
     {
       id: '1',
-      title: 'Nota Fiscal Paulista (NFP)',
+      title: 'Facturen & inkomsten',
       enabled: true,
       defaultOpen: true,
       links: [
-        { id: '1a', label: 'Sobre a Nota Fiscal Paulista', url: '#' },
-        { id: '1b', label: 'Acesso a consultas on-line', url: '#' },
-        { id: '1c', label: 'A quem ele se destina', url: '#' },
+        { id: '1a', label: 'Facturen maken en versturen', url: '/facturen' },
+        { id: '1b', label: 'Openstaande betalingen volgen', url: '/facturen#betalingen' },
+        { id: '1c', label: 'Herinneringen automatiseren', url: '/facturen#herinneringen' },
       ],
     },
     {
       id: '2',
-      title: 'Nota Fiscal Electrónica (NFE)',
+      title: 'Uitgaven & documenten',
       enabled: true,
       defaultOpen: false,
       links: [
-        { id: '2a', label: 'Sobre a Nota Fiscal Eletrônica', url: '#' },
-        { id: '2b', label: 'Acesso ao sistema', url: '#' },
+        { id: '2a', label: 'Uitgaven registreren', url: '/uitgaven' },
+        { id: '2b', label: 'Bonnen en documenten uploaden', url: '/uitgaven#bonnen' },
+        { id: '2c', label: 'Documentenarchief', url: '/functies#documenten' },
       ],
     },
     {
       id: '3',
-      title: 'Vehiculos (IPVA)',
+      title: 'Boekhouding, btw & rapporten',
       enabled: true,
       defaultOpen: false,
-      links: [{ id: '3a', label: 'Consulta IPVA', url: '#' }],
+      links: [
+        { id: '3a', label: 'Boekhouding beheren', url: '/boekhouding' },
+        { id: '3b', label: 'Btw-administratie', url: '/btw' },
+        { id: '3c', label: 'Financiële rapporten', url: '/rapporten' },
+      ],
     },
   ];
 
@@ -49,4 +53,3 @@ export async function Accordion() {
 
   return <AccordionClient items={resolvedItems} />;
 }
-

@@ -14,7 +14,7 @@ export function AdminNavbar() {
       boxShadow: '0 2px 10px rgba(0,0,0,0.03)'
     }}>
       <Link href="/">
-        <img width="101" height="74" src="/assets/img/bpark.svg" alt="BPAG Logo" style={{ cursor: 'pointer' }} />
+        <img width="101" height="74" src="/assets/img/bpark.svg" alt="Briskala" style={{ cursor: 'pointer' }} />
       </Link>
       <Link href="/" style={{
         color: '#1a5276',

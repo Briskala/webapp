@@ -11,21 +11,21 @@ import { submitContactRequest } from '../actions/submitForms';
 const testimonials = [
   {
     stars: 5,
-    text: 'Briskala heeft ons geholpen bij het vinden van het perfecte bedrijfspand. Professioneel, snel en betrouwbaar — wij zijn zeer tevreden met de samenwerking.',
+    text: 'Met Briskala beheren we facturen, uitgaven en btw zelf. Overzichtelijk, snel en betrouwbaar — precies wat ons mkb nodig had.',
     name: 'Marc de Vries',
     role: 'CEO, Innovate Solutions BV',
   },
   {
     stars: 5,
-    text: 'De autofinanciering via Briskala was soepel en transparant. Binnen een week reden wij in onze nieuwe bedrijfsauto. Aanrader voor elk bedrijf.',
+    text: 'Als zzp’er factureer ik via Briskala en houd ik mijn administratie bij zonder stress. De rapporten geven me eindelijk grip op mijn cijfers.',
     name: 'Samira El Amrani',
-    role: 'Directeur, Urban Mobility Group',
+    role: 'Freelance consultant',
   },
   {
     stars: 5,
-    text: 'Uitstekende service en een team dat écht luistert. Briskala heeft onze woningbouwvraag perfect begeleid van A tot Z. Top samenwerking!',
+    text: 'Onze accountantspraktijk werkt efficiënter samen met klanten via Briskala. Documenten, boekingen en overzichten op één plek.',
     name: 'Kevin Janssen',
-    role: 'Projectontwikkelaar, KB Bouw',
+    role: 'Accountant, KJ Finance',
   },
 ];
 
@@ -470,7 +470,7 @@ export default function ContactPage() {
               </div>
             </div>
             <p className="pm-text">
-              Welkom bij de contactpagina van <strong>Briskala Property &amp; Asset Group</strong>. Wij begeleiden particulieren, zakelijke investeerders en ondernemingen bij al hun vraagstukken omtrent vastgoed, financial lease, stookolietanks en woningbouw.
+              Welkom bij de contactpagina van <strong>Briskala</strong>. Wij helpen particulieren, zzp’ers, bedrijven en accountants met boekhouding, facturen, uitgaven, btw en financieel beheer.
             </p>
             <p className="pm-text">
               Onze experts streven ernaar om u binnen <strong>24 uur</strong> (op werkdagen) te voorzien van een gedegen antwoord of een concreet voorstel. Vul ons formulier hieronder in voor een gerichte afhandeling.
@@ -611,10 +611,12 @@ export default function ContactPage() {
                     required
                   >
                     <option value="" disabled>Kies een onderwerp</option>
-                    <option value="vastgoed">Vastgoed advies</option>
-                    <option value="autofinanciering">Autofinanciering</option>
-                    <option value="woningbouw">Woningbouw bemiddeling</option>
-                    <option value="olietanken">Olietanken advies</option>
+                    <option value="facturen">Facturen & inkomsten</option>
+                    <option value="boekhouding">Boekhouding</option>
+                    <option value="btw">Btw & belastingen</option>
+                    <option value="rapporten">Rapporten & inzichten</option>
+                    <option value="prijzen">Prijzen & abonnementen</option>
+                    <option value="accountants">Samenwerking voor accountants</option>
                     <option value="algemeen">Algemene vraag</option>
                     <option value="overig">Overig</option>
                   </select>
@@ -706,7 +708,7 @@ export default function ContactPage() {
             <div className="pm-alt-grid">
               {[
                 { href: 'tel:+31200000000', Icon: Phone, title: 'Bellen', desc: '+31 (0)20 000 00 00 — ma t/m vr 09:00–17:30' },
-                { href: 'mailto:info@briskala.nl', Icon: Mail, title: 'E-mail algemeen', desc: 'info@info@briskala.nl — reactie binnen 24 uur' },
+                { href: 'mailto:info@briskala.nl', Icon: Mail, title: 'E-mail algemeen', desc: 'info@briskala.nl — reactie binnen 24 uur' },
                 { href: '/probleem-melden', Icon: Wrench, title: 'Support Center', desc: 'Een storing of technisch probleem melden' },
                 { href: '/', Icon: BookOpen, title: 'Hoofdkantoor', desc: 'Keizersgracht, Amsterdam · Bezoek op afspraak' },
               ].map(({ href, Icon, title, desc }) => (

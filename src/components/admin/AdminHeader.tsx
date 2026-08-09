@@ -30,7 +30,7 @@ export function AdminHeader() {
       <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
         <img
           src="/assets/img/bpark.svg"
-          alt="BPAG Logo"
+          alt="Briskala"
           width={72}
           height={52}
           style={{ display: 'block' }}

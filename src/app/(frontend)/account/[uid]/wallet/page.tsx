@@ -36,10 +36,10 @@ export default async function WalletPage(props: { params: Promise<{ uid: string 
     <div>
       <div className="wallet-header">
         <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#1a5276', margin: 0 }}>
-          Portemonnee
+          Financieel overzicht
         </h2>
         <div style={{ background: '#f7f9fb', padding: '12px 20px', borderRadius: '8px', border: '1px solid #e0e0e0', textAlign: 'right' }}>
-          <div style={{ fontSize: '11px', color: '#666', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Actueel Saldo</div>
+          <div style={{ fontSize: '11px', color: '#666', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Huidig saldo</div>
           <div style={{ fontSize: '24px', fontWeight: 700, color: '#1a5276' }}>€ {balance.toFixed(2)}</div>
         </div>
       </div>
@@ -48,7 +48,7 @@ export default async function WalletPage(props: { params: Promise<{ uid: string 
       
       {transactions.length === 0 ? (
         <div style={{ padding: '32px', textAlign: 'center', background: '#f7f9fb', borderRadius: '8px', border: '1px dashed #ccc' }}>
-          <p style={{ color: '#666', margin: 0 }}>Er zijn nog geen transacties gevonden in uw portemonnee.</p>
+          <p style={{ color: '#666', margin: 0 }}>Er zijn nog geen financiële transacties gevonden in uw overzicht.</p>
         </div>
       ) : (
         <div className="account-table-container">

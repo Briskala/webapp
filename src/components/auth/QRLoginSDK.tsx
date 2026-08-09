@@ -58,7 +58,7 @@ export function QRLoginSDK({ sessionToken }: Props) {
       
       <main style={{ maxWidth: '800px', margin: '40px auto', padding: '0 16px' }}>
         <h1 style={{ fontSize: '28px', fontWeight: 700, color: '#1a5276', marginBottom: '32px' }}>
-          {language === 'nl' ? 'Verificatie SDK Test' : 'Verification SDK Test'}
+          {language === 'nl' ? 'Inloggen bij Briskala' : 'Sign in to Briskala'}
         </h1>
         
         <div style={{ marginBottom: '40px' }}>

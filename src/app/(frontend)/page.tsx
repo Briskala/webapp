@@ -26,7 +26,7 @@ export default async function HomePage() {
       <Breadcrumb />
       <div className="main">
         <div className="content-col">
-          <h2>Diensten &amp; Informatie</h2>
+          <h2>Platform &amp; Functies</h2>
           <Accordion />
         </div>
         <Sidebar />

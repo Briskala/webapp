@@ -14,7 +14,7 @@ export const Hero: GlobalConfig = {
       name: 'heading',
       type: 'text',
       label: 'Hoofdtitel',
-      defaultValue: 'Waarmee kunnen we u helpen?',
+      defaultValue: 'Uw complete boekhoudplatform',
       required: true,
     },
     {

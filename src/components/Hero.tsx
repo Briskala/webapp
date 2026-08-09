@@ -9,19 +9,19 @@ export async function Hero() {
 
   const hero = (await payload.findGlobal({ slug: 'hero-section' })) as any;
 
-  const title = hero?.title || 'Discover, Live, and Enjoy.';
-  const subtitle = hero?.subtitle || 'From essential local services and community news to must-see attractions, vibrant events, and unforgettable experiences';
-  const primaryButtonText = hero?.primaryButtonText || '↗ Explore Services';
-  const primaryButtonUrl = hero?.primaryButtonUrl || '/our-services';
-  const secondaryButtonText = hero?.secondaryButtonText || 'Contact Us';
-  const secondaryButtonUrl = hero?.secondaryButtonUrl || '/contact';
-  const tagline = hero?.tagline || 'We proudly deliver these core services and much more as your council.';
+  const title = hero?.title || 'Uw complete boekhoudplatform';
+  const subtitle = hero?.subtitle || 'Beheer facturen, uitgaven, btw en financiële rapporten — zelf, voor particulieren, zzp’ers, mkb en accountants.';
+  const primaryButtonText = hero?.primaryButtonText || '↗ Ontdek functies';
+  const primaryButtonUrl = hero?.primaryButtonUrl || '/functies';
+  const secondaryButtonText = hero?.secondaryButtonText || 'Bekijk prijzen';
+  const secondaryButtonUrl = hero?.secondaryButtonUrl || '/prijzen';
+  const tagline = hero?.tagline || 'Briskala helpt u uw boekhouding en financiële administratie zelf te beheren.';
   const stripServices = hero?.stripServices && hero.stripServices.length > 0
     ? hero.stripServices
     : [
-        { id: '1', icon: '👶', title: 'Woningbouw', linkText: 'Learn More', url: '/housing-development' },
-        { id: '2', icon: '🏗️', title: 'Vastgoed', linkText: 'Register Today', url: '/real-estate' },
-        { id: '3', icon: '🎉', title: 'Autofinanciering', linkText: 'Learn More', url: '/car-financing' },
+        { id: '1', icon: '🧾', title: 'Facturen', linkText: 'Meer info', url: '/facturen' },
+        { id: '2', icon: '📚', title: 'Boekhouding', linkText: 'Meer info', url: '/boekhouding' },
+        { id: '3', icon: '📊', title: 'Rapporten', linkText: 'Meer info', url: '/rapporten' },
       ];
 
   return (

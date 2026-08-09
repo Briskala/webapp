@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { HERO_DEFAULT } from '@/content/briskala';
 
 interface HeroCard {
   id?: string | null;
@@ -15,31 +16,12 @@ interface CustomHeroProps {
 }
 
 export function CustomHero({ heading, backgroundImage, actionCards }: CustomHeroProps) {
-  const displayHeading = heading || 'Waarmee kunnen we u helpen?';
+  const displayHeading = heading || HERO_DEFAULT.heading;
   const bgUrl = backgroundImage && typeof backgroundImage === 'object' && backgroundImage.url
     ? backgroundImage.url
-    : '/assets/img/family_walking_bg.png';
+    : '/assets/img/family_accounting_bg.jpeg';
   
-  const cards = actionCards && actionCards.length > 0 ? actionCards : [
-    {
-      id: '1',
-      title: 'Ik zoek onafhankelijk vastgoed of een bedrijfspand',
-      linkText: 'Lees over ons vastgoed advies',
-      linkUrl: '#diensten'
-    },
-    {
-      id: '2',
-      title: 'Ik wil een zakelijke auto of wagenpark financieren',
-      linkText: 'Lees meer over autofinanciering',
-      linkUrl: '/autofinanciering'
-    },
-    {
-      id: '3',
-      title: 'Ik wil bouwen en zoek de juiste aannemer of partners',
-      linkText: 'Lees over woningbouw bemiddeling',
-      linkUrl: '#diensten'
-    }
-  ];
+  const cards = actionCards && actionCards.length > 0 ? actionCards : HERO_DEFAULT.cards;
 
   return (
     <section 

@@ -58,8 +58,8 @@ export function AccountLayoutClient({ uid, labels, dbUser, children }: Props) {
     { icon: <FileText size={18} />, label: labels.menuAanvragen, href: `/account/${user.uid}/aanvragen` },
     { icon: <Briefcase size={18} />, label: labels.menuDiensten, href: `/account/${user.uid}/diensten` },
     { icon: <MessageSquare size={18} />, label: labels.menuBerichten, href: `/account/${user.uid}/berichten`, badge: dbUser?.messageCount },
-    { icon: <FolderOpen size={18} />, label: 'Mijn documenten', href: `/account/${user.uid}/documenten` },
-    { icon: <CreditCard size={18} />, label: 'Portemonnee', href: `/account/${user.uid}/wallet` }, // Changed Wallet to Portemonnee
+    { icon: <FolderOpen size={18} />, label: 'Documenten & bonnen', href: `/account/${user.uid}/documenten` },
+    { icon: <CreditCard size={18} />, label: 'Financieel overzicht', href: `/account/${user.uid}/wallet` },
   ];
 
   return (

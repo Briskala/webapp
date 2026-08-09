@@ -25,7 +25,7 @@ export const Customers: CollectionConfig = {
       index: true,
       label: 'Klantnummer',
       admin: {
-        description: 'Wordt automatisch gegenereerd indien leeg (formaat: BPAG-XXXXXX).',
+        description: 'Wordt automatisch gegenereerd indien leeg (formaat: BRISK-XXXXXX).',
       },
     },
     {

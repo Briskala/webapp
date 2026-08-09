@@ -35,23 +35,9 @@ async function seed() {
     }
   }
 
-  // Create Pages
+  // CMS pages that are not covered by dedicated App Router routes
   const pages = [
-    // Main Pages
-    { title: 'About Us', slug: 'about-us' },
-    { title: 'Our Services', slug: 'our-services' },
-    { title: 'Housing Development', slug: 'housing-development' },
-    { title: 'Real Estate', slug: 'real-estate' },
-    { title: 'Car Financing', slug: 'car-financing' },
-    { title: 'Oil Refueling', slug: 'oil-refueling' },
-    { title: 'Holiday & Resort Services', slug: 'holiday-resort-services' },
-    { title: 'Customer Support', slug: 'customer-support' },
-    // Information Pages
-    { title: 'News', slug: 'news' },
-    { title: 'Frequently Asked Questions', slug: 'faq' },
-    { title: 'Contact', slug: 'contact' },
     { title: 'Sitemap', slug: 'sitemap' },
-    // Legal Pages
     { title: 'Privacy Policy', slug: 'privacy-policy' },
     { title: 'Terms and Conditions', slug: 'terms-and-conditions' },
     { title: 'Cookie Policy', slug: 'cookie-policy' },
@@ -87,7 +73,7 @@ async function seed() {
                   children: [
                     {
                       mode: 'normal',
-                      text: `Welcome to the ${page.title} page.`,
+                      text: `${page.title} — Briskala boekhouding & financieel beheer.`,
                       type: 'text',
                       style: '',
                       detail: 0,
@@ -107,8 +93,11 @@ async function seed() {
     }
   }
 
-  console.log('Seeding complete.')
+  console.log('Seeding complete!')
   process.exit(0)
 }
 
-seed().catch(console.error)
+seed().catch((e) => {
+  console.error(e)
+  process.exit(1)
+})

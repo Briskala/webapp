@@ -8,7 +8,7 @@ import { syncRssNews } from '../actions/rssSync'
 
 export const metadata = {
   title: 'Nieuws & Updates — Briskala',
-  description: 'Blijf op de hoogte van de laatste ontwikkelingen, woningbouwadviezen en marktupdates van Briskala.',
+  description: 'Blijf op de hoogte van updates over boekhouding, btw, facturatie en financieel beheer van Briskala.',
 }
 
 export const dynamic = 'force-dynamic'
@@ -114,7 +114,7 @@ export default async function NieuwsPage() {
       <Breadcrumb pageTitle="Nieuws" />
       <div className="main">
         <div className="content-col">
-          {/* Header section matching olietanken */}
+          {/* Header section */}
           <h1
             style={{
               fontSize: '32px',
