@@ -4,3 +4,9 @@ allowBuilds:
   protobufjs: true
   sharp: true
   unrs-resolver: true
+
+# Also install Linux binaries (libsql, sharp) so local builds work on Netlify's Linux servers
+supportedArchitectures:
+  os: [current, linux]
+  cpu: [current, x64]
+  libc: [current, glibc]
