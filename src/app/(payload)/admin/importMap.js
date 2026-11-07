@@ -27,6 +27,7 @@ import { BriskalaLogo as BriskalaLogo_555c0e3d851ee2e2b07df25329a308cd } from '@
 import { AdminLoginFooter as AdminLoginFooter_867d534693f0dd2a1be786efce99eb0b } from '@/components/admin/AdminLoginLayout'
 import { AdminFooter as AdminFooter_75d278fd95889c63c9efc1a0e6762f9b } from '@/components/admin/AdminFooter'
 import { AdminLoginHeader as AdminLoginHeader_867d534693f0dd2a1be786efce99eb0b } from '@/components/admin/AdminLoginLayout'
+import { S3ClientUploadHandler as S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24 } from '@payloadcms/storage-s3/client'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
 /** @type import('payload').ImportMap */
@@ -60,5 +61,6 @@ export const importMap = {
   "@/components/admin/AdminLoginLayout#AdminLoginFooter": AdminLoginFooter_867d534693f0dd2a1be786efce99eb0b,
   "@/components/admin/AdminFooter#AdminFooter": AdminFooter_75d278fd95889c63c9efc1a0e6762f9b,
   "@/components/admin/AdminLoginLayout#AdminLoginHeader": AdminLoginHeader_867d534693f0dd2a1be786efce99eb0b,
+  "@payloadcms/storage-s3/client#S3ClientUploadHandler": S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }

@@ -1,5 +1,5 @@
 import { initializeApp, getApps, getApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
+import { getAuth, Auth } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -11,8 +11,12 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-// Prevent multiple initializations in dev/hot-reload
-const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
-const auth = getAuth(app);
+const hasFirebaseConfig = Boolean(firebaseConfig.apiKey && firebaseConfig.apiKey.trim() !== '');
+
+// Prevent multiple initializations in dev/hot-reload; gracefully skip if not configured
+const app = hasFirebaseConfig
+  ? (getApps().length ? getApp() : initializeApp(firebaseConfig))
+  : null;
+const auth = app ? getAuth(app) : (null as unknown as Auth);
 
 export { app, auth };

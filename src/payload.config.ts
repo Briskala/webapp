@@ -1,4 +1,5 @@
 import { sqliteAdapter } from '@payloadcms/db-sqlite'
+import { s3Storage } from '@payloadcms/storage-s3'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { buildConfig } from 'payload'
@@ -38,6 +39,11 @@ import { SiteDesign } from './globals/SiteDesign'
 import { SiteNavigation } from './globals/SiteNavigation'
 import { LegalTexts } from './globals/LegalTexts'
 import { NewsSettings } from './globals/NewsSettings'
+
+// Cloud file storage for uploads (Media). Netlify functions have no persistent disk,
+// so in production set S3_BUCKET + credentials (AWS S3, Cloudflare R2, etc.).
+// Without S3_BUCKET, files are stored on local disk as before (local dev).
+const useS3 = Boolean(process.env.S3_BUCKET)
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -89,7 +95,25 @@ export default buildConfig({
       url: process.env.DATABASE_URL || '',
       authToken: process.env.DATABASE_AUTH_TOKEN || '',
     },
+    push: false,
   }),
   sharp,
-  plugins: [],
+  plugins: [
+    s3Storage({
+      enabled: useS3,
+      collections: {
+        media: true,
+      },
+      bucket: process.env.S3_BUCKET || '',
+      config: {
+        credentials: {
+          accessKeyId: process.env.S3_ACCESS_KEY_ID || '',
+          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || '',
+        },
+        region: process.env.S3_REGION || 'auto',
+        ...(process.env.S3_ENDPOINT ? { endpoint: process.env.S3_ENDPOINT } : {}),
+        forcePathStyle: Boolean(process.env.S3_ENDPOINT),
+      },
+    }),
+  ],
 })

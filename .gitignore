@@ -46,3 +46,17 @@ briskala.db
 briskala.db-*
 *.db
 *.db-journal
+
+# Web app
+node_modules/
+.next/
+.netlify/
+.env
+.env.*
+!.env.example
+*.tsbuildinfo
+media/
+*.db
+*.sqlite
+.DS_Store
+todo.md

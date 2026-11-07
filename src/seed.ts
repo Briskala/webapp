@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import { getPayload } from 'payload'
 import config from './payload.config'
 
@@ -9,7 +10,7 @@ async function seed() {
 
   // Create admin users
   const admins = [
-    { email: 'admin@bpaGroup.com', password: 'SecurePassword123!' },
+    { email: 'admin@bpagroup.com', password: 'SecurePassword123!' },
     { email: 'computer@id.ericksonholding.com', password: 'SecurePassword123!' },
   ]
 

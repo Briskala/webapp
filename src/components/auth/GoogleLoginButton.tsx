@@ -19,6 +19,10 @@ export function GoogleLoginButton() {
   const router = useRouter();
 
   const handleGoogleLogin = async () => {
+    if (!auth) {
+      setError('Firebase is niet geconfigureerd in het .env bestand.');
+      return;
+    }
     setLoading(true);
     setError(null);
     try {
@@ -26,7 +30,7 @@ export function GoogleLoginButton() {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
 
-      // Sync user to Turso DB via API route
+      // Sync user to DB via API route
       await fetch('/api/auth/sync-user', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
